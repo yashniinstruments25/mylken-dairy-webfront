@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -64,10 +63,11 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				mylken: {
-					blue: '#1A3A5F',
-					lightBlue: '#5D8AA8',
-					cream: '#F5F0E6',
-					gray: '#F2F2F2',
+					primary: "#2C5F2D",
+					secondary: "#97BC62",
+					accent: "#FFE77A",
+					light: "#F5F5DC",
+					dark: "#1E3F20",
 				}
 			},
 			borderRadius: {
@@ -112,12 +112,32 @@ export default {
 						transform: 'translateY(10px)'
 					}
 				},
+				"float": {
+					"0%, 100%": { transform: "translateY(0)" },
+					"50%": { transform: "translateY(-10px)" }
+				},
+				"slide-in-left": {
+					"0%": { transform: "translateX(-100%)", opacity: "0" },
+					"100%": { transform: "translateX(0)", opacity: "1" }
+				},
+				"slide-in-right": {
+					"0%": { transform: "translateX(100%)", opacity: "0" },
+					"100%": { transform: "translateX(0)", opacity: "1" }
+				},
+				"zoom-in": {
+					"0%": { transform: "scale(0.95)", opacity: "0" },
+					"100%": { transform: "scale(1)", opacity: "1" }
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out',
-				'fade-out': 'fade-out 0.5s ease-out'
+				'fade-out': 'fade-out 0.5s ease-out',
+				"float": "float 3s ease-in-out infinite",
+				"slide-in-left": "slide-in-left 0.8s ease-out",
+				"slide-in-right": "slide-in-right 0.8s ease-out",
+				"zoom-in": "zoom-in 0.8s ease-out"
 			},
 			fontFamily: {
 				sans: ['Open Sans', 'sans-serif'],
