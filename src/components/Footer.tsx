@@ -4,6 +4,7 @@ import { Facebook, Twitter, Instagram, Linkedin, ArrowRight } from 'lucide-react
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const { toast } = useToast();
@@ -19,26 +20,26 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-mylken-blue text-white pt-16 pb-6">
+    <footer className="bg-mylken-primary text-white pt-16 pb-6">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
           <div>
             <h3 className="text-2xl font-bold mb-4 font-heading">Mylken</h3>
-            <p className="text-mylken-cream mb-4 text-sm">
+            <p className="text-white mb-4 text-sm">
               Providing premium dairy industry equipment for over 30 years. Quality, reliability, and innovation are at the heart of everything we do.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-mylken-cream transition-colors">
+              <a href="#" className="text-white hover:text-mylken-accent transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="hover:text-mylken-cream transition-colors">
+              <a href="#" className="text-white hover:text-mylken-accent transition-colors">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="hover:text-mylken-cream transition-colors">
+              <a href="#" className="text-white hover:text-mylken-accent transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="#" className="hover:text-mylken-cream transition-colors">
+              <a href="#" className="text-white hover:text-mylken-accent transition-colors">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -46,43 +47,86 @@ const Footer = () => {
           
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Quick Links</h4>
+            <h4 className="text-lg font-bold mb-4 text-white">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#home" className="hover:text-mylken-cream transition-colors text-sm">Home</a></li>
-              <li><a href="#products" className="hover:text-mylken-cream transition-colors text-sm">Products</a></li>
-              <li><a href="#about" className="hover:text-mylken-cream transition-colors text-sm">About Us</a></li>
-              <li><a href="#contact" className="hover:text-mylken-cream transition-colors text-sm">Contact</a></li>
-              <li><a href="#" className="hover:text-mylken-cream transition-colors text-sm">Terms & Conditions</a></li>
-              <li><a href="#" className="hover:text-mylken-cream transition-colors text-sm">Privacy Policy</a></li>
+              <li>
+                <Link to="/" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/products" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <a href="#" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Terms & Conditions
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Privacy Policy
+                </a>
+              </li>
             </ul>
           </div>
           
           {/* Products */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Our Products</h4>
+            <h4 className="text-lg font-bold mb-4 text-white">Our Products</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="hover:text-mylken-cream transition-colors text-sm">Milk Analyzers</a></li>
-              <li><a href="#" className="hover:text-mylken-cream transition-colors text-sm">Khoya Machines</a></li>
-              <li><a href="#" className="hover:text-mylken-cream transition-colors text-sm">Milk Cans</a></li>
-              <li><a href="#" className="hover:text-mylken-cream transition-colors text-sm">Dairy Processing Equipment</a></li>
-              <li><a href="#" className="hover:text-mylken-cream transition-colors text-sm">Storage Solutions</a></li>
-              <li><a href="#" className="hover:text-mylken-cream transition-colors text-sm">Accessories</a></li>
+              <li>
+                <Link to="/products/milk-analyzers" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Milk Analyzers
+                </Link>
+              </li>
+              <li>
+                <Link to="/products/khoya-machines" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Khoya Machines
+                </Link>
+              </li>
+              <li>
+                <Link to="/products/milk-cans" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Milk Cans
+                </Link>
+              </li>
+              <li>
+                <Link to="/products/dairy-processing" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Dairy Processing Equipment
+                </Link>
+              </li>
+              <li>
+                <Link to="/products/testing-kits" className="text-white hover:text-mylken-accent transition-colors text-sm">
+                  Quality Testing Kits
+                </Link>
+              </li>
             </ul>
           </div>
           
           {/* Newsletter */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Newsletter</h4>
-            <p className="text-sm text-mylken-cream mb-4">Subscribe to receive updates on new products and dairy industry insights.</p>
+            <h4 className="text-lg font-bold mb-4 text-white">Newsletter</h4>
+            <p className="text-sm text-white mb-4">Subscribe to receive updates on new products and dairy industry insights.</p>
             <form onSubmit={handleSubscribe} className="space-y-3">
               <div className="flex">
                 <Input 
                   type="email" 
                   placeholder="Your email address" 
                   required 
-                  className="rounded-r-none bg-mylken-blue/50 border-mylken-lightBlue focus:border-white text-white placeholder:text-mylken-cream/70"
+                  className="rounded-r-none bg-white/20 border-white/30 focus:border-white text-white placeholder:text-white/70"
                 />
-                <Button type="submit" className="rounded-l-none bg-white text-mylken-blue hover:bg-mylken-cream">
+                <Button type="submit" className="rounded-l-none bg-mylken-accent text-mylken-dark hover:bg-white">
                   <ArrowRight size={18} />
                 </Button>
               </div>
@@ -90,7 +134,7 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-mylken-lightBlue/30 pt-6 text-center text-sm text-mylken-cream/70">
+        <div className="border-t border-white/20 pt-6 text-center text-sm text-white">
           <p>© {currentYear} Mylken. All rights reserved. </p>
         </div>
       </div>
