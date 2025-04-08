@@ -1,9 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link, useLocation } from 'react-router-dom';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -19,9 +27,16 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const productCategories = [
+    { name: 'Milk Analyzers', href: '/products/milk-analyzers' },
+    { name: 'Khoya Making Machines', href: '/products/khoya-machines' },
+    { name: 'Milk Cans', href: '/products/milk-cans' },
+    { name: 'Dairy Processing Equipment', href: '/products/dairy-processing' },
+    { name: 'Quality Testing Kits', href: '/products/testing-kits' }
+  ];
+
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Products', href: '/products' },
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '/contact' }
   ];
@@ -47,7 +62,8 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-6">
+          {/* Home and other simple links */}
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -66,6 +82,53 @@ const Navbar = () => {
               )}></span>
             </Link>
           ))}
+
+          {/* Products dropdown */}
+          <div className="z-50">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger 
+                    className={cn(
+                      "font-medium transition-colors bg-transparent",
+                      isActive('/products') 
+                        ? "text-mylken-accent" 
+                        : "text-mylken-primary hover:text-mylken-secondary"
+                    )}
+                  >
+                    Products
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="min-w-[260px]">
+                    <ul className="grid gap-2 p-4">
+                      {productCategories.map((category) => (
+                        <li key={category.name} className="relative">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to={category.href}
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary"
+                            >
+                              <div className="text-sm font-medium leading-none">{category.name}</div>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      ))}
+                      <li className="relative mt-2 border-t pt-2">
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/products"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
+                          >
+                            View All Products
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+          
           <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-secondary hover:text-white transition-colors">
             Get Quote
           </Button>
@@ -105,7 +168,46 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-secondary hover:text-white transition-colors w-full">
+            
+            {/* Mobile Products Dropdown */}
+            <div className="py-2 relative">
+              <button 
+                className="flex items-center justify-between w-full text-left"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const submenu = e.currentTarget.nextElementSibling;
+                  if (submenu) {
+                    submenu.classList.toggle('hidden');
+                  }
+                }}
+              >
+                <span className={isActive('/products') ? "text-mylken-accent font-medium" : "text-mylken-primary"}>Products</span>
+                <ChevronDown size={16} />
+              </button>
+              <div className="pl-4 space-y-2 mt-2 hidden">
+                {productCategories.map((category) => (
+                  <Link
+                    key={category.name}
+                    to={category.href}
+                    className="block py-1 text-mylken-primary hover:text-mylken-secondary"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+                <Link
+                  to="/products"
+                  className="block py-1 font-medium text-mylken-accent"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  View All Products
+                </Link>
+              </div>
+            </div>
+            
+            <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-secondary hover:text-white transition-colors w-full"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Get Quote
             </Button>
           </div>
