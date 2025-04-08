@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductsSection from '@/components/ProductsSection';
-import { ArrowRight, Award, Settings, Tool, Clock, Shield } from 'lucide-react';
+import { ArrowRight, Award, Settings, Wrench, Clock, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Products = () => {
@@ -67,7 +67,7 @@ const Products = () => {
               
               <div className="bg-mylken-light/30 p-6 rounded-lg shadow-sm transition-all hover:shadow-md">
                 <div className="w-12 h-12 rounded-full bg-mylken-primary/10 flex items-center justify-center mb-4">
-                  <Tool className="text-mylken-primary" />
+                  <Wrench className="text-mylken-primary" />
                 </div>
                 <h3 className="text-xl font-semibold text-mylken-dark">Easy Maintenance</h3>
                 <p className="mt-3 text-gray-600">
