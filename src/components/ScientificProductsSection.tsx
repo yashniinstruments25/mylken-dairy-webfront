@@ -12,7 +12,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-interface Product {
+interface ScientificProduct {
   id: number;
   name: string;
   category: string;
@@ -23,87 +23,87 @@ interface Product {
   rating?: number;
 }
 
-const products: Product[] = [
+const scientificProducts: ScientificProduct[] = [
   {
     id: 1,
-    name: "Advanced Milk Analyzer",
-    category: "Analyzers",
-    description: "High-precision milk analyzer with advanced features for fat, SNF, protein measurement.",
+    name: "Advanced Spectrophotometer",
+    category: "Analysis",
+    description: "High-precision spectrophotometer for accurate measurement of light absorption in liquid samples.",
     featured: true,
-    image: "/images/milk-analyzer.jpg",
-    specs: ["13 Parameters", "60-second analysis", "Auto Cleaning", "Data Storage"],
-    rating: 5
+    image: "/images/spectrophotometer.jpg",
+    specs: ["UV-Vis Range", "0.001 abs resolution", "Data export", "Automated calibration"],
+    rating: 4.9
   },
   {
     id: 2,
-    name: "Modern Khoya Machine",
-    category: "Processing",
-    description: "Efficient khoya making machine with temperature control and uniform heating.",
+    name: "Digital Centrifuge",
+    category: "Lab Equipment",
+    description: "High-speed centrifuge with digital controls for precise separation of biological samples.",
     featured: true,
-    image: "/images/khoya-machine.jpg",
-    specs: ["200L Capacity", "Digital Control", "SS304 Construction", "Energy Efficient"],
+    image: "/images/centrifuge.jpg",
+    specs: ["15,000 RPM max", "Digital controls", "Auto-balance", "Multiple rotors"],
     rating: 4.8
   },
   {
     id: 3,
-    name: "Premium Milk Can",
-    category: "Storage",
-    description: "Heavy-duty stainless steel milk cans with secure lids and easy carrying handles.",
+    name: "Precision Analytical Balance",
+    category: "Measurement",
+    description: "High-accuracy analytical balance for laboratory weighing with excellent repeatability.",
     featured: true,
-    image: "/images/milk-can.jpg",
-    specs: ["Food Grade SS", "Tamper-proof", "40L Capacity", "Ergonomic Design"],
-    rating: 4.9
+    image: "/images/analytical-balance.jpg",
+    specs: ["0.1mg readability", "Internal calibration", "Draft shield", "GLP compliance"],
+    rating: 5.0
   },
   {
     id: 4,
-    name: "Compact Milk Analyzer",
-    category: "Analyzers",
-    description: "Space-saving milk analyzer with quick results and user-friendly operation.",
+    name: "Laboratory Autoclave",
+    category: "Sterilization",
+    description: "Professional autoclave for sterilizing laboratory equipment and media with precise temperature control.",
     featured: true,
     image: "/placeholder.svg",
-    specs: ["9 Parameters", "45-second analysis", "Portable Design", "Battery Option"],
+    specs: ["40L capacity", "Digital display", "Safety locks", "Multiple cycles"],
     rating: 4.7
   },
   {
     id: 5,
-    name: "Industrial Milk Chiller",
-    category: "Cold Storage",
-    description: "Rapid cooling system for maintaining milk freshness and extending shelf life.",
+    name: "Digital pH Meter",
+    category: "Analysis",
+    description: "Advanced pH meter for accurate measurement of acidity and alkalinity in liquid samples.",
     featured: false,
     image: "/placeholder.svg",
-    specs: ["500L Capacity", "Quick Cooling", "Digital Temperature Control", "Energy Saving"],
+    specs: ["±0.01 pH accuracy", "Auto calibration", "Data logging", "Temperature compensation"],
     rating: 4.8
   },
   {
     id: 6,
-    name: "Automatic Paneer Press",
-    category: "Processing",
-    description: "Consistent pressure application for uniform paneer texture and moisture content.",
+    name: "Laboratory Incubator",
+    category: "Lab Equipment",
+    description: "Precision temperature-controlled incubator for culturing microorganisms and biological samples.",
     featured: false,
     image: "/placeholder.svg",
-    specs: ["100kg/hr Output", "Pressure Control", "SS Construction", "CIP Compatible"],
+    specs: ["50L capacity", "Digital control", "±0.1°C accuracy", "Forced air circulation"],
     rating: 4.6
   }
 ];
 
-const ProductsSection = () => {
+const ScientificProductsSection = () => {
   const [category, setCategory] = useState<string | null>(null);
   
   const filteredProducts = category 
-    ? products.filter(p => p.category === category) 
-    : products;
+    ? scientificProducts.filter(p => p.category === category) 
+    : scientificProducts;
   
-  const categories = Array.from(new Set(products.map(p => p.category)));
+  const categories = Array.from(new Set(scientificProducts.map(p => p.category)));
   
   return (
-    <section id="products" className="section bg-mylken-light/30">
+    <section id="scientific-products" className="section bg-mylken-light/30">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <Badge className="mb-3 bg-mylken-accent text-mylken-dark hover:bg-mylken-accent/80">Our Dairy Products</Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-mylken-dark mb-4">Premium Dairy Equipment</h2>
+          <Badge className="mb-3 bg-mylken-accent text-mylken-dark hover:bg-mylken-accent/80">Laboratory Solutions</Badge>
+          <h2 className="text-3xl md:text-4xl font-bold text-mylken-dark mb-4">Scientific Equipment</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover our range of high-quality dairy equipment designed for precision, 
-            efficiency, and reliability in modern dairy operations.
+            Discover our comprehensive range of high-precision laboratory equipment for research, 
+            quality control, and scientific analysis applications.
           </p>
           
           {/* Category Filter */}
@@ -131,10 +131,10 @@ const ProductsSection = () => {
         {/* Featured Products Carousel */}
         {!category && (
           <div className="mb-16">
-            <h3 className="text-2xl font-semibold text-mylken-dark mb-6">Featured Dairy Products</h3>
+            <h3 className="text-2xl font-semibold text-mylken-dark mb-6">Featured Scientific Products</h3>
             <Carousel className="w-full">
               <CarouselContent>
-                {products.filter(p => p.featured).map((product) => (
+                {scientificProducts.filter(p => p.featured).map((product) => (
                   <CarouselItem key={product.id} className="md:basis-1/2 lg:basis-1/3">
                     <div className="p-1">
                       <Card className="overflow-hidden h-full">
@@ -246,9 +246,9 @@ const ProductsSection = () => {
         </div>
         
         <div className="text-center mt-12">
-          <p className="text-gray-600 mb-6">Can't find what you're looking for? We offer customized solutions for dairy businesses of all sizes.</p>
+          <p className="text-gray-600 mb-6">Need specialized laboratory equipment? We offer customized scientific solutions.</p>
           <Button className="bg-mylken-primary text-white hover:bg-mylken-secondary">
-            Request Custom Quote <ArrowUpRight size={18} className="ml-2" />
+            Request Scientific Consultation <ArrowUpRight size={18} className="ml-2" />
           </Button>
         </div>
       </div>
@@ -256,4 +256,4 @@ const ProductsSection = () => {
   );
 };
 
-export default ProductsSection;
+export default ScientificProductsSection;

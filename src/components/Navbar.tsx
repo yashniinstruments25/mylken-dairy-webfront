@@ -34,6 +34,13 @@ const Navbar = () => {
     { name: 'Dairy Processing Equipment', href: '/products/dairy-processing' },
     { name: 'Quality Testing Kits', href: '/products/testing-kits' }
   ];
+  
+  const scientificCategories = [
+    { name: 'Laboratory Equipment', href: '/scientific-products/lab-equipment' },
+    { name: 'Analysis Instruments', href: '/scientific-products/analysis' },
+    { name: 'Measurement Tools', href: '/scientific-products/measurement' },
+    { name: 'Sterilization Equipment', href: '/scientific-products/sterilization' }
+  ];
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -83,7 +90,7 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* Products dropdown */}
+          {/* Dairy Products dropdown */}
           <div className="z-50">
             <NavigationMenu>
               <NavigationMenuList>
@@ -96,7 +103,7 @@ const Navbar = () => {
                         : "text-mylken-primary hover:text-mylken-secondary"
                     )}
                   >
-                    Products
+                    Dairy Products
                   </NavigationMenuTrigger>
                   <NavigationMenuContent className="min-w-[260px]">
                     <ul className="grid gap-2 p-4">
@@ -118,7 +125,53 @@ const Navbar = () => {
                             to="/products"
                             className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
                           >
-                            View All Products
+                            View All Dairy Products
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+          
+          {/* Scientific Products dropdown */}
+          <div className="z-50">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger 
+                    className={cn(
+                      "font-medium transition-colors bg-transparent",
+                      isActive('/scientific-products') 
+                        ? "text-mylken-accent" 
+                        : "text-mylken-primary hover:text-mylken-secondary"
+                    )}
+                  >
+                    Scientific Products
+                  </NavigationMenuTrigger>
+                  <NavigationMenuContent className="min-w-[260px]">
+                    <ul className="grid gap-2 p-4">
+                      {scientificCategories.map((category) => (
+                        <li key={category.name} className="relative">
+                          <NavigationMenuLink asChild>
+                            <Link
+                              to={category.href}
+                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary"
+                            >
+                              <div className="text-sm font-medium leading-none">{category.name}</div>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      ))}
+                      <li className="relative mt-2 border-t pt-2">
+                        <NavigationMenuLink asChild>
+                          <Link
+                            to="/scientific-products"
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
+                          >
+                            View All Scientific Products
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -169,7 +222,7 @@ const Navbar = () => {
               </Link>
             ))}
             
-            {/* Mobile Products Dropdown */}
+            {/* Mobile Dairy Products Dropdown */}
             <div className="py-2 relative">
               <button 
                 className="flex items-center justify-between w-full text-left"
@@ -181,7 +234,9 @@ const Navbar = () => {
                   }
                 }}
               >
-                <span className={isActive('/products') ? "text-mylken-accent font-medium" : "text-mylken-primary"}>Products</span>
+                <span className={isActive('/products') ? "text-mylken-accent font-medium" : "text-mylken-primary"}>
+                  Dairy Products
+                </span>
                 <ChevronDown size={16} />
               </button>
               <div className="pl-4 space-y-2 mt-2 hidden">
@@ -200,7 +255,45 @@ const Navbar = () => {
                   className="block py-1 font-medium text-mylken-accent"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  View All Products
+                  View All Dairy Products
+                </Link>
+              </div>
+            </div>
+            
+            {/* Mobile Scientific Products Dropdown */}
+            <div className="py-2 relative">
+              <button 
+                className="flex items-center justify-between w-full text-left"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const submenu = e.currentTarget.nextElementSibling;
+                  if (submenu) {
+                    submenu.classList.toggle('hidden');
+                  }
+                }}
+              >
+                <span className={isActive('/scientific-products') ? "text-mylken-accent font-medium" : "text-mylken-primary"}>
+                  Scientific Products
+                </span>
+                <ChevronDown size={16} />
+              </button>
+              <div className="pl-4 space-y-2 mt-2 hidden">
+                {scientificCategories.map((category) => (
+                  <Link
+                    key={category.name}
+                    to={category.href}
+                    className="block py-1 text-mylken-primary hover:text-mylken-secondary"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {category.name}
+                  </Link>
+                ))}
+                <Link
+                  to="/scientific-products"
+                  className="block py-1 font-medium text-mylken-accent"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  View All Scientific Products
                 </Link>
               </div>
             </div>
