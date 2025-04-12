@@ -8,7 +8,7 @@ import Testimonials from '@/components/Testimonials';
 import Stats from '@/components/Stats';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Shield, Sparkles, Zap } from 'lucide-react';
 
 const Index = () => {
   useEffect(() => {
@@ -43,24 +43,19 @@ const Index = () => {
 const WhyChooseUs = () => {
   const features = [
     {
-      title: "Premium Quality",
-      description: "Our equipment is built with high-grade materials ensuring durability and consistent performance.",
-      icon: "✓"
+      title: "Innovation First",
+      description: "Our equipment incorporates the latest technology advances for better efficiency and results.",
+      icon: <Sparkles className="text-mylken-primary" size={20} />
     },
     {
-      title: "Technical Support",
-      description: "Get expert assistance from our technical team whenever you need it.",
-      icon: "✓"
+      title: "Agile Support",
+      description: "Our startup team provides rapid, personalized technical assistance whenever needed.",
+      icon: <Zap className="text-mylken-primary" size={20} />
     },
     {
-      title: "Precision Engineering",
-      description: "Every product is precision-engineered for accurate results and efficient operations.",
-      icon: "✓"
-    },
-    {
-      title: "Industry Compliant",
-      description: "All our equipment meets strict industry standards and regulatory requirements.",
-      icon: "✓"
+      title: "Quality Engineering",
+      description: "Every product is precision-engineered by our team of experts for reliable performance.",
+      icon: <Shield className="text-mylken-primary" size={20} />
     }
   ];
 
@@ -73,18 +68,18 @@ const WhyChooseUs = () => {
             <div className="absolute -bottom-2 left-0 right-0 h-1 bg-mylken-secondary rounded-full"></div>
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            With decades of experience in the dairy industry, we provide equipment that combines innovation with reliability.
+            As an innovative startup in the dairy industry, we combine cutting-edge technology with agile service to provide equipment that meets modern challenges.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div 
               key={index}
               className="bg-white p-6 rounded-lg shadow-md border-t-4 border-mylken-primary hover:shadow-xl transition-shadow duration-300 animate-fade-in"
               style={{ animationDelay: `${index * 150}ms` }}
             >
-              <div className="w-12 h-12 bg-mylken-light rounded-full flex items-center justify-center text-mylken-primary text-xl font-bold mb-4">
+              <div className="w-12 h-12 bg-mylken-light rounded-full flex items-center justify-center mb-4">
                 {feature.icon}
               </div>
               <h3 className="text-xl font-semibold text-mylken-dark mb-2">{feature.title}</h3>
@@ -110,12 +105,11 @@ const CallToAction = () => {
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-fade-in">
-            Ready to Upgrade Your Dairy Operations?
+            Ready to Grow Your Dairy Business?
           </h2>
           <p className="text-mylken-light text-lg mb-8 animate-fade-in animation-delay-300">
-            Discover how our premium dairy equipment can improve your productivity, 
-            efficiency, and product quality. Our specialists are ready to help you 
-            find the perfect solution for your business needs.
+            Partner with our innovative startup to revolutionize your operations with cutting-edge equipment
+            and technology-driven solutions customized for your needs.
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 animate-fade-in animation-delay-500">

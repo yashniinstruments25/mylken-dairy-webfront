@@ -32,19 +32,17 @@ const Navbar = () => {
     { name: 'Khoya Making Machines', href: '/products/khoya-machines' },
     { name: 'Milk Cans', href: '/products/milk-cans' },
     { name: 'Dairy Processing Equipment', href: '/products/dairy-processing' },
-    { name: 'Quality Testing Kits', href: '/products/testing-kits' }
   ];
   
   const scientificCategories = [
     { name: 'Laboratory Equipment', href: '/scientific-products/lab-equipment' },
     { name: 'Analysis Instruments', href: '/scientific-products/analysis' },
     { name: 'Measurement Tools', href: '/scientific-products/measurement' },
-    { name: 'Sterilization Equipment', href: '/scientific-products/sterilization' }
   ];
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'About Us', href: '/about' },
+    { name: 'About', href: '/about' },
     { name: 'Contact', href: '/contact' }
   ];
 
@@ -63,20 +61,20 @@ const Navbar = () => {
     >
       <div className="container-custom flex items-center justify-between">
         <div className="flex items-center">
-          <Link to="/" className="text-mylken-primary font-heading font-bold text-3xl">
+          <Link to="/" className="text-mylken-primary font-heading font-bold text-2xl md:text-3xl">
             Mylken
           </Link>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="hidden md:flex items-center space-x-4 lg:space-x-6">
           {/* Home and other simple links */}
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.href}
               className={cn(
-                "font-medium transition-colors relative group",
+                "font-medium transition-colors relative group text-sm lg:text-base",
                 isActive(link.href) 
                   ? "text-mylken-accent" 
                   : "text-mylken-primary hover:text-mylken-secondary"
@@ -97,7 +95,7 @@ const Navbar = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger 
                     className={cn(
-                      "font-medium transition-colors bg-transparent",
+                      "font-medium transition-colors bg-transparent text-sm lg:text-base",
                       isActive('/products') 
                         ? "text-mylken-accent" 
                         : "text-mylken-primary hover:text-mylken-secondary"
@@ -105,27 +103,27 @@ const Navbar = () => {
                   >
                     Dairy Products
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="min-w-[260px]">
-                    <ul className="grid gap-2 p-4">
+                  <NavigationMenuContent className="min-w-[220px]">
+                    <ul className="grid gap-1 p-3">
                       {productCategories.map((category) => (
                         <li key={category.name} className="relative">
                           <NavigationMenuLink asChild>
                             <Link
                               to={category.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary"
+                              className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary"
                             >
                               <div className="text-sm font-medium leading-none">{category.name}</div>
                             </Link>
                           </NavigationMenuLink>
                         </li>
                       ))}
-                      <li className="relative mt-2 border-t pt-2">
+                      <li className="relative mt-1 border-t pt-1">
                         <NavigationMenuLink asChild>
                           <Link
                             to="/products"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
+                            className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
                           >
-                            View All Dairy Products
+                            View All
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -143,35 +141,35 @@ const Navbar = () => {
                 <NavigationMenuItem>
                   <NavigationMenuTrigger 
                     className={cn(
-                      "font-medium transition-colors bg-transparent",
+                      "font-medium transition-colors bg-transparent text-sm lg:text-base",
                       isActive('/scientific-products') 
                         ? "text-mylken-accent" 
                         : "text-mylken-primary hover:text-mylken-secondary"
                     )}
                   >
-                    Scientific Products
+                    Scientific
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="min-w-[260px]">
-                    <ul className="grid gap-2 p-4">
+                  <NavigationMenuContent className="min-w-[220px]">
+                    <ul className="grid gap-1 p-3">
                       {scientificCategories.map((category) => (
                         <li key={category.name} className="relative">
                           <NavigationMenuLink asChild>
                             <Link
                               to={category.href}
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary"
+                              className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary"
                             >
                               <div className="text-sm font-medium leading-none">{category.name}</div>
                             </Link>
                           </NavigationMenuLink>
                         </li>
                       ))}
-                      <li className="relative mt-2 border-t pt-2">
+                      <li className="relative mt-1 border-t pt-1">
                         <NavigationMenuLink asChild>
                           <Link
                             to="/scientific-products"
-                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
+                            className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
                           >
-                            View All Scientific Products
+                            View All
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -182,7 +180,7 @@ const Navbar = () => {
             </NavigationMenu>
           </div>
           
-          <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-secondary hover:text-white transition-colors">
+          <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-secondary hover:text-white transition-colors text-sm px-3 py-1 h-auto">
             Get Quote
           </Button>
         </div>
@@ -205,7 +203,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white absolute top-full left-0 w-full shadow-md animate-fade-in">
-          <div className="container-custom py-4 flex flex-col space-y-4">
+          <div className="container-custom py-3 flex flex-col space-y-3">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -255,7 +253,7 @@ const Navbar = () => {
                   className="block py-1 font-medium text-mylken-accent"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  View All Dairy Products
+                  View All
                 </Link>
               </div>
             </div>
@@ -293,7 +291,7 @@ const Navbar = () => {
                   className="block py-1 font-medium text-mylken-accent"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  View All Scientific Products
+                  View All
                 </Link>
               </div>
             </div>
