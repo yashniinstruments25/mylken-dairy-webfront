@@ -14,7 +14,7 @@ const NavLink: React.FC<NavLinkProps> = ({ name, href, isActive }) => {
     <Link
       to={href}
       className={cn(
-        "font-medium transition-colors relative group text-sm lg:text-base",
+        "font-medium transition-all relative group text-sm lg:text-base px-2 py-2",
         isActive(href) 
           ? "text-mylken-accent" 
           : "text-mylken-primary hover:text-mylken-secondary"
