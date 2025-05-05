@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight, Milk, Factory, Beaker, Droplets, Cheese } from 'lucide-react';
+import { ArrowRight, Milk, Factory, Beaker, Droplets } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -121,7 +121,7 @@ const Hero = () => {
                 Dairy Processing Innovation
               </span>
               <span className="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-medium flex items-center gap-1">
-                <Cheese size={12} className="text-mylken-accent" />
+                <Milk size={12} className="text-mylken-accent" />
                 Since 2005
               </span>
             </div>
@@ -262,7 +262,7 @@ const Hero = () => {
             {/* Stats Floating Label */}
             <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white py-2 px-4 rounded-full shadow-lg hidden md:flex items-center gap-3 group">
               <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center relative">
-                <Cheese className="text-mylken-accent h-6 w-6" />
+                <Droplets className="text-mylken-accent h-6 w-6" />
                 {/* Milk droplet animation on hover */}
                 <span className="absolute -top-2 -right-2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-opacity"></span>
               </div>
