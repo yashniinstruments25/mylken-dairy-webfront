@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronRight, Download, Mail, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter, CardPricing } from "@/components/ui/card";
 
 // Product category data
 const productCategories = {
@@ -452,61 +452,71 @@ const ProductCategory = () => {
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       <main className="flex-grow pt-20">
+        {/* Category Header */}
+        <section className="bg-mylken-primary text-white py-12">
+          <div className="container mx-auto px-4">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">{category.title}</h1>
+            <p className="text-mylken-light max-w-2xl">{category.description}</p>
+          </div>
+        </section>
+
         {/* Product Hero Section */}
         {selectedProduct && (
-          <section className="py-12 bg-gradient-to-br from-[#FEF9E7] to-[#FCF3CF]">
+          <section className="py-12 bg-white border-b">
             <div className="container mx-auto px-4 md:px-6">
               <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                   {/* Product Image */}
-                  <div className="bg-white rounded-lg shadow-sm p-4 h-full">
-                    <img 
-                      src={selectedProduct.image} 
-                      alt={selectedProduct.name} 
-                      className="w-full h-auto object-contain aspect-square rounded-md"
-                      onError={(e) => {
-                        e.currentTarget.src = '/placeholder.svg';
-                      }}
-                    />
+                  <div className="bg-white rounded-lg shadow-md p-6 h-full">
+                    <div className="aspect-square rounded-md overflow-hidden">
+                      <img 
+                        src={selectedProduct.image} 
+                        alt={selectedProduct.name} 
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = '/placeholder.svg';
+                        }}
+                      />
+                    </div>
                   </div>
                   
                   {/* Product Info */}
                   <div>
-                    <h1 className="text-3xl md:text-4xl font-bold text-mylken-dark mb-2">
+                    <h1 className="text-3xl md:text-4xl font-bold text-mylken-dark mb-4">
                       {selectedProduct.name}
                     </h1>
-                    <p className="text-gray-700 text-lg mb-6">
-                      {selectedProduct.shortDesc}
-                    </p>
+                    <div className="bg-mylken-light/20 p-4 rounded-md mb-6">
+                      <p className="text-gray-700 text-lg">
+                        {selectedProduct.shortDesc}
+                      </p>
+                    </div>
                     
-                    <Card className="bg-white shadow-sm border-0 mb-8">
+                    <Card className="mb-8 shadow-md border-t-4 border-mylken-primary">
                       <CardContent className="p-6">
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <p className="text-gray-600 mb-1">Price:</p>
-                            <p className="text-3xl font-bold text-mylken-primary">
-                              {selectedProduct.price}
-                            </p>
-                          </div>
+                        <div className="flex flex-col">
+                          <p className="text-gray-600 mb-1">Price Starting From:</p>
+                          <p className="text-3xl font-bold text-mylken-primary">
+                            {selectedProduct.price}
+                          </p>
+                          <p className="text-sm text-gray-500 mt-2">{selectedProduct.priceNote}</p>
                         </div>
-                        <p className="text-sm text-gray-500 mt-2">{selectedProduct.priceNote}</p>
                       </CardContent>
                     </Card>
                     
                     <div className="mb-8">
-                      <h3 className="text-xl font-semibold text-mylken-dark mb-4">Key Features:</h3>
-                      <ul className="space-y-2">
+                      <h3 className="text-xl font-semibold text-mylken-dark mb-4 border-b pb-2">Key Features:</h3>
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
                         {selectedProduct.keyFeatures.map((feature: string, index: number) => (
                           <li key={index} className="flex items-center text-gray-700">
-                            <ChevronRight className="text-mylken-accent mr-2 shrink-0" size={18} />
-                            {feature}
+                            <ChevronRight className="text-mylken-accent shrink-0" size={18} />
+                            <span>{feature}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
                     
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <Button size="lg" className="bg-mylken-accent text-mylken-dark hover:bg-mylken-accent/90">
+                      <Button size="lg" variant="primary" className="px-8">
                         Request Quote
                       </Button>
                       <Button size="lg" variant="outline" className="border-mylken-primary text-mylken-primary hover:bg-mylken-primary hover:text-white flex items-center gap-2">
@@ -522,62 +532,73 @@ const ProductCategory = () => {
         
         {/* Product Details Tabs */}
         {selectedProduct && (
-          <section className="py-12">
+          <section className="py-12 bg-gray-50">
             <div className="container mx-auto px-4 md:px-6">
               <div className="max-w-7xl mx-auto">
                 <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                  <TabsList className="w-full max-w-md mx-auto grid grid-cols-3 mb-8">
-                    <TabsTrigger value="description" className="text-center py-3">Description</TabsTrigger>
-                    <TabsTrigger value="specifications" className="text-center py-3">Specifications</TabsTrigger>
-                    <TabsTrigger value="faq" className="text-center py-3">FAQ</TabsTrigger>
+                  <TabsList className="w-full max-w-md mx-auto grid grid-cols-4 mb-8 bg-white shadow-md rounded-lg overflow-hidden">
+                    <TabsTrigger value="description" className="text-center py-4 data-[state=active]:bg-mylken-primary data-[state=active]:text-white">Description</TabsTrigger>
+                    <TabsTrigger value="specifications" className="text-center py-4 data-[state=active]:bg-mylken-primary data-[state=active]:text-white">Specifications</TabsTrigger>
+                    <TabsTrigger value="features" className="text-center py-4 data-[state=active]:bg-mylken-primary data-[state=active]:text-white">Features</TabsTrigger>
+                    <TabsTrigger value="faq" className="text-center py-4 data-[state=active]:bg-mylken-primary data-[state=active]:text-white">FAQ</TabsTrigger>
                   </TabsList>
                   
-                  <TabsContent value="description" className="bg-white rounded-lg p-6 shadow-sm">
-                    <h2 className="text-2xl font-bold text-mylken-dark mb-4">Product Description</h2>
-                    <p className="text-gray-700 mb-8">{selectedProduct.fullDescription}</p>
+                  <TabsContent value="description" className="bg-white rounded-lg p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-mylken-dark mb-4 border-b pb-2">Product Description</h2>
+                    <p className="text-gray-700 mb-8 leading-relaxed">{selectedProduct.fullDescription}</p>
                     
-                    <h3 className="text-xl font-semibold text-mylken-dark mb-4">Features & Benefits</h3>
-                    <ul className="space-y-3 mb-8">
-                      {selectedProduct.features.map((feature: string, index: number) => (
-                        <li key={index} className="flex items-start">
-                          <ChevronRight className="text-mylken-accent mt-1 mr-2 shrink-0" size={18} />
-                          <span className="text-gray-700">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    
-                    <h3 className="text-xl font-semibold text-mylken-dark mb-4">Applications</h3>
-                    <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <h3 className="text-xl font-semibold text-mylken-dark mb-4 border-b pb-2">Applications</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {selectedProduct.applications.map((app: string, index: number) => (
-                        <li key={index} className="bg-mylken-light/30 rounded-md px-4 py-3 text-gray-700">
-                          {app}
-                        </li>
+                        <div key={index} className="bg-mylken-light/30 rounded-md px-4 py-4 text-gray-700 flex items-center gap-3">
+                          <div className="h-8 w-8 rounded-full bg-mylken-primary/20 flex items-center justify-center text-mylken-primary font-bold">
+                            {index + 1}
+                          </div>
+                          <span>{app}</span>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </TabsContent>
                   
-                  <TabsContent value="specifications" className="bg-white rounded-lg p-6 shadow-sm">
-                    <h2 className="text-2xl font-bold text-mylken-dark mb-6">Technical Specifications</h2>
-                    <div className="divide-y">
+                  <TabsContent value="specifications" className="bg-white rounded-lg p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-mylken-dark mb-6 border-b pb-2">Technical Specifications</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {selectedProduct.specifications.map((spec: string, index: number) => {
-                        const [label, value] = spec.split(':').map(s => s.trim());
+                        const [label, value] = spec.includes(':') ? spec.split(':').map(s => s.trim()) : [spec, ''];
                         return (
-                          <div key={index} className="py-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div key={index} className="border-b border-gray-100 pb-3">
                             <div className="font-medium text-mylken-dark">{label}</div>
-                            <div className="md:col-span-2 text-gray-700">{value || spec}</div>
+                            {value && <div className="text-gray-700">{value}</div>}
                           </div>
                         );
                       })}
                     </div>
                   </TabsContent>
                   
-                  <TabsContent value="faq" className="bg-white rounded-lg p-6 shadow-sm">
-                    <h2 className="text-2xl font-bold text-mylken-dark mb-6">Frequently Asked Questions</h2>
-                    <div className="divide-y">
+                  <TabsContent value="features" className="bg-white rounded-lg p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-mylken-dark mb-6 border-b pb-2">Features & Benefits</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {selectedProduct.features.map((feature: string, index: number) => (
+                        <div key={index} className="flex items-start gap-3 bg-gray-50 p-4 rounded-md">
+                          <div className="h-8 w-8 rounded-full bg-mylken-accent/20 flex items-center justify-center text-mylken-accent font-bold shrink-0">
+                            {index + 1}
+                          </div>
+                          <p className="text-gray-700">{feature}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="faq" className="bg-white rounded-lg p-8 shadow-md">
+                    <h2 className="text-2xl font-bold text-mylken-dark mb-6 border-b pb-2">Frequently Asked Questions</h2>
+                    <div className="space-y-6">
                       {selectedProduct.faq?.map((item: any, index: number) => (
-                        <div key={index} className="py-4">
-                          <h3 className="font-semibold text-mylken-dark text-lg mb-2">{item.question}</h3>
-                          <p className="text-gray-700">{item.answer}</p>
+                        <div key={index} className="bg-gray-50 p-6 rounded-md">
+                          <h3 className="font-semibold text-mylken-dark text-lg mb-3 flex items-center gap-2">
+                            <span className="h-6 w-6 rounded-full bg-mylken-primary flex items-center justify-center text-white text-sm">Q</span>
+                            {item.question}
+                          </h3>
+                          <p className="text-gray-700 pl-8">{item.answer}</p>
                         </div>
                       )) || (
                         <p className="text-gray-500">No FAQs available for this product.</p>
@@ -592,10 +613,10 @@ const ProductCategory = () => {
         
         {/* Related Products */}
         {category.products.length > 1 && (
-          <section className="py-12 bg-gray-50">
+          <section className="py-12 bg-white">
             <div className="container mx-auto px-4 md:px-6">
               <div className="max-w-7xl mx-auto">
-                <h2 className="text-2xl font-bold text-mylken-dark mb-8">Related Products</h2>
+                <h2 className="text-2xl font-bold text-mylken-dark mb-8 border-b pb-2">Related Products</h2>
                 
                 <motion.div 
                   className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -606,7 +627,7 @@ const ProductCategory = () => {
                   {category.products.filter((p: any) => p.id !== (selectedProduct?.id || 0)).map((product: any) => (
                     <motion.div 
                       key={product.id}
-                      className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                      className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer"
                       onClick={() => {
                         setSelectedProduct(product);
                         setActiveTab("description");
@@ -614,17 +635,17 @@ const ProductCategory = () => {
                       }}
                       variants={itemVariants}
                     >
-                      <div className="aspect-video overflow-hidden">
+                      <div className="aspect-video overflow-hidden bg-gray-100">
                         <img 
                           src={product.image} 
                           alt={product.name} 
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                           onError={(e) => {
                             e.currentTarget.src = '/placeholder.svg';
                           }}
                         />
                       </div>
-                      <div className="p-5">
+                      <div className="p-6">
                         <h3 className="font-bold text-lg text-mylken-primary mb-2">{product.name}</h3>
                         <p className="text-gray-600 mb-4 line-clamp-2">{product.shortDesc}</p>
                         <Button variant="link" className="p-0 h-auto text-mylken-primary hover:text-mylken-secondary flex items-center gap-1">
@@ -701,7 +722,7 @@ const ProductCategory = () => {
                 </div>
                 
                 <div className="mt-6">
-                  <Button className="w-full md:w-auto bg-mylken-primary text-white hover:bg-mylken-secondary px-8 py-2 h-auto">
+                  <Button variant="primary" className="w-full md:w-auto px-8 py-2 h-auto">
                     Submit Inquiry
                   </Button>
                 </div>
