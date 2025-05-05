@@ -1,6 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight, Milk, Tractor, Factory } from 'lucide-react';
+import { ArrowRight, Milk, Factory, Beaker } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -39,7 +39,7 @@ const Hero = () => {
             <div className="flex items-center gap-2">
               <span className="px-4 py-2 rounded-full bg-mylken-accent/20 text-mylken-accent inline-flex items-center text-sm font-medium">
                 <span className="w-2 h-2 rounded-full bg-mylken-accent mr-2 animate-pulse"></span>
-                Dairy Machinery Experts
+                Dairy Processing Innovation
               </span>
               <span className="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-medium">
                 Since 2005
@@ -47,23 +47,25 @@ const Hero = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              <span className="block">Advanced</span>
-              <span className="block">Dairy <span className="text-mylken-accent">Equipment</span></span>
-              <span className="block">Solutions</span>
+              <span className="block">Transform Your</span>
+              <span className="block">Dairy <span className="text-mylken-accent">Production</span></span>
+              <span className="block">With Precision</span>
             </h1>
             
             <p className="text-mylken-light text-lg md:text-xl max-w-lg">
-              We engineer cutting-edge machinery for modern dairy operations, 
-              delivering efficiency, reliability, and innovation to elevate your production.
+              We provide cutting-edge machinery that helps dairy farmers and processors 
+              maximize yield, ensure quality, and increase efficiency in every step of production.
             </p>
             
             <div className="flex flex-wrap gap-4 pt-4">
               <Link to="/products" className="bg-mylken-accent text-mylken-dark hover:bg-mylken-light transition-all duration-300 px-6 py-3 rounded-md font-medium flex items-center gap-2 group">
-                Explore Our Products 
+                Browse Equipment 
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link to="/contact" className="bg-transparent border border-mylken-light text-white hover:bg-mylken-light/10 transition-colors px-6 py-3 rounded-md font-medium">
-                Request Consultation
+              <Link to="/contact">
+                <Button variant="milk" className="transition-colors px-6 py-6 h-auto">
+                  Request Consultation
+                </Button>
               </Link>
             </div>
             
@@ -72,24 +74,24 @@ const Hero = () => {
                 <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Factory className="text-mylken-accent" size={20} />
                 </div>
-                <h3 className="text-white font-semibold">Industry-Leading</h3>
-                <p className="text-mylken-light text-sm">Technology</p>
+                <h3 className="text-white font-semibold">Dairy Processing</h3>
+                <p className="text-mylken-light text-sm">Equipment</p>
               </div>
               
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
                 <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Milk className="text-mylken-accent" size={20} />
                 </div>
-                <h3 className="text-white font-semibold">Superior</h3>
-                <p className="text-mylken-light text-sm">Quality Output</p>
+                <h3 className="text-white font-semibold">Quality</h3>
+                <p className="text-mylken-light text-sm">Testing Tools</p>
               </div>
               
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center">
                 <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Tractor className="text-mylken-accent" size={20} />
+                  <Beaker className="text-mylken-accent" size={20} />
                 </div>
-                <h3 className="text-white font-semibold">Reliable</h3>
-                <p className="text-mylken-light text-sm">Performance</p>
+                <h3 className="text-white font-semibold">Lab</h3>
+                <p className="text-mylken-light text-sm">Analysis</p>
               </div>
             </div>
           </div>
@@ -101,7 +103,7 @@ const Hero = () => {
               <div className="rounded-lg overflow-hidden relative z-10">
                 <img 
                   src="/images/milk-analyzer-hero.jpg" 
-                  alt="Mylken Dairy Equipment" 
+                  alt="Advanced Milk Analyzer" 
                   className="w-full h-auto object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
@@ -111,7 +113,7 @@ const Hero = () => {
               </div>
               <div className="absolute -bottom-5 -right-5 bg-white rounded-full p-3 shadow-lg animate-zoom-in">
                 <div className="bg-mylken-primary rounded-full h-16 w-16 flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">Industry<br/>Leader</span>
+                  <span className="text-white text-sm font-bold">99.8%<br/>Accuracy</span>
                 </div>
               </div>
             </div>
@@ -123,17 +125,17 @@ const Hero = () => {
                   <Factory className="text-mylken-primary h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-mylken-dark">Premium Equipment</h4>
-                  <p className="text-xs text-gray-500">For Modern Dairy Operations</p>
+                  <h4 className="font-bold text-mylken-dark">Automation Ready</h4>
+                  <p className="text-xs text-gray-500">Smart Dairy Solutions</p>
                 </div>
               </div>
               <div className="bg-gray-50 p-2 rounded-md">
                 <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">Customer Satisfaction</span>
-                  <span className="text-mylken-primary font-medium">98%</span>
+                  <span className="text-gray-600">Energy Efficiency</span>
+                  <span className="text-mylken-primary font-medium">96%</span>
                 </div>
                 <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                  <div className="bg-mylken-primary h-full rounded-full" style={{ width: "98%" }}></div>
+                  <div className="bg-mylken-primary h-full rounded-full" style={{ width: "96%" }}></div>
                 </div>
               </div>
             </div>
@@ -141,9 +143,9 @@ const Hero = () => {
             {/* Stats Floating Label */}
             <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white py-2 px-4 rounded-full shadow-lg hidden md:flex items-center gap-3">
               <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center">
-                <span className="font-bold text-mylken-accent">500+</span>
+                <span className="font-bold text-mylken-accent">15+</span>
               </div>
-              <span className="text-sm font-medium text-mylken-dark">Installations</span>
+              <span className="text-sm font-medium text-mylken-dark">Dairy Solutions</span>
             </div>
           </div>
         </div>

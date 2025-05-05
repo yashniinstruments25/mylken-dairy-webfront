@@ -11,6 +11,8 @@ import ProductCategory from "./pages/ProductCategory";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import MilkAnalyzers from "./pages/MilkAnalyzers";
+import KhoyaMachines from "./pages/KhoyaMachines";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/products" element={<Products />} />
           <Route path="/scientific-products" element={<ScientificProducts />} />
           <Route path="/products/:categoryId" element={<ProductCategory />} />
+          <Route path="/milk-analyzers" element={<MilkAnalyzers />} />
+          <Route path="/khoya-machines" element={<KhoyaMachines />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
