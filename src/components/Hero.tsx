@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Milk, Factory, Beaker, Droplets } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -30,19 +31,34 @@ const Hero = () => {
     
     const createMilkDrop = () => {
       const drop = document.createElement('div');
-      drop.className = 'absolute bg-white rounded-full opacity-60 shadow-md';
+      drop.className = 'absolute';
+      drop.style.zIndex = '5';
+      
+      // Create teardrop shape for milk drop
+      const innerDrop = document.createElement('div');
+      innerDrop.className = 'bg-white rounded-t-full rounded-bl-full rounded-br-lg rotate-45 opacity-60 shadow-md';
       
       // Random position, size and animation duration
       const size = Math.random() * 30 + 10;
       const left = Math.random() * 100;
       const animationDuration = Math.random() * 8 + 5;
       
-      drop.style.width = `${size}px`;
-      drop.style.height = `${size}px`;
+      innerDrop.style.width = `${size}px`;
+      innerDrop.style.height = `${size}px`;
       drop.style.left = `${left}%`;
       drop.style.top = '0';
       drop.style.animation = `fall ${animationDuration}s linear forwards`;
       
+      // Add trail effect
+      const trail = document.createElement('div');
+      trail.className = 'absolute bg-white w-1 opacity-30';
+      trail.style.top = `${size}px`;
+      trail.style.left = `${size/2}px`;
+      trail.style.height = '0';
+      trail.style.animation = `drip ${animationDuration/4}s linear infinite alternate`;
+      
+      drop.appendChild(innerDrop);
+      drop.appendChild(trail);
       milkDropsRef.current?.appendChild(drop);
       
       // Remove drop after animation completes
@@ -92,21 +108,31 @@ const Hero = () => {
         <div className="absolute left-1/2 top-1/3 w-40 h-40 bg-mylken-light rounded-full blur-2xl"></div>
       </div>
       
-      {/* Milk wave at bottom */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[60px]">
+      {/* Enhanced Milk wave at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 z-5">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[80px]">
           <path 
             d="M0,0 C150,90 350,0 500,80 C650,160 750,40 900,80 C1050,120 1200,30 1200,30 V120 H0 Z" 
-            className="fill-white opacity-20"
+            className="fill-white opacity-30"
           ></path>
         </svg>
       </div>
       
-      {/* Second milk wave with offset */}
-      <div className="absolute bottom-0 left-0 right-0" style={{ animation: "milkWave 8s ease-in-out infinite" }}>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[40px]">
+      {/* Second milk wave with offset - more visible */}
+      <div className="absolute bottom-0 left-0 right-0 milk-wave z-4">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[60px]">
           <path 
             d="M0,40 C150,0 350,80 500,20 C650,0 750,60 900,30 C1050,0 1200,30 1200,30 V120 H0 Z" 
+            className="fill-white opacity-40"
+          ></path>
+        </svg>
+      </div>
+      
+      {/* Third milk wave for more dramatic effect */}
+      <div className="absolute bottom-0 left-0 right-0 z-3" style={{ animation: "milkWave 7s ease-in-out infinite reverse" }}>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[50px]">
+          <path 
+            d="M0,60 C350,0 450,120 650,30 C750,0 950,80 1200,20 V120 H0 Z" 
             className="fill-white opacity-25"
           ></path>
         </svg>

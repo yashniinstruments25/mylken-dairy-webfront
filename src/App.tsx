@@ -26,8 +26,8 @@ const createMilkSplash = () => {
   container.style.pointerEvents = 'none';
   container.style.zIndex = '9999';
   
-  // Create splash elements
-  for (let i = 0; i < 5; i++) {
+  // Create larger and more visible splash elements
+  for (let i = 0; i < 8; i++) {
     const splash = document.createElement('div');
     splash.className = 'milk-splash';
     
@@ -37,7 +37,11 @@ const createMilkSplash = () => {
     
     splash.style.top = `${y}%`;
     splash.style.left = `${x}%`;
-    splash.style.animationDelay = `${i * 0.2}s`;
+    splash.style.width = `${Math.random() * 40 + 20}px`;
+    splash.style.height = `${Math.random() * 40 + 20}px`;
+    splash.style.opacity = '0.8';
+    splash.style.animationDuration = `${Math.random() * 0.5 + 0.7}s`;
+    splash.style.animationDelay = `${i * 0.15}s`;
     
     container.appendChild(splash);
   }
@@ -47,7 +51,61 @@ const createMilkSplash = () => {
   // Remove after animation completes
   setTimeout(() => {
     document.body.removeChild(container);
-  }, 2000);
+  }, 2500);
+};
+
+const createMilkDrops = () => {
+  const drops = document.createElement('div');
+  drops.style.position = 'fixed';
+  drops.style.top = '0';
+  drops.style.left = '0';
+  drops.style.width = '100%';
+  drops.style.height = '100%';
+  drops.style.pointerEvents = 'none';
+  drops.style.zIndex = '9998';
+  drops.id = 'milk-drops-container';
+  
+  document.body.appendChild(drops);
+  
+  // Function to create a single drop
+  const createDrop = () => {
+    const drop = document.createElement('div');
+    drop.className = 'milk-drop';
+    
+    // Random size for variety
+    const size = Math.random() * 15 + 5;
+    drop.style.width = `${size}px`;
+    drop.style.height = `${size}px`;
+    
+    // Random horizontal position
+    const left = Math.random() * 100;
+    drop.style.left = `${left}%`;
+    
+    // Start from top
+    drop.style.top = '0';
+    
+    // Animation
+    drop.style.animation = `milk-drop-fall ${Math.random() * 3 + 3}s linear forwards`;
+    
+    drops.appendChild(drop);
+    
+    // Remove drop after animation completes
+    setTimeout(() => {
+      if (drop.parentNode) {
+        drop.parentNode.removeChild(drop);
+      }
+    }, 6000);
+  };
+  
+  // Create drops at intervals
+  let dropInterval = setInterval(createDrop, 300);
+  
+  return () => {
+    clearInterval(dropInterval);
+    if (document.body.contains(drops)) {
+      document.body.removeChild(drops);
+    }
+  };
 };
 
 const queryClient = new QueryClient();
@@ -56,6 +114,13 @@ const App = () => {
   // Create splash effect on first render
   React.useEffect(() => {
     createMilkSplash();
+    
+    // Start creating milk drops
+    const cleanupDrops = createMilkDrops();
+    
+    return () => {
+      cleanupDrops();
+    };
   }, []);
   
   return (
