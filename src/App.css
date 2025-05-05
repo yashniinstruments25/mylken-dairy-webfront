@@ -1,3 +1,4 @@
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -27,6 +28,73 @@
   }
 }
 
+@keyframes milk-drip {
+  0% { 
+    height: 0; 
+    opacity: 0;
+  }
+  50% { 
+    opacity: 1;
+  }
+  100% { 
+    height: 100px; 
+    opacity: 0;
+  }
+}
+
+@keyframes milk-wave {
+  0% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-8px); 
+  }
+  100% { 
+    transform: translateY(0px); 
+  }
+}
+
+@keyframes milk-splash {
+  0% {
+    transform: scale(0);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+@keyframes drip {
+  0% { height: 8px; }
+  100% { height: 16px; }
+}
+
+.milk-drip {
+  position: absolute;
+  width: 4px;
+  background-color: white;
+  border-radius: 0 0 4px 4px;
+  top: 0;
+  animation: milk-drip 3s infinite;
+}
+
+.milk-wave {
+  animation: milk-wave 8s infinite ease-in-out;
+}
+
+.milk-splash {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: milk-splash 1s forwards;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
@@ -40,3 +108,39 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Milk Bubble Effect */
+.milk-bubble {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: milk-bubble 2s ease-in-out infinite;
+}
+
+@keyframes milk-bubble {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-20px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Button milk splash effect */
+.btn-milk-splash:hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+  transform: translate(-50%, -50%) scale(0);
+  animation: milk-splash 0.6s forwards;
+}
+

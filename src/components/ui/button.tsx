@@ -19,10 +19,12 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80 shadow-sm",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        accent: "bg-mylken-accent text-mylken-dark hover:bg-mylken-accent/90 shadow-sm",
-        primary: "bg-mylken-primary text-white hover:bg-mylken-primary/90 shadow-md",
-        milk: "bg-white text-mylken-primary hover:bg-mylken-light border border-mylken-primary/20 shadow-sm",
-        cream: "bg-mylken-light text-mylken-primary hover:bg-white shadow-sm",
+        accent: "bg-mylken-accent text-mylken-dark hover:bg-mylken-accent/90 shadow-sm relative",
+        primary: "bg-mylken-primary text-white hover:bg-mylken-primary/90 shadow-md relative",
+        milk: "bg-white text-mylken-primary hover:bg-mylken-light border border-mylken-primary/20 shadow-sm relative",
+        cream: "bg-mylken-light text-mylken-primary hover:bg-white shadow-sm relative",
+        milkSplash: "bg-white text-mylken-primary border border-mylken-primary/50 hover:border-mylken-primary relative overflow-hidden shadow-sm before:absolute before:inset-0 before:bg-mylken-accent/0 hover:before:bg-mylken-accent/20 before:transition-colors",
+        dairy: "bg-mylken-primary text-white relative overflow-hidden shadow-md after:absolute after:-bottom-1 after:left-0 after:h-1 after:w-full after:bg-mylken-accent after:transform after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -60,3 +62,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 Button.displayName = "Button"
 
 export { Button, buttonVariants }
+
