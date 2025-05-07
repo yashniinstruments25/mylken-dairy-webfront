@@ -54,11 +54,11 @@ const FeaturedProducts = () => {
               className="group overflow-hidden border border-gray-100 hover:shadow-xl transition-all duration-300 animate-fade-in"
               style={{ animationDelay: `${index * 200}ms` }}
             >
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative h-52 overflow-hidden">
                 <img 
                   src={product.image || "/placeholder.svg"} 
                   alt={product.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = "/placeholder.svg";

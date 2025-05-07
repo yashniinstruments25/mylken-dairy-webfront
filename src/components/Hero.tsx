@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Milk, Factory, Beaker, Droplets } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -228,7 +227,7 @@ const Hero = () => {
           
           {/* Hero Image */}
           <div ref={imageRef} className="relative ml-auto animate-slide-in-right transition-all duration-300">
-            <div className="bg-white rounded-lg p-3 shadow-2xl relative">
+            <div className="bg-white rounded-lg p-3 shadow-2xl relative max-w-md mx-auto">
               <div className="absolute -left-4 -top-4 w-16 h-16 rounded-lg bg-mylken-accent rotate-12 animate-float"></div>
               
               {/* Milk splash effect on image */}
@@ -239,7 +238,7 @@ const Hero = () => {
                 <img 
                   src="/images/milk-analyzer-hero.jpg" 
                   alt="Advanced Milk Analyzer" 
-                  className="w-full h-auto object-cover"
+                  className="w-full h-auto max-h-80 object-contain"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = "/placeholder.svg";
