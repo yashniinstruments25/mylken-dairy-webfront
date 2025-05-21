@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -8,7 +7,7 @@ import Testimonials from '@/components/Testimonials';
 import Stats from '@/components/Stats';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, Sparkles, Zap, Droplets, Milk, Cow, Leaf } from 'lucide-react';
+import { ArrowRight, Shield, Sparkles, Zap, Droplets, Milk, Beef, Leaf } from 'lucide-react';
 
 const Index = () => {
   useEffect(() => {
@@ -117,7 +116,7 @@ const WhyChooseUs = () => {
       {/* Farm-themed background */}
       <div className="absolute inset-0 z-0 opacity-10">
         {/* Decorative farm elements */}
-        <div className="absolute top-0 left-0 right-0 h-40 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTQuNjI3IDBsLjgzLjgyOC0xLjQxNSAxLjQxNUw1MS44IDBoMi44Mjd6TTUuMzczIDBsLS44My44MjhMNS45NiAyLjI0MyA4LjIgMEg1LjM3NHpNNDguOTcgMGwzLjY1NyAzLjY1Ny0xLjQxNCAxLjQxNEw0Ni4xNDMgMGgyLjgyOHpNMTEuMDMgMEw3LjM3MiAzLjY1NyA4Ljc4NyA1LjA3IDEzLjg1NyAwSDExLjAzem0zMi4yODQgMEw0OS44IDYuNDg1IDQ4LjM4NCA3LjlsLTcuOS03LjloMi44M3ptLTI0LjU3IDBsLTUuNjU3IDUuNjU3IDEuNDE1IDEuNDE1TDIyLjYyNyAwSDE4Ljc0NXptMTYuNjg2IDBsLTcuMDcgNy4wNyAxLjQxNCAxLjQxNSA5LjktOS45aC00LjI0M3ptLTguNDg1IDBsLTguNDg1IDguNDg1IDEuNDE0IDEuNDE0TDI0Ljk3IDBoLTQuMjQzem0tNC4yNDIgMEwxMi4xNDMgMTAuNjU3bDEuNDE0IDEuNDE0TDI2LjE0MyAwSDEyLjcwNHptLTguNDg1IDBMMi4xNDQgMTIuOTdsMS40MTQgMS40MTVMMTYuOTcgMEg4LjQ4NXptLTQuMjQzIDBMMCAxMC43Mjd2Mi44MjhsLjgyOC0uODI4TDQuMjQzIDB6TTAgNS42NTdsMS40MTQgMS40MTRMNS42NTcgMi44MyA0LjI0MyAxLjQxNCAwIDUuNjU3eiIgZmlsbD0iIzY1YTMwZCIgZmlsbC1vcGFjaXR5PSIwLjEiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==')]"></div>
+        <div className="absolute top-0 left-0 right-0 h-40 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNTQuNjI3IDBsLjgzLjgyOC0xLjQxNSAxLjQxNUw1MS44IDBoMi44Mjd6TTUuMzczIDBsLS44My44MjhMNS45NiAyLjI0MyA4LjIgMEg1LjM3NHpNNDguOTcgMGwzLjY1NyAzLjY1Ny0xLjQxNCAxLjQxNEw0Ni4xNDMgMGgyLjgyOHpNMTEuMDMgMEw3LjM3MiAzLjY1NyA4Ljc4NyA1LjA3IDEzLjg1NyAwSDExLjAzem0zMi4yODQgMEw0OS44IDYuNDg1IDQ4LjM4NCA3LjlsLTcuOS03LjloMi44M3ptLTI0LjU3IDBsLTUuNjU3IDUuNjU3IDEuNDE1IDEuNDE1TDIyLjYyNyAwSDE4Ljc0NXptLTQuMjQzIDBMMi4xNDQgMTIuOTdsMS40MTQgMS40MTVMMTYuOTcgMEg4LjQ4NXptLTQuMjQzIDB6TTAgNS42NTdsMS40MTQgMS40MTRMNS42NTcgMi44MyA0LjI0MyAxLjQxNCAwIDUuNjU3eiIgZmlsbD0iIzY1YTMwZCIgZmlsbC1vcGFjaXR5PSIwLjEiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvc3ZnPg==')]"></div>
         
         {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-green-50/50 to-white/0"></div>
@@ -208,7 +207,7 @@ const WhyChooseUs = () => {
               {/* Farm element animations */}
               <div className="absolute bottom-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity">
                 {index === 0 ? (
-                  <Cow className="text-green-600/20 h-20 w-20 transform -translate-y-1/2 group-hover:animate-bounce" style={{animationDuration: "3s"}} />
+                  <Beef className="text-green-600/20 h-20 w-20 transform -translate-y-1/2 group-hover:animate-bounce" style={{animationDuration: "3s"}} />
                 ) : index === 1 ? (
                   <Droplets className="text-blue-400/20 h-20 w-20 transform -translate-y-1/2 group-hover:animate-bounce" style={{animationDuration: "2.5s"}} />
                 ) : (

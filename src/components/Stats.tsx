@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Milk, Award, Clock, CheckCircle, HeadphonesIcon, Cow } from 'lucide-react';
+import { Milk, Award, Clock, CheckCircle, HeadphonesIcon, Beef } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Stats = () => {
@@ -99,13 +99,13 @@ const Stats = () => {
         {/* Abstract farm pattern */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-10 left-10 w-20 h-20">
-            <Cow className="w-full h-full text-green-900" />
+            <Beef className="w-full h-full text-green-900" />
           </div>
           <div className="absolute top-40 right-40 w-16 h-16">
             <Milk className="w-full h-full text-yellow-600" />
           </div>
           <div className="absolute bottom-20 left-1/4 w-24 h-24">
-            <Cow className="w-full h-full text-green-900" />
+            <Beef className="w-full h-full text-green-900" />
           </div>
           <div className="absolute top-60 left-1/2 w-16 h-16">
             <Milk className="w-full h-full text-yellow-600" />
