@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
@@ -8,7 +7,7 @@ import Testimonials from '@/components/Testimonials';
 import Stats from '@/components/Stats';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, Sparkles, Zap } from 'lucide-react';
+import { ArrowRight, Shield, Sparkles, Zap, Droplets, Milk } from 'lucide-react';
 
 const Index = () => {
   useEffect(() => {
@@ -39,33 +38,94 @@ const Index = () => {
   );
 };
 
-// Why Choose Us section
+// Enhanced Why Choose Us section
 const WhyChooseUs = () => {
   const features = [
     {
       title: "Innovation First",
       description: "Our equipment incorporates the latest technology advances for better efficiency and results.",
-      icon: <Sparkles className="text-mylken-primary" size={20} />
+      icon: <Sparkles className="text-mylken-primary" size={24} />,
+      animationDelay: 0
     },
     {
       title: "Agile Support",
       description: "Our startup team provides rapid, personalized technical assistance whenever needed.",
-      icon: <Zap className="text-mylken-primary" size={20} />
+      icon: <Zap className="text-mylken-primary" size={24} />,
+      animationDelay: 200
     },
     {
       title: "Quality Engineering",
       description: "Every product is precision-engineered by our team of experts for reliable performance.",
-      icon: <Shield className="text-mylken-primary" size={20} />
+      icon: <Shield className="text-mylken-primary" size={24} />,
+      animationDelay: 400
     }
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-br from-mylken-light to-white">
-      <div className="container-custom">
-        <div className="text-center mb-12">
+    <section className="py-16 overflow-hidden relative">
+      {/* Milk-themed background */}
+      <div className="absolute inset-0 z-0">
+        {/* Milk pool background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-mylken-light to-white"></div>
+        
+        {/* Milk bubbles */}
+        {[...Array(10)].map((_, i) => (
+          <div 
+            key={i}
+            className="milk-bubble absolute"
+            style={{
+              width: `${Math.random() * 30 + 10}px`,
+              height: `${Math.random() * 30 + 10}px`,
+              left: `${Math.random() * 100}%`,
+              bottom: `${Math.random() * 50}%`,
+              animationDuration: `${Math.random() * 5 + 3}s`,
+              animationDelay: `${Math.random() * 2}s`
+            }}
+          ></div>
+        ))}
+        
+        {/* Milk drops flowing on both sides */}
+        <div className="absolute left-0 top-0 h-full overflow-hidden w-16">
+          {[...Array(5)].map((_, i) => (
+            <div
+              key={`left-${i}`}
+              className="absolute milk-drip"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${Math.random() * 3 + 2}s`,
+                animationDelay: `${i * 0.5}s`,
+                opacity: 0.7
+              }}
+            ></div>
+          ))}
+        </div>
+        
+        <div className="absolute right-0 top-0 h-full overflow-hidden w-16">
+          {[...Array(5)].map((_, i) => (
+            <div
+              key={`right-${i}`}
+              className="absolute milk-drip"
+              style={{
+                right: `${Math.random() * 100}%`,
+                animationDuration: `${Math.random() * 3 + 2}s`,
+                animationDelay: `${i * 0.5}s`,
+                opacity: 0.7
+              }}
+            ></div>
+          ))}
+        </div>
+      </div>
+      
+      <div className="container-custom relative z-10">
+        <div className="text-center mb-16">
+          <div className="inline-block relative mb-6">
+            <Milk className="text-mylken-primary h-12 w-12 mx-auto animate-bounce" />
+            <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-mylken-accent rounded-full opacity-70"></div>
+          </div>
+          
           <h2 className="text-3xl md:text-4xl font-bold text-mylken-dark mb-4 relative inline-block">
             Why Choose Mylken
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-mylken-secondary rounded-full"></div>
+            <div className="absolute -bottom-2 left-0 right-0 h-1.5 bg-mylken-accent rounded-full"></div>
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
             As an innovative startup in the dairy industry, we combine cutting-edge technology with agile service to provide equipment that meets modern challenges.
@@ -76,17 +136,54 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md border-t-4 border-mylken-primary hover:shadow-xl transition-shadow duration-300 animate-fade-in"
-              style={{ animationDelay: `${index * 150}ms` }}
+              className="bg-white p-8 rounded-lg shadow-lg border-t-4 border-mylken-primary hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in relative overflow-hidden group"
+              style={{ animationDelay: `${feature.animationDelay}ms` }}
             >
-              <div className="w-12 h-12 bg-mylken-light rounded-full flex items-center justify-center mb-4">
-                {feature.icon}
+              {/* Milk splash on hover */}
+              <div className="absolute inset-0 bg-mylken-light/0 group-hover:bg-mylken-light/20 transition-all duration-500"></div>
+              <div className="group-hover:animate-milk-splash absolute -right-4 -bottom-4 w-24 h-24 bg-mylken-light/0 group-hover:bg-mylken-light/30 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-500"></div>
+              
+              {/* Floating milk drops */}
+              <div className="absolute top-0 right-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500 overflow-hidden">
+                <div className="absolute top-2 right-6 w-2 h-2 bg-mylken-accent rounded-full animate-ping"></div>
+                <div className="absolute top-8 right-4 w-1.5 h-1.5 bg-mylken-accent rounded-full" style={{animationDelay: "0.3s", animation: "ping 2s infinite"}}></div>
               </div>
-              <h3 className="text-xl font-semibold text-mylken-dark mb-2">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              
+              <div className="w-16 h-16 bg-mylken-light rounded-full flex items-center justify-center mb-6 relative z-10 mx-auto md:mx-0">
+                {feature.icon}
+                <div className="absolute inset-0 border-4 border-mylken-primary/20 rounded-full animate-pulse"></div>
+              </div>
+              
+              <h3 className="text-2xl font-semibold text-mylken-dark mb-4 relative z-10">{feature.title}</h3>
+              
+              <div className="h-0.5 w-12 bg-mylken-accent mb-4 relative z-10"></div>
+              
+              <p className="text-gray-600 relative z-10">{feature.description}</p>
+              
+              {/* Animated milk drop */}
+              <div className="absolute bottom-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                <Droplets className="text-mylken-primary/40 h-20 w-20 transform -translate-y-1/2 group-hover:animate-bounce" style={{animationDuration: "3s"}} />
+              </div>
             </div>
           ))}
         </div>
+
+        <div className="mt-16 text-center relative">
+          <div className="absolute left-0 w-full h-0.5 bg-mylken-primary/10"></div>
+          <span className="relative bg-mylken-light inline-block px-6 -top-2.5">
+            <Link to="/about" className="inline-flex items-center text-mylken-primary hover:text-mylken-secondary transition-colors">
+              Learn more about our innovative approach
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </span>
+        </div>
+      </div>
+
+      {/* Milk wave at bottom */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
+          <path fill="#f5f5f5" fill-opacity="0.5" d="M0,96L48,112C96,128,192,160,288,176C384,192,480,192,576,176C672,160,768,128,864,122.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+        </svg>
       </div>
     </section>
   );

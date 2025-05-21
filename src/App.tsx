@@ -84,7 +84,7 @@ const createMilkDrops = () => {
     // Start from top
     drop.style.top = '0';
     
-    // Animation
+    // Animation - using the fixed rotation for correct milk drop appearance
     drop.style.animation = `milk-drop-fall ${Math.random() * 3 + 3}s linear forwards`;
     
     drops.appendChild(drop);

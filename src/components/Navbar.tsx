@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Droplets } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -15,18 +14,11 @@ import {
 } from "@/components/ui/navigation-menu";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Always visible navbar, no transparency change
+  const navbarStyles = "fixed w-full z-40 bg-mylken-primary py-3 shadow-md";
 
   const productCategories = [
     { name: 'Milk Analyzers', href: '/products/milk-analyzers' },
@@ -59,18 +51,10 @@ const Navbar = () => {
   );
 
   return (
-    <nav 
-      className={cn(
-        "fixed w-full z-40 transition-all duration-300 py-4 backdrop-blur-sm",
-        isScrolled 
-          ? "bg-white/95 shadow-md py-2 before:opacity-0" 
-          : "bg-transparent before:opacity-100",
-        "before:absolute before:inset-0 before:bg-gradient-to-b before:from-mylken-primary/10 before:to-transparent before:z-[-1] before:transition-opacity"
-      )}
-    >
+    <nav className={navbarStyles}>
       <div className="container-custom flex items-center justify-between relative z-10">
         {/* Logo */}
-        <Logo variant={isScrolled ? 'default' : 'default'} />
+        <Logo variant="default" />
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-3 lg:space-x-6">
@@ -82,8 +66,8 @@ const Navbar = () => {
               className={cn(
                 "font-medium transition-colors relative group text-sm lg:text-base px-2 py-1.5",
                 isActive(link.href) 
-                  ? "text-mylken-accent" 
-                  : "text-mylken-primary hover:text-mylken-secondary"
+                  ? "text-mylken-accent font-bold" 
+                  : "text-mylken-accent hover:text-mylken-light"
               )}
             >
               {link.name}
@@ -105,8 +89,8 @@ const Navbar = () => {
                     className={cn(
                       "font-medium transition-colors bg-transparent text-sm lg:text-base",
                       isActive('/products') 
-                        ? "text-mylken-accent" 
-                        : "text-mylken-primary hover:text-mylken-secondary"
+                        ? "text-mylken-accent font-bold" 
+                        : "text-mylken-accent hover:text-mylken-light"
                     )}
                   >
                     Dairy Products
@@ -155,8 +139,8 @@ const Navbar = () => {
                     className={cn(
                       "font-medium transition-colors bg-transparent text-sm lg:text-base",
                       isActive('/scientific-products') 
-                        ? "text-mylken-accent" 
-                        : "text-mylken-primary hover:text-mylken-secondary"
+                        ? "text-mylken-accent font-bold" 
+                        : "text-mylken-accent hover:text-mylken-light"
                     )}
                   >
                     Scientific
@@ -206,7 +190,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-mylken-primary focus:outline-none"
+            className="text-mylken-accent focus:outline-none"
           >
             {mobileMenuOpen ? (
               <X size={24} />

@@ -1,28 +1,11 @@
+
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight, Milk, Factory, Beaker, Droplets } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const Hero = () => {
-  const imageRef = useRef<HTMLDivElement>(null);
   const milkDropsRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!imageRef.current) return;
-      
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      
-      const moveX = (clientX - innerWidth / 2) / 50;
-      const moveY = (clientY - innerHeight / 2) / 50;
-      
-      imageRef.current.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
-    };
-    
-    document.addEventListener('mousemove', handleMouseMove);
-    return () => document.removeEventListener('mousemove', handleMouseMove);
-  }, []);
   
   // Create animated milk drops
   useEffect(() => {
@@ -35,7 +18,7 @@ const Hero = () => {
       
       // Create teardrop shape for milk drop
       const innerDrop = document.createElement('div');
-      innerDrop.className = 'bg-white rounded-t-full rounded-bl-full rounded-br-lg rotate-45 opacity-60 shadow-md';
+      innerDrop.className = 'milk-drop';
       
       // Random position, size and animation duration
       const size = Math.random() * 30 + 10;
@@ -46,7 +29,7 @@ const Hero = () => {
       innerDrop.style.height = `${size}px`;
       drop.style.left = `${left}%`;
       drop.style.top = '0';
-      drop.style.animation = `fall ${animationDuration}s linear forwards`;
+      drop.style.animation = `milk-drop-fall ${animationDuration}s linear forwards`;
       
       // Add trail effect
       const trail = document.createElement('div');
@@ -96,23 +79,30 @@ const Hero = () => {
   }, []);
   
   return (
-    <section id="home" className="relative bg-mylken-primary pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden">
+    <section id="home" className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-mylken-primary opacity-80"></div>
+        <img 
+          src="/images/dairy-farm-bg.jpg" 
+          alt="Dairy Farm Background"
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.src = "/placeholder.svg";
+          }}
+        />
+      </div>
+      
       {/* Milk drops animation container */}
       <div ref={milkDropsRef} className="absolute inset-0 overflow-hidden pointer-events-none z-10"></div>
-      
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute -right-10 -top-10 w-72 h-72 bg-mylken-accent rounded-full blur-3xl"></div>
-        <div className="absolute -left-10 bottom-20 w-60 h-60 bg-mylken-secondary rounded-full blur-3xl"></div>
-        <div className="absolute left-1/2 top-1/3 w-40 h-40 bg-mylken-light rounded-full blur-2xl"></div>
-      </div>
       
       {/* Enhanced Milk wave at bottom */}
       <div className="absolute bottom-0 left-0 right-0 z-5">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[80px]">
           <path 
             d="M0,0 C150,90 350,0 500,80 C650,160 750,40 900,80 C1050,120 1200,30 1200,30 V120 H0 Z" 
-            className="fill-white opacity-30"
+            className="fill-white opacity-50"
           ></path>
         </svg>
       </div>
@@ -122,7 +112,7 @@ const Hero = () => {
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[60px]">
           <path 
             d="M0,40 C150,0 350,80 500,20 C650,0 750,60 900,30 C1050,0 1200,30 1200,30 V120 H0 Z" 
-            className="fill-white opacity-40"
+            className="fill-white opacity-60"
           ></path>
         </svg>
       </div>
@@ -132,15 +122,15 @@ const Hero = () => {
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[50px]">
           <path 
             d="M0,60 C350,0 450,120 650,30 C750,0 950,80 1200,20 V120 H0 Z" 
-            className="fill-white opacity-25"
+            className="fill-white opacity-40"
           ></path>
         </svg>
       </div>
       
       <div className="container-custom relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 animate-slide-in-left">
-            <div className="flex items-center gap-2">
+        <div className="flex flex-col items-center justify-center text-center pt-16 pb-8">
+          <div className="space-y-6 animate-slide-in-left max-w-3xl mx-auto">
+            <div className="flex items-center justify-center gap-2">
               <span className="px-4 py-2 rounded-full bg-mylken-accent/20 text-mylken-accent inline-flex items-center text-sm font-medium">
                 <span className="w-2 h-2 rounded-full bg-mylken-accent mr-2 animate-pulse"></span>
                 Dairy Processing Innovation
@@ -168,12 +158,12 @@ const Hero = () => {
               <span className="block">With Precision</span>
             </h1>
             
-            <p className="text-mylken-light text-lg md:text-xl max-w-lg">
+            <p className="text-mylken-light text-lg md:text-xl max-w-2xl mx-auto">
               We provide cutting-edge machinery that helps dairy farmers and processors 
               maximize yield, ensure quality, and increase efficiency in every step of production.
             </p>
             
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-wrap justify-center gap-4 pt-4">
               <Link to="/products" className="bg-mylken-accent text-mylken-dark hover:bg-mylken-light transition-all duration-300 px-6 py-3 rounded-md font-medium flex items-center gap-2 group relative overflow-hidden">
                 <span className="relative z-10">Browse Equipment</span>
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1 relative z-10" />
@@ -191,112 +181,49 @@ const Hero = () => {
                 </Button>
               </Link>
             </div>
-            
-            <div className="pt-8 grid grid-cols-3 gap-6">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-white/20 transition-colors">
-                <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 relative">
-                  <Factory className="text-mylken-accent" size={20} />
-                  {/* Milk droplet */}
-                  <span className="absolute top-0 right-0 w-2 h-2 bg-white rounded-full animate-ping"></span>
-                </div>
-                <h3 className="text-white font-semibold">Dairy Processing</h3>
-                <p className="text-mylken-light text-sm">Equipment</p>
-              </div>
-              
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-white/20 transition-colors">
-                <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 relative">
-                  <Milk className="text-mylken-accent" size={20} />
-                  {/* Milk droplet */}
-                  <span className="absolute -top-1 -right-1 w-2 h-2 bg-white rounded-full animate-ping"></span>
-                </div>
-                <h3 className="text-white font-semibold">Quality</h3>
-                <p className="text-mylken-light text-sm">Testing Tools</p>
-              </div>
-              
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 text-center hover:bg-white/20 transition-colors">
-                <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-3 relative">
-                  <Beaker className="text-mylken-accent" size={20} />
-                  {/* Milk droplet */}
-                  <span className="absolute -top-1 -left-1 w-2 h-2 bg-white rounded-full animate-ping"></span>
-                </div>
-                <h3 className="text-white font-semibold">Lab</h3>
-                <p className="text-mylken-light text-sm">Analysis</p>
-              </div>
-            </div>
           </div>
           
-          {/* Hero Image */}
-          <div ref={imageRef} className="relative ml-auto animate-slide-in-right transition-all duration-300">
-            <div className="bg-white rounded-lg p-3 shadow-2xl relative max-w-md mx-auto">
-              <div className="absolute -left-4 -top-4 w-16 h-16 rounded-lg bg-mylken-accent rotate-12 animate-float"></div>
-              
-              {/* Milk splash effect on image */}
-              <div className="absolute -left-2 -top-2 w-4 h-4 rounded-full bg-white animate-pulse"></div>
-              <div className="absolute -right-3 -bottom-3 w-6 h-6 rounded-full bg-white/80 animate-pulse" style={{ animationDelay: "0.5s" }}></div>
-              
-              <div className="rounded-lg overflow-hidden relative z-10">
-                <img 
-                  src="/images/milk-analyzer-hero.jpg" 
-                  alt="Advanced Milk Analyzer" 
-                  className="w-full h-auto max-h-80 object-contain"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = "/placeholder.svg";
-                  }}
-                />
-                {/* Milk overlay effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent pointer-events-none"></div>
-              </div>
-              <div className="absolute -bottom-5 -right-5 bg-white rounded-full p-3 shadow-lg animate-zoom-in">
-                <div className="bg-mylken-primary rounded-full h-16 w-16 flex items-center justify-center relative">
-                  <span className="text-white text-sm font-bold">99.8%<br/>Accuracy</span>
-                  {/* Milk droplet */}
-                  <span className="absolute -top-1 -right-1 w-3 h-3 bg-mylken-accent rounded-full animate-bounce"></span>
-                </div>
-              </div>
-            </div>
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <FeatureCard
+              icon={<Factory />}
+              title="Dairy Processing"
+              subtitle="Equipment"
+            />
             
-            {/* Floating Card */}
-            <div className="mt-6 bg-white p-4 rounded-lg shadow-lg absolute -bottom-10 -right-10 w-64 animate-float">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="bg-mylken-primary/10 p-2 rounded-md relative">
-                  <Factory className="text-mylken-primary h-6 w-6" />
-                  {/* Milk droplet */}
-                  <Droplets className="absolute -top-2 -right-2 text-mylken-accent h-4 w-4" />
-                </div>
-                <div>
-                  <h4 className="font-bold text-mylken-dark">Automation Ready</h4>
-                  <p className="text-xs text-gray-500">Smart Dairy Solutions</p>
-                </div>
-              </div>
-              <div className="bg-gray-50 p-2 rounded-md">
-                <div className="flex justify-between text-sm mb-1">
-                  <span className="text-gray-600">Energy Efficiency</span>
-                  <span className="text-mylken-primary font-medium">96%</span>
-                </div>
-                <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-                  <div className="bg-mylken-primary h-full rounded-full relative" style={{ width: "96%" }}>
-                    {/* Milk bubble effect */}
-                    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 -translate-x-1 w-3 h-3 bg-white rounded-full opacity-70"></div>
-                    <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-2 h-2 bg-white rounded-full opacity-50"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <FeatureCard
+              icon={<Milk />}
+              title="Quality"
+              subtitle="Testing Tools"
+            />
             
-            {/* Stats Floating Label */}
-            <div className="absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white py-2 px-4 rounded-full shadow-lg hidden md:flex items-center gap-3 group">
-              <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center relative">
-                <Droplets className="text-mylken-accent h-6 w-6" />
-                {/* Milk droplet animation on hover */}
-                <span className="absolute -top-2 -right-2 w-2 h-2 bg-white rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-bounce transition-opacity"></span>
-              </div>
-              <span className="text-sm font-medium text-mylken-dark">15+ Dairy Solutions</span>
-            </div>
+            <FeatureCard
+              icon={<Beaker />}
+              title="Lab"
+              subtitle="Analysis"
+            />
           </div>
         </div>
       </div>
     </section>
+  );
+};
+
+// Feature card component to clean up the code
+const FeatureCard = ({ icon, title, subtitle }: { 
+  icon: React.ReactNode, 
+  title: string, 
+  subtitle: string 
+}) => {
+  return (
+    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center hover:bg-white/20 transition-colors transform hover:scale-105 transition-transform duration-300">
+      <div className="bg-mylken-accent/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 relative">
+        <div className="text-mylken-accent">{icon}</div>
+        {/* Milk droplet */}
+        <span className="absolute top-0 right-0 w-2 h-2 bg-white rounded-full animate-ping"></span>
+      </div>
+      <h3 className="text-white text-xl font-semibold">{title}</h3>
+      <p className="text-mylken-light">{subtitle}</p>
+    </div>
   );
 };
 
