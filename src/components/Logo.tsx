@@ -13,7 +13,7 @@ const Logo: React.FC<LogoProps> = ({ className, variant = 'default' }) => {
   return (
     <Link to="/" className={cn("flex items-center gap-2", className)}>
       <div className="relative">
-        <div className="bg-mylken-primary rounded-full h-8 w-8 flex items-center justify-center">
+        <div className="bg-yellow-400 rounded-full h-8 w-8 flex items-center justify-center">
           <Milk className="h-5 w-5 text-white" />
         </div>
         {/* Milk droplet effect */}

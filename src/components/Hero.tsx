@@ -1,13 +1,14 @@
 
 import React, { useEffect, useRef } from 'react';
-import { ArrowRight, Milk, Factory, Beaker, Droplets } from 'lucide-react';
+import { ArrowRight, Milk, Droplets, Beaker } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const Hero = () => {
   const milkDropsRef = useRef<HTMLDivElement>(null);
+  const farmAnimationsRef = useRef<HTMLDivElement>(null);
   
-  // Create animated milk drops
+  // Create animated milk drops and farm elements
   useEffect(() => {
     if (!milkDropsRef.current) return;
     
@@ -51,10 +52,54 @@ const Hero = () => {
       }, animationDuration * 1000);
     };
     
+    // Generate farm animations (floating elements)
+    const createFarmElements = () => {
+      if (!farmAnimationsRef.current) return;
+      
+      const farmElements = [
+        { name: 'cow', emoji: '🐄', size: () => Math.random() * 30 + 20 },
+        { name: 'sheep', emoji: '🐑', size: () => Math.random() * 20 + 15 },
+        { name: 'milk-bottle', emoji: '🥛', size: () => Math.random() * 15 + 15 },
+        { name: 'farmer', emoji: '👨‍🌾', size: () => Math.random() * 25 + 20 },
+        { name: 'tractor', emoji: '🚜', size: () => Math.random() * 30 + 25 },
+        { name: 'cheese', emoji: '🧀', size: () => Math.random() * 20 + 15 },
+      ];
+      
+      // Create each farm element
+      farmElements.forEach((element, index) => {
+        const farmElement = document.createElement('div');
+        farmElement.className = 'absolute z-5 farm-element';
+        farmElement.textContent = element.emoji;
+        
+        // Random position
+        const size = element.size();
+        const left = Math.random() * 90 + 5;
+        const top = Math.random() * 70 + 10;
+        
+        farmElement.style.fontSize = `${size}px`;
+        farmElement.style.left = `${left}%`;
+        farmElement.style.top = `${top}%`;
+        farmElement.style.transform = 'translateY(0px)';
+        farmElement.style.opacity = '0.7';
+        farmElement.style.filter = 'drop-shadow(0 0 5px rgba(0,0,0,0.2))';
+        
+        // Animation
+        const animDuration = 3 + Math.random() * 8;
+        const animDelay = index * 0.8;
+        
+        farmElement.style.animation = `float-element ${animDuration}s ease-in-out ${animDelay}s infinite alternate`;
+        
+        farmAnimationsRef.current?.appendChild(farmElement);
+      });
+    };
+    
     // Create drops at intervals
     const interval = setInterval(createMilkDrop, 800);
     
-    // Add keyframes for fall animation
+    // Add farm elements
+    createFarmElements();
+    
+    // Add keyframes for animations
     const style = document.createElement('style');
     style.innerHTML = `
       @keyframes fall {
@@ -69,6 +114,12 @@ const Hero = () => {
         50% { transform: translateY(-10px); }
         100% { transform: translateY(0); }
       }
+      
+      @keyframes float-element {
+        0% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(5deg); }
+        100% { transform: translateY(0) rotate(-5deg); }
+      }
     `;
     document.head.appendChild(style);
     
@@ -82,17 +133,20 @@ const Hero = () => {
     <section id="home" className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-mylken-primary opacity-80"></div>
+        <div className="absolute inset-0 bg-mylken-light/40 backdrop-blur-sm"></div>
         <img 
           src="/images/dairy-farm-bg.jpg" 
           alt="Dairy Farm Background"
           className="w-full h-full object-cover"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            target.src = "/placeholder.svg";
+            target.src = "https://images.unsplash.com/photo-1525192300685-647610b3f3ae?q=80&w=1280&auto=format";
           }}
         />
       </div>
+      
+      {/* Farm animations container */}
+      <div ref={farmAnimationsRef} className="absolute inset-0 overflow-hidden pointer-events-none z-5"></div>
       
       {/* Milk drops animation container */}
       <div ref={milkDropsRef} className="absolute inset-0 overflow-hidden pointer-events-none z-10"></div>
@@ -102,7 +156,7 @@ const Hero = () => {
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[80px]">
           <path 
             d="M0,0 C150,90 350,0 500,80 C650,160 750,40 900,80 C1050,120 1200,30 1200,30 V120 H0 Z" 
-            className="fill-white opacity-50"
+            className="fill-white opacity-70"
           ></path>
         </svg>
       </div>
@@ -112,17 +166,7 @@ const Hero = () => {
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[60px]">
           <path 
             d="M0,40 C150,0 350,80 500,20 C650,0 750,60 900,30 C1050,0 1200,30 1200,30 V120 H0 Z" 
-            className="fill-white opacity-60"
-          ></path>
-        </svg>
-      </div>
-      
-      {/* Third milk wave for more dramatic effect */}
-      <div className="absolute bottom-0 left-0 right-0 z-3" style={{ animation: "milkWave 7s ease-in-out infinite reverse" }}>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[50px]">
-          <path 
-            d="M0,60 C350,0 450,120 650,30 C750,0 950,80 1200,20 V120 H0 Z" 
-            className="fill-white opacity-40"
+            className="fill-white opacity-80"
           ></path>
         </svg>
       </div>
@@ -131,17 +175,17 @@ const Hero = () => {
         <div className="flex flex-col items-center justify-center text-center pt-16 pb-8">
           <div className="space-y-6 animate-slide-in-left max-w-3xl mx-auto">
             <div className="flex items-center justify-center gap-2">
-              <span className="px-4 py-2 rounded-full bg-mylken-accent/20 text-mylken-accent inline-flex items-center text-sm font-medium">
+              <span className="px-4 py-2 rounded-full bg-mylken-accent/20 text-mylken-primary inline-flex items-center text-sm font-medium">
                 <span className="w-2 h-2 rounded-full bg-mylken-accent mr-2 animate-pulse"></span>
                 Dairy Processing Innovation
               </span>
-              <span className="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-medium flex items-center gap-1">
+              <span className="px-3 py-1 rounded-full bg-white/60 text-mylken-primary text-xs font-medium flex items-center gap-1">
                 <Milk size={12} className="text-mylken-accent" />
                 Since 2005
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-mylken-primary leading-tight">
               <span className="block">Transform Your</span>
               <span className="block">Dairy <span className="text-mylken-accent relative">
                 Production
@@ -158,7 +202,7 @@ const Hero = () => {
               <span className="block">With Precision</span>
             </h1>
             
-            <p className="text-mylken-light text-lg md:text-xl max-w-2xl mx-auto">
+            <p className="text-mylken-dark text-lg md:text-xl max-w-2xl mx-auto">
               We provide cutting-edge machinery that helps dairy farmers and processors 
               maximize yield, ensure quality, and increase efficiency in every step of production.
             </p>
@@ -184,23 +228,48 @@ const Hero = () => {
           </div>
           
           <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <FeatureCard
-              icon={<Factory />}
+            <DairyFeatureCard
+              icon={<div className="relative">
+                <div className="text-3xl">🏭</div>
+                <div className="absolute -top-2 -right-2 w-2 h-2 bg-mylken-accent rounded-full animate-ping"></div>
+              </div>}
               title="Dairy Processing"
               subtitle="Equipment"
             />
             
-            <FeatureCard
-              icon={<Milk />}
+            <DairyFeatureCard
+              icon={<div className="relative">
+                <div className="text-3xl">🔍</div>
+                <div className="absolute -top-2 -right-2 w-2 h-2 bg-mylken-accent rounded-full animate-ping"></div>
+              </div>}
               title="Quality"
               subtitle="Testing Tools"
             />
             
-            <FeatureCard
-              icon={<Beaker />}
+            <DairyFeatureCard
+              icon={<div className="relative">
+                <div className="text-3xl">🧪</div>
+                <div className="absolute -top-2 -right-2 w-2 h-2 bg-mylken-accent rounded-full animate-ping"></div>
+              </div>}
               title="Lab"
               subtitle="Analysis"
             />
+          </div>
+          
+          {/* Floating milk equipment illustration */}
+          <div className="absolute right-5 top-1/3 hidden lg:block">
+            <div className="relative animate-bounce-slow">
+              <div className="text-5xl filter drop-shadow-md">🥛</div>
+              <div className="absolute -bottom-2 -right-2 w-3 h-3 bg-white rounded-full animate-ping"></div>
+            </div>
+          </div>
+          
+          {/* Floating milking machine illustration */}
+          <div className="absolute left-10 bottom-1/4 hidden lg:block">
+            <div className="relative animate-float">
+              <div className="text-5xl filter drop-shadow-md">🚜</div>
+              <div className="absolute -top-2 -right-2 w-3 h-3 bg-white rounded-full animate-ping"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -209,20 +278,20 @@ const Hero = () => {
 };
 
 // Feature card component to clean up the code
-const FeatureCard = ({ icon, title, subtitle }: { 
+const DairyFeatureCard = ({ icon, title, subtitle }: { 
   icon: React.ReactNode, 
   title: string, 
   subtitle: string 
 }) => {
   return (
-    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 text-center hover:bg-white/20 transition-colors transform hover:scale-105 transition-transform duration-300">
+    <div className="bg-white/80 backdrop-blur-sm rounded-lg p-6 text-center hover:bg-white/90 transition-colors transform hover:scale-105 transition-transform duration-300 shadow-lg">
       <div className="bg-mylken-accent/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 relative">
         <div className="text-mylken-accent">{icon}</div>
         {/* Milk droplet */}
         <span className="absolute top-0 right-0 w-2 h-2 bg-white rounded-full animate-ping"></span>
       </div>
-      <h3 className="text-white text-xl font-semibold">{title}</h3>
-      <p className="text-mylken-light">{subtitle}</p>
+      <h3 className="text-mylken-primary text-xl font-semibold">{title}</h3>
+      <p className="text-mylken-secondary">{subtitle}</p>
     </div>
   );
 };

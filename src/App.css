@@ -172,3 +172,64 @@
     opacity: 0; 
   }
 }
+
+/* Farm elements animations */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(5deg); }
+  66% { transform: translateY(-5px) rotate(-5deg); }
+}
+
+@keyframes dairy-float {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
+  50% { transform: translate(-10px, -20px) rotate(5deg); opacity: 0.7; }
+  100% { transform: translate(10px, 0) rotate(-5deg); opacity: 0.4; }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.dairy-float {
+  animation: dairy-float 10s ease-in-out infinite alternate;
+}
+
+/* Farm animals and equipment animations */
+.farm-element {
+  transition: all 0.3s ease;
+}
+
+.farm-element:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* Milk bubble trail effect */
+.milk-bubble-trail {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  filter: blur(2px);
+  pointer-events: none;
+  animation: bubbleTrail 2s forwards;
+}
+
+@keyframes bubbleTrail {
+  0% {
+    transform: scale(0.3);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
