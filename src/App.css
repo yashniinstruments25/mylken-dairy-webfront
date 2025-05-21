@@ -80,6 +80,20 @@
   100% { transform: translateY(0); }
 }
 
+@keyframes grass-sway {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes cow-graze {
+  0% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-2px) rotate(2deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-2px) rotate(-2deg); }
+  100% { transform: translateY(0) rotate(0deg); }
+}
+
 .milk-drip {
   position: absolute;
   width: 4px;
@@ -151,32 +165,49 @@
   animation: milk-splash 0.6s forwards;
 }
 
-/* Milk droplet styling with CORRECT orientation */
+/* Milk droplet styling with CORRECT orientation (pointing DOWN) */
 .milk-drop {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 50% 50% 5% 50%;
-  transform: rotate(45deg);  /* Proper orientation for milk drop */
+  transform: rotate(225deg);  /* Corrected orientation for milk drop (pointing down) */
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
 }
 
 /* Milk drops animation - FIXED to fall correctly */
 @keyframes milk-drop-fall {
   0% { 
-    transform: translateY(-10px) rotate(45deg) scale(0.2); 
+    transform: translateY(-10px) rotate(225deg) scale(0.2); 
     opacity: 0; 
   }
   10% { 
     opacity: 0.9;
-    transform: translateY(0) rotate(45deg) scale(1); 
+    transform: translateY(0) rotate(225deg) scale(1); 
   }
   70% { 
     opacity: 0.8;
   }
   100% { 
-    transform: translateY(120vh) rotate(45deg) scale(0.8);
+    transform: translateY(120vh) rotate(225deg) scale(0.8);
     opacity: 0; 
   }
+}
+
+/* Farm-themed animations */
+@keyframes wheat-sway {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.wheat-stalk {
+  transform-origin: bottom center;
+  animation: wheat-sway 4s ease-in-out infinite;
+}
+
+.cow-animate {
+  animation: cow-graze 8s ease-in-out infinite;
 }
 
 /* Animation delays utility classes */
@@ -226,4 +257,25 @@
 
 .animate-slide-in-left {
   animation: slide-in-left 0.8s ease-out forwards;
+}
+
+/* Farm-themed animations */
+@keyframes leaf-flutter {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.05); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.leaf-flutter {
+  animation: leaf-flutter 3s ease-in-out infinite;
+}
+
+@keyframes sun-glow {
+  0% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.4); }
+  50% { box-shadow: 0 0 25px rgba(251, 191, 36, 0.6); }
+  100% { box-shadow: 0 0 15px rgba(251, 191, 36, 0.4); }
+}
+
+.sun-glow {
+  animation: sun-glow 4s ease-in-out infinite;
 }
