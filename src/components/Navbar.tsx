@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Droplets } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -16,25 +15,10 @@ import {
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Handle scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setScrolled(scrollPosition > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // Dynamic navbar styles based on scroll position
-  const navbarStyles = cn(
-    "fixed w-full z-40 py-3 transition-all duration-300",
-    scrolled ? "bg-mylken-primary shadow-md" : "bg-transparent"
-  );
+  // Always visible navbar, no transparency change
+  const navbarStyles = "fixed w-full z-40 bg-mylken-primary py-3 shadow-md";
 
   const productCategories = [
     { name: 'Milk Analyzers', href: '/products/milk-analyzers' },
@@ -63,14 +47,14 @@ const Navbar = () => {
 
   // Milk droplet animation for menu items
   const MilkDroplet = () => (
-    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-yellow-400 rounded-full hidden group-hover:block animate-bounce"></div>
+    <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-mylken-accent rounded-full hidden group-hover:block animate-bounce"></div>
   );
 
   return (
     <nav className={navbarStyles}>
       <div className="container-custom flex items-center justify-between relative z-10">
         {/* Logo */}
-        <Logo variant={scrolled ? "default" : "light"} />
+        <Logo variant="default" />
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-3 lg:space-x-6">
@@ -82,13 +66,13 @@ const Navbar = () => {
               className={cn(
                 "font-medium transition-colors relative group text-sm lg:text-base px-2 py-1.5",
                 isActive(link.href) 
-                  ? "text-yellow-400 font-bold" 
-                  : "text-yellow-400 hover:text-yellow-300"
+                  ? "text-mylken-accent font-bold" 
+                  : "text-mylken-accent hover:text-mylken-light"
               )}
             >
               {link.name}
               <span className={cn(
-                "absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full rounded-full",
+                "absolute -bottom-1 left-0 w-0 h-0.5 bg-mylken-accent transition-all duration-300 group-hover:w-full rounded-full",
                 isActive(link.href) ? "w-full" : "w-0"
               )}></span>
               {/* Milk droplet effect */}
@@ -105,8 +89,8 @@ const Navbar = () => {
                     className={cn(
                       "font-medium transition-colors bg-transparent text-sm lg:text-base",
                       isActive('/products') 
-                        ? "text-yellow-400 font-bold" 
-                        : "text-yellow-400 hover:text-yellow-300"
+                        ? "text-mylken-accent font-bold" 
+                        : "text-mylken-accent hover:text-mylken-light"
                     )}
                   >
                     Dairy Products
@@ -119,7 +103,7 @@ const Navbar = () => {
                           <NavigationMenuLink asChild>
                             <Link
                               to={category.href}
-                              className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-yellow-100 hover:text-mylken-primary group"
+                              className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary group"
                             >
                               <div className="text-sm font-medium leading-none flex items-center">
                                 <Droplets className="mr-2 h-3 w-3 text-mylken-primary opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -133,7 +117,7 @@ const Navbar = () => {
                         <NavigationMenuLink asChild>
                           <Link
                             to="/products"
-                            className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-yellow-100 hover:text-mylken-primary font-medium"
+                            className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
                           >
                             View All
                           </Link>
@@ -155,8 +139,8 @@ const Navbar = () => {
                     className={cn(
                       "font-medium transition-colors bg-transparent text-sm lg:text-base",
                       isActive('/scientific-products') 
-                        ? "text-yellow-400 font-bold" 
-                        : "text-yellow-400 hover:text-yellow-300"
+                        ? "text-mylken-accent font-bold" 
+                        : "text-mylken-accent hover:text-mylken-light"
                     )}
                   >
                     Scientific
@@ -169,7 +153,7 @@ const Navbar = () => {
                           <NavigationMenuLink asChild>
                             <Link
                               to={category.href}
-                              className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-yellow-100 hover:text-mylken-primary group"
+                              className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary group"
                             >
                               <div className="text-sm font-medium leading-none flex items-center">
                                 <Droplets className="mr-2 h-3 w-3 text-mylken-primary opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -183,7 +167,7 @@ const Navbar = () => {
                         <NavigationMenuLink asChild>
                           <Link
                             to="/scientific-products"
-                            className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-yellow-100 hover:text-mylken-primary font-medium"
+                            className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
                           >
                             View All
                           </Link>
@@ -196,7 +180,7 @@ const Navbar = () => {
             </NavigationMenu>
           </div>
           
-          <Button className="bg-yellow-400 text-mylken-dark hover:bg-yellow-300 hover:text-mylken-dark transition-colors text-sm px-3 py-1 h-auto relative overflow-hidden group">
+          <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-secondary hover:text-white transition-colors text-sm px-3 py-1 h-auto relative overflow-hidden group">
             <span className="relative z-10">Get Quote</span>
             <span className="absolute top-0 left-0 w-0 h-full bg-mylken-primary transition-all duration-300 group-hover:w-full"></span>
           </Button>
@@ -206,7 +190,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-yellow-400 focus:outline-none"
+            className="text-mylken-accent focus:outline-none"
           >
             {mobileMenuOpen ? (
               <X size={24} />
@@ -222,7 +206,7 @@ const Navbar = () => {
         <div className="md:hidden bg-white absolute top-full left-0 w-full shadow-md animate-fade-in">
           <div className="container-custom py-3 flex flex-col space-y-3">
             {/* Wave effect at top of mobile menu */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-yellow-400" style={{
+            <div className="absolute top-0 left-0 w-full h-1 bg-mylken-accent" style={{
               clipPath: "polygon(0% 0%, 15% 100%, 30% 0%, 45% 100%, 60% 0%, 75% 100%, 90% 0%, 100% 100%, 100% 0%)"
             }}></div>
             
