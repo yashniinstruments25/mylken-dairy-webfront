@@ -74,6 +74,12 @@
   100% { height: 16px; }
 }
 
+@keyframes scroll {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+  100% { transform: translateY(0); }
+}
+
 .milk-drip {
   position: absolute;
   width: 4px;
@@ -145,30 +151,79 @@
   animation: milk-splash 0.6s forwards;
 }
 
-/* Milk droplet styling - fixed orientation */
+/* Milk droplet styling with CORRECT orientation */
 .milk-drop {
   position: absolute;
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 50% 50% 50% 5%;
-  transform: rotate(225deg);  /* Fixed orientation to look like a proper milk drop */
+  border-radius: 50% 50% 5% 50%;
+  transform: rotate(45deg);  /* Proper orientation for milk drop */
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
 }
 
-/* Milk drops animation */
+/* Milk drops animation - FIXED to fall correctly */
 @keyframes milk-drop-fall {
   0% { 
-    transform: translateY(-10px) rotate(225deg) scale(0.2); 
+    transform: translateY(-10px) rotate(45deg) scale(0.2); 
     opacity: 0; 
   }
   10% { 
     opacity: 0.9;
-    transform: translateY(0) rotate(225deg) scale(1); 
+    transform: translateY(0) rotate(45deg) scale(1); 
   }
   70% { 
     opacity: 0.8;
   }
   100% { 
-    transform: translateY(120vh) rotate(225deg) scale(0.8);
+    transform: translateY(120vh) rotate(45deg) scale(0.8);
     opacity: 0; 
   }
+}
+
+/* Animation delays utility classes */
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+.animation-delay-700 {
+  animation-delay: 700ms;
+}
+
+/* Container custom styles */
+.container-custom {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Page transition effect */
+.page-transition {
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Slide animations */
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.8s ease-out forwards;
 }
