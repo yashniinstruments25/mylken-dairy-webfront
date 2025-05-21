@@ -8,7 +8,7 @@ import Testimonials from '@/components/Testimonials';
 import Stats from '@/components/Stats';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Shield, Sparkles, Zap, Droplets, Milk, Wheat, Sun } from 'lucide-react';
+import { ArrowRight, Shield, Beaker, Zap, Droplets } from 'lucide-react';
 
 const Index = () => {
   useEffect(() => {
@@ -18,36 +18,8 @@ const Index = () => {
     // Add page transition class to body
     document.body.classList.add('page-transition');
     
-    // Create bubble trail effect for mouse movement
-    const handleMouseMove = (e: MouseEvent) => {
-      // Create bubble trail at random intervals
-      if (Math.random() > 0.9) {
-        const bubble = document.createElement('div');
-        bubble.className = 'milk-bubble-trail';
-        
-        // Random size
-        const size = Math.random() * 20 + 5;
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
-        
-        // Position at cursor
-        bubble.style.left = `${e.clientX}px`;
-        bubble.style.top = `${e.clientY}px`;
-        
-        document.body.appendChild(bubble);
-        
-        // Remove after animation completes
-        setTimeout(() => {
-          document.body.removeChild(bubble);
-        }, 2000);
-      }
-    };
-    
-    document.addEventListener('mousemove', handleMouseMove);
-    
     return () => {
       document.body.classList.remove('page-transition');
-      document.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
   
@@ -67,60 +39,47 @@ const Index = () => {
   );
 };
 
-// Enhanced Why Choose Us section with dairy farm theme
+// Professional Why Choose Us section focused on machinery
 const WhyChooseUs = () => {
   const features = [
     {
-      title: "Innovation First",
-      description: "Our equipment incorporates the latest technology advances for better efficiency and results.",
-      icon: <Sparkles className="text-mylken-primary" size={24} />,
-      emoji: "🚜",
-      animationDelay: 0
+      title: "Advanced Technology",
+      description: "Our equipment incorporates the latest technological advances for better efficiency and results.",
+      icon: <Beaker className="text-mylken-primary" size={24} />,
+      image: "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?q=80&w=1974&auto=format&fit=crop",
+      alt: "Advanced Milk Testing Equipment"
     },
     {
-      title: "Agile Support",
-      description: "Our startup team provides rapid, personalized technical assistance whenever needed.",
+      title: "Expert Support",
+      description: "Our specialized team provides rapid, personalized technical assistance whenever needed.",
       icon: <Zap className="text-mylken-primary" size={24} />,
-      emoji: "👨‍🌾",
-      animationDelay: 200
+      image: "https://images.unsplash.com/photo-1581092921461-eab98af79b0b?q=80&w=1770&auto=format&fit=crop",
+      alt: "Technical Support Team"
     },
     {
-      title: "Quality Engineering",
+      title: "Precision Engineering",
       description: "Every product is precision-engineered by our team of experts for reliable performance.",
       icon: <Shield className="text-mylken-primary" size={24} />,
-      emoji: "🧪",
-      animationDelay: 400
+      image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1770&auto=format&fit=crop",
+      alt: "Precision Engineering Machinery"
     }
   ];
 
   return (
-    <section className="py-16 overflow-hidden relative">
-      {/* Farm-themed background */}
-      <div className="absolute inset-0 z-0">
-        {/* Light background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-mylken-light to-white"></div>
-        
-        {/* Farm pattern overlay */}
-        <div className="absolute inset-0 opacity-5" 
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
-        
-        {/* Animated farm elements */}
-        <div className="absolute top-10 left-10 text-4xl dairy-float">🐄</div>
-        <div className="absolute bottom-20 right-10 text-3xl dairy-float" style={{animationDelay: '2s'}}>🥛</div>
-        <div className="absolute top-40 right-20 text-2xl dairy-float" style={{animationDelay: '4s'}}>🧀</div>
-        <div className="absolute bottom-40 left-20 text-3xl dairy-float" style={{animationDelay: '6s'}}>🚜</div>
-      </div>
+    <section className="py-16 overflow-hidden relative bg-mylken-light/50">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 z-0 opacity-5" 
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      ></div>
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block relative mb-6">
             <div className="bg-mylken-primary/10 rounded-full p-5">
-              <Milk className="text-mylken-primary h-12 w-12 mx-auto animate-bounce" />
+              <Droplets className="text-mylken-primary h-12 w-12 mx-auto" />
             </div>
-            <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-mylken-accent rounded-full opacity-70"></div>
           </div>
           
           <h2 className="text-3xl md:text-4xl font-bold text-mylken-dark mb-4 relative inline-block">
@@ -136,32 +95,29 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="bg-white p-8 rounded-lg shadow-lg border-t-4 border-mylken-primary hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in relative overflow-hidden group"
-              style={{ animationDelay: `${feature.animationDelay}ms` }}
+              className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group"
             >
-              {/* Farm background patterns */}
-              <div className="absolute inset-0 bg-mylken-light/0 group-hover:bg-mylken-light/20 transition-all duration-500"></div>
-              <div className="group-hover:animate-milk-splash absolute -right-4 -bottom-4 w-24 h-24 bg-mylken-light/0 group-hover:bg-mylken-light/30 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-500"></div>
-              
-              {/* Dairy farm element */}
-              <div className="absolute top-3 right-3 text-2xl opacity-40 group-hover:opacity-70 transition-opacity">
-                {feature.emoji}
+              {/* Feature image */}
+              <div className="h-48 overflow-hidden">
+                <img 
+                  src={feature.image} 
+                  alt={feature.alt}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.unsplash.com/photo-1563694983011-6f4d90358083?q=80&w=687&auto=format&fit=crop";
+                  }}
+                />
               </div>
               
-              <div className="w-16 h-16 bg-mylken-light rounded-full flex items-center justify-center mb-6 relative z-10 mx-auto md:mx-0">
-                {feature.icon}
-                <div className="absolute inset-0 border-4 border-mylken-primary/20 rounded-full animate-pulse"></div>
-              </div>
-              
-              <h3 className="text-2xl font-semibold text-mylken-dark mb-4 relative z-10">{feature.title}</h3>
-              
-              <div className="h-0.5 w-12 bg-mylken-accent mb-4 relative z-10"></div>
-              
-              <p className="text-gray-600 relative z-10">{feature.description}</p>
-              
-              {/* Animated farm element on hover */}
-              <div className="absolute bottom-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Droplets className="text-mylken-primary/40 h-20 w-20 transform -translate-y-1/2 group-hover:animate-bounce" style={{animationDuration: "3s"}} />
+              <div className="p-6">
+                <div className="w-12 h-12 bg-mylken-light rounded-full flex items-center justify-center mb-4">
+                  {feature.icon}
+                </div>
+                
+                <h3 className="text-xl font-semibold text-mylken-dark mb-2">{feature.title}</h3>
+                <div className="h-0.5 w-12 bg-mylken-accent mb-4"></div>
+                <p className="text-gray-600">{feature.description}</p>
               </div>
             </div>
           ))}
@@ -177,75 +133,85 @@ const WhyChooseUs = () => {
           </span>
         </div>
       </div>
-
-      {/* Farm-themed bottom decoration */}
-      <div className="absolute bottom-0 left-0 w-full overflow-hidden">
-        <div className="relative">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
-            <path fill="#EEF2F6" fill-opacity="0.8" d="M0,96L48,112C96,128,192,160,288,176C384,192,480,192,576,176C672,160,768,128,864,122.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-          </svg>
-          
-          {/* Farm elements on the wave */}
-          <div className="absolute bottom-0 left-1/4 text-xl">🌾</div>
-          <div className="absolute bottom-5 left-1/2 text-2xl">🐄</div>
-          <div className="absolute bottom-10 right-1/4 text-xl">🥛</div>
-        </div>
-      </div>
     </section>
   );
 };
 
-// Enhanced Call to Action section
+// Enhanced Call to Action section with machinery focus
 const CallToAction = () => {
   return (
     <section className="py-16 bg-mylken-primary relative overflow-hidden">
-      {/* Farm-themed background elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute right-0 top-0 w-72 h-72 bg-mylken-accent rounded-full blur-3xl"></div>
-        <div className="absolute left-0 bottom-0 w-60 h-60 bg-mylken-secondary rounded-full blur-3xl"></div>
+      <div className="absolute inset-0">
+        <div className="absolute right-0 top-0 w-72 h-72 bg-mylken-accent opacity-10 rounded-full blur-3xl"></div>
+        <div className="absolute left-0 bottom-0 w-60 h-60 bg-mylken-secondary opacity-10 rounded-full blur-3xl"></div>
       </div>
       
-      {/* Floating farm elements */}
-      <div className="absolute top-10 left-10 text-4xl opacity-20 dairy-float">🚜</div>
-      <div className="absolute bottom-10 right-10 text-4xl opacity-20 dairy-float" style={{animationDelay: '3s'}}>🥛</div>
-      
       <div className="container-custom relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="mb-6">
-            <div className="inline-block relative">
-              <span className="text-5xl">🧪</span>
-              <div className="absolute -top-2 -right-2 w-3 h-3 bg-mylken-accent rounded-full animate-ping"></div>
+        <div className="md:flex items-center justify-between gap-8">
+          <div className="md:w-1/2 mb-8 md:mb-0">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Ready to Modernize Your Dairy Operation?
+            </h2>
+            <p className="text-mylken-light text-lg mb-8 max-w-lg">
+              Partner with Mylken to revolutionize your dairy production with cutting-edge equipment
+              and technology-driven solutions customized for your farm's unique needs.
+            </p>
+            
+            <div className="flex flex-wrap gap-4">
+              <Link to="/products">
+                <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-light group px-6 py-6 h-auto">
+                  Explore Dairy Equipment
+                  <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" size={18} />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <Button variant="outline" className="bg-transparent border border-mylken-light text-white hover:bg-mylken-light/10 px-6 py-6 h-auto">
+                  Contact Our Specialists
+                </Button>
+              </Link>
             </div>
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-fade-in">
-            Ready to Modernize Your Dairy Operation?
-          </h2>
-          <p className="text-mylken-light text-lg mb-8 animate-fade-in animation-delay-300">
-            Partner with Mylken to revolutionize your dairy production with cutting-edge equipment
-            and technology-driven solutions customized for your farm's unique needs.
-          </p>
-          
-          <div className="flex flex-wrap justify-center gap-4 animate-fade-in animation-delay-500">
-            <Link to="/products">
-              <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-light group px-6 py-6 h-auto">
-                Explore Dairy Equipment
-                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" size={18} />
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button variant="outline" className="bg-transparent border border-mylken-light text-white hover:bg-mylken-light/10 px-6 py-6 h-auto">
-                Contact Our Specialists
-              </Button>
-            </Link>
-          </div>
-          
-          {/* Farm-themed decorative elements */}
-          <div className="mt-12 flex justify-center space-x-8 opacity-60">
-            <div className="dairy-float text-3xl" style={{animationDelay: '1s'}}>🥛</div>
-            <div className="dairy-float text-3xl" style={{animationDelay: '2s'}}>🧀</div>
-            <div className="dairy-float text-3xl" style={{animationDelay: '3s'}}>🐄</div>
-            <div className="dairy-float text-3xl" style={{animationDelay: '4s'}}>🚜</div>
+          {/* Equipment imagery */}
+          <div className="md:w-1/2">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="rounded-lg overflow-hidden shadow-lg">
+                <img 
+                  src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?q=80&w=1974&auto=format&fit=crop"
+                  alt="Milk Testing Equipment"
+                  className="w-full h-full object-cover"
+                  style={{ aspectRatio: '4/3' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.unsplash.com/photo-1563694983011-6f4d90358083?q=80&w=687&auto=format&fit=crop";
+                  }}
+                />
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-lg">
+                <img 
+                  src="https://images.unsplash.com/photo-1598233847491-f16487adee2f?q=80&w=1776&auto=format&fit=crop"
+                  alt="Dairy Processing"
+                  className="w-full h-full object-cover"
+                  style={{ aspectRatio: '4/3' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1?q=80&w=1287&auto=format&fit=crop";
+                  }}
+                />
+              </div>
+              <div className="rounded-lg overflow-hidden shadow-lg col-span-2">
+                <img 
+                  src="https://images.unsplash.com/photo-1581092921461-eab98af79b0b?q=80&w=1770&auto=format&fit=crop"
+                  alt="Quality Control Lab"
+                  className="w-full h-auto object-cover"
+                  style={{ aspectRatio: '16/9' }}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1770&auto=format&fit=crop";
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

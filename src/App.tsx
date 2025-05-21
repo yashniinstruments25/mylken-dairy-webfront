@@ -15,8 +15,8 @@ import NotFound from "./pages/NotFound";
 import MilkAnalyzers from "./pages/MilkAnalyzers";
 import KhoyaMachines from "./pages/KhoyaMachines";
 
-// Create milk splash effect on page load with farm theme
-const createMilkSplash = () => {
+// Create professional page load animation
+const createPageLoadEffect = () => {
   const container = document.createElement('div');
   container.style.position = 'fixed';
   container.style.top = '0';
@@ -25,173 +25,40 @@ const createMilkSplash = () => {
   container.style.height = '100%';
   container.style.pointerEvents = 'none';
   container.style.zIndex = '9999';
+  container.style.background = 'linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0))';
+  container.style.backgroundSize = '200% 100%';
+  container.style.animation = 'shine 1.5s ease-in-out';
   
-  // Create larger and more visible splash elements
-  for (let i = 0; i < 8; i++) {
-    const splash = document.createElement('div');
-    splash.className = 'milk-splash';
-    
-    // Random position
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-    
-    splash.style.top = `${y}%`;
-    splash.style.left = `${x}%`;
-    splash.style.width = `${Math.random() * 40 + 20}px`;
-    splash.style.height = `${Math.random() * 40 + 20}px`;
-    splash.style.opacity = '0.8';
-    splash.style.animationDuration = `${Math.random() * 0.5 + 0.7}s`;
-    splash.style.animationDelay = `${i * 0.15}s`;
-    
-    container.appendChild(splash);
-  }
-  
-  // Add farm-themed emoji elements
-  const farmElements = ['🐄', '🥛', '🧀', '🚜', '🌾'];
-  
-  for (let i = 0; i < 5; i++) {
-    const element = document.createElement('div');
-    
-    // Random position and styling
-    const x = Math.random() * 90 + 5;
-    const y = Math.random() * 70 + 15;
-    const rotate = Math.random() * 40 - 20;
-    const scale = Math.random() * 0.5 + 0.7;
-    
-    element.textContent = farmElements[i % farmElements.length];
-    element.style.position = 'absolute';
-    element.style.left = `${x}%`;
-    element.style.top = `${y}%`;
-    element.style.fontSize = '30px';
-    element.style.transform = `rotate(${rotate}deg) scale(${scale})`;
-    element.style.opacity = '0';
-    element.style.filter = 'drop-shadow(0 0 5px rgba(0,0,0,0.2))';
-    element.style.animation = 'farmElementAppear 1s forwards';
-    element.style.animationDelay = `${i * 0.2 + 0.5}s`;
-    
-    container.appendChild(element);
-  }
-  
-  // Add keyframe for farm elements
   const style = document.createElement('style');
-  style.innerHTML = `
-    @keyframes farmElementAppear {
-      0% { opacity: 0; transform: rotate(${Math.random() * 40 - 20}deg) scale(0.3); }
-      30% { opacity: 0.8; }
-      80% { opacity: 0.7; transform: rotate(${Math.random() * 20 - 10}deg) scale(${Math.random() * 0.5 + 0.8}); }
-      100% { opacity: 0; transform: translateY(50px) rotate(${Math.random() * 40 - 20}deg) scale(0.5); }
+  style.textContent = `
+    @keyframes shine {
+      0% {
+        background-position: -200% 0;
+        opacity: 1;
+      }
+      100% {
+        background-position: 200% 0;
+        opacity: 0;
+      }
     }
   `;
   document.head.appendChild(style);
-  
   document.body.appendChild(container);
   
-  // Remove after animation completes
   setTimeout(() => {
-    document.body.removeChild(container);
-    document.head.removeChild(style);
-  }, 3500);
-};
-
-const createMilkDrops = () => {
-  const drops = document.createElement('div');
-  drops.style.position = 'fixed';
-  drops.style.top = '0';
-  drops.style.left = '0';
-  drops.style.width = '100%';
-  drops.style.height = '100%';
-  drops.style.pointerEvents = 'none';
-  drops.style.zIndex = '9998';
-  drops.id = 'milk-drops-container';
-  
-  document.body.appendChild(drops);
-  
-  // Function to create a single drop
-  const createDrop = () => {
-    const drop = document.createElement('div');
-    drop.className = 'milk-drop';
-    
-    // Random size for variety
-    const size = Math.random() * 15 + 5;
-    drop.style.width = `${size}px`;
-    drop.style.height = `${size}px`;
-    
-    // Random horizontal position
-    const left = Math.random() * 100;
-    drop.style.left = `${left}%`;
-    
-    // Start from top
-    drop.style.top = '0';
-    
-    // Animation - using the fixed rotation for correct milk drop appearance
-    drop.style.animation = `milk-drop-fall ${Math.random() * 3 + 3}s linear forwards`;
-    
-    drops.appendChild(drop);
-    
-    // Remove drop after animation completes
-    setTimeout(() => {
-      if (drop.parentNode) {
-        drop.parentNode.removeChild(drop);
-      }
-    }, 6000);
-  };
-  
-  // Occasionally create farm elements too
-  const createFarmElement = () => {
-    if (Math.random() > 0.7) {
-      const farmElements = ['🐄', '🥛', '🧀', '🚜', '🌾'];
-      const element = document.createElement('div');
-      
-      // Random styling
-      const size = Math.random() * 20 + 15;
-      const left = Math.random() * 90 + 5;
-      
-      element.textContent = farmElements[Math.floor(Math.random() * farmElements.length)];
-      element.style.position = 'absolute';
-      element.style.fontSize = `${size}px`;
-      element.style.left = `${left}%`;
-      element.style.top = '0';
-      element.style.opacity = '0.5';
-      element.style.filter = 'drop-shadow(0 0 3px rgba(0,0,0,0.2))';
-      element.style.animation = 'dairy-float 8s linear forwards';
-      
-      drops.appendChild(element);
-      
-      // Remove after animation
-      setTimeout(() => {
-        if (element.parentNode) {
-          element.parentNode.removeChild(element);
-        }
-      }, 8000);
+    if (document.body.contains(container)) {
+      document.body.removeChild(container);
+      document.head.removeChild(style);
     }
-  };
-  
-  // Create drops and farm elements at intervals
-  let dropInterval = setInterval(createDrop, 300);
-  let farmInterval = setInterval(createFarmElement, 2000);
-  
-  return () => {
-    clearInterval(dropInterval);
-    clearInterval(farmInterval);
-    if (document.body.contains(drops)) {
-      document.body.removeChild(drops);
-    }
-  };
+  }, 1500);
 };
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  // Create splash effect on first render
+  // Create page load effect on first render
   React.useEffect(() => {
-    createMilkSplash();
-    
-    // Start creating milk drops
-    const cleanupDrops = createMilkDrops();
-    
-    return () => {
-      cleanupDrops();
-    };
+    createPageLoadEffect();
   }, []);
   
   return (

@@ -28,72 +28,36 @@
   }
 }
 
-@keyframes milk-drip {
-  0% { 
-    height: 0; 
-    opacity: 0;
-  }
-  50% { 
-    opacity: 1;
-    height: 40px;
-  }
-  100% { 
-    height: 100px; 
-    opacity: 0;
-  }
+/* Professional subtle animations */
+@keyframes subtle-fade-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes milk-wave {
-  0% { 
-    transform: translateY(0px); 
-  }
-  50% { 
-    transform: translateY(-8px); 
-  }
-  100% { 
-    transform: translateY(0px); 
-  }
+@keyframes subtle-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-@keyframes milk-splash {
-  0% {
-    transform: scale(0);
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: scale(2.5);
-    opacity: 0;
-  }
+/* Professional hover effects */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes drip {
-  0% { height: 8px; }
-  100% { height: 16px; }
+/* Card image zoom effect */
+.card-image-container {
+  overflow: hidden;
 }
-
-.milk-drip {
-  position: absolute;
-  width: 4px;
-  background-color: white;
-  border-radius: 0 0 4px 4px;
-  top: 0;
-  animation: milk-drip 3s infinite;
+.card-image {
+  transition: transform 0.5s ease;
 }
-
-.milk-wave {
-  animation: milk-wave 8s infinite ease-in-out;
-}
-
-.milk-splash {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  animation: milk-splash 1s forwards;
+.card-image:hover {
+  transform: scale(1.05);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -108,128 +72,4 @@
 
 .read-the-docs {
   color: #888;
-}
-
-/* Milk Bubble Effect */
-.milk-bubble {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  animation: milk-bubble 2s ease-in-out infinite;
-}
-
-@keyframes milk-bubble {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translateY(-20px) scale(0.5);
-    opacity: 0;
-  }
-}
-
-/* Button milk splash effect */
-.btn-milk-splash:hover::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
-  transform: translate(-50%, -50%) scale(0);
-  animation: milk-splash 0.6s forwards;
-}
-
-/* Milk droplet styling - fixed orientation */
-.milk-drop {
-  position: absolute;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 50% 50% 50% 5%;
-  transform: rotate(225deg);  /* Fixed orientation to look like a proper milk drop */
-  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
-}
-
-/* Milk drops animation */
-@keyframes milk-drop-fall {
-  0% { 
-    transform: translateY(-10px) rotate(225deg) scale(0.2); 
-    opacity: 0; 
-  }
-  10% { 
-    opacity: 0.9;
-    transform: translateY(0) rotate(225deg) scale(1); 
-  }
-  70% { 
-    opacity: 0.8;
-  }
-  100% { 
-    transform: translateY(120vh) rotate(225deg) scale(0.8);
-    opacity: 0; 
-  }
-}
-
-/* Farm elements animations */
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  33% { transform: translateY(-10px) rotate(5deg); }
-  66% { transform: translateY(-5px) rotate(-5deg); }
-}
-
-@keyframes dairy-float {
-  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.4; }
-  50% { transform: translate(-10px, -20px) rotate(5deg); opacity: 0.7; }
-  100% { transform: translate(10px, 0) rotate(-5deg); opacity: 0.4; }
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 4s ease-in-out infinite;
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-.dairy-float {
-  animation: dairy-float 10s ease-in-out infinite alternate;
-}
-
-/* Farm animals and equipment animations */
-.farm-element {
-  transition: all 0.3s ease;
-}
-
-.farm-element:hover {
-  transform: scale(1.2);
-  cursor: pointer;
-}
-
-/* Milk bubble trail effect */
-.milk-bubble-trail {
-  position: absolute;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.6);
-  filter: blur(2px);
-  pointer-events: none;
-  animation: bubbleTrail 2s forwards;
-}
-
-@keyframes bubbleTrail {
-  0% {
-    transform: scale(0.3);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
 }
