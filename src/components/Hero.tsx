@@ -9,9 +9,9 @@ const Hero = () => {
     <section id="home" className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden bg-mylken-primary">
       {/* Background overlay with pattern */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-mylken-primary via-mylken-primary to-mylken-secondary opacity-90"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-mylken-primary via-mylken-primary to-mylken-secondary opacity-95"></div>
         {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-10">
+        <div className="absolute inset-0 opacity-15">
           <div className="absolute top-10 left-10 w-32 h-32 bg-mylken-accent rounded-full blur-3xl"></div>
           <div className="absolute top-1/3 right-20 w-48 h-48 bg-mylken-light rounded-full blur-3xl"></div>
           <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-mylken-accent rounded-full blur-3xl"></div>

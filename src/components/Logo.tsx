@@ -23,13 +23,13 @@ const Logo: React.FC<LogoProps> = ({ className, variant = 'default' }) => {
       <div className="flex flex-col items-start">
         <span className={cn(
           "font-heading font-bold text-2xl leading-none tracking-tight",
-          variant === 'default' ? "text-mylken-primary" : "text-white"
+          variant === 'default' ? "text-white" : "text-white"
         )}>
           Mylken
         </span>
         <span className={cn(
-          "text-xs leading-none font-medium tracking-wide",
-          variant === 'default' ? "text-mylken-secondary/80" : "text-mylken-light/80"
+          "text-xs leading-none font-medium tracking-wide uppercase",
+          variant === 'default' ? "text-mylken-accent/90" : "text-mylken-accent/90"
         )}>
           DAIRY EQUIPMENT
         </span>
