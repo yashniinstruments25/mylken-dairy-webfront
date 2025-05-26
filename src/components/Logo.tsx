@@ -11,26 +11,27 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ className, variant = 'default' }) => {
   return (
-    <Link to="/" className={cn("flex items-center gap-2", className)}>
+    <Link to="/" className={cn("flex items-center gap-3", className)}>
       <div className="relative">
-        <div className="bg-mylken-primary rounded-full h-8 w-8 flex items-center justify-center">
-          <Droplets className="h-5 w-5 text-white" />
+        {/* Main logo circle with gradient */}
+        <div className="bg-gradient-to-br from-mylken-primary to-mylken-secondary rounded-full h-10 w-10 flex items-center justify-center shadow-lg">
+          <Droplets className="h-6 w-6 text-white" />
         </div>
-        {/* Professional accent */}
-        <div className="absolute -bottom-1 -right-1 bg-mylken-accent rounded-full h-3 w-3"></div>
+        {/* Accent dot */}
+        <div className="absolute -bottom-1 -right-1 bg-mylken-accent rounded-full h-4 w-4 border-2 border-white"></div>
       </div>
       <div className="flex flex-col items-start">
         <span className={cn(
-          "font-heading font-bold text-xl leading-none",
+          "font-heading font-bold text-2xl leading-none tracking-tight",
           variant === 'default' ? "text-mylken-primary" : "text-white"
         )}>
           Mylken
         </span>
         <span className={cn(
-          "text-xs leading-none",
-          variant === 'default' ? "text-mylken-secondary" : "text-mylken-light"
+          "text-xs leading-none font-medium tracking-wide",
+          variant === 'default' ? "text-mylken-secondary/80" : "text-mylken-light/80"
         )}>
-          Dairy Innovation
+          DAIRY EQUIPMENT
         </span>
       </div>
     </Link>
