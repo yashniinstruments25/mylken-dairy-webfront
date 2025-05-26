@@ -9,14 +9,14 @@ const Hero = () => {
     <section id="home" className="relative pt-28 pb-20 md:pt-32 md:pb-24 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-mylken-light/40 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-mylken-primary/20 backdrop-blur-sm"></div>
         <img 
-          src="/images/dairy-farm-bg.jpg" 
-          alt="Dairy Farm Background"
+          src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?q=80&w=1974&auto=format&fit=crop"
+          alt="Modern Dairy Processing Equipment"
           className="w-full h-full object-cover"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            target.src = "https://images.unsplash.com/photo-1525192300685-647610b3f3ae?q=80&w=1280&auto=format";
+            target.src = "https://images.unsplash.com/photo-1563694983011-6f4d90358083?q=80&w=687&auto=format&fit=crop";
           }}
         />
       </div>
@@ -26,7 +26,7 @@ const Hero = () => {
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[80px]">
           <path 
             d="M0,0 C150,90 350,0 500,80 C650,160 750,40 900,80 C1050,120 1200,30 1200,30 V120 H0 Z" 
-            className="fill-white opacity-80"
+            className="fill-white opacity-90"
           ></path>
         </svg>
       </div>
@@ -35,30 +35,30 @@ const Hero = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 pt-8">
           <div className="space-y-6 md:w-1/2 animate-fade-in">
             <div className="flex items-center gap-2">
-              <span className="px-4 py-2 rounded-full bg-mylken-accent/20 text-mylken-primary inline-flex items-center text-sm font-medium">
+              <span className="px-4 py-2 rounded-full bg-white/90 text-mylken-primary inline-flex items-center text-sm font-medium shadow-lg">
                 <span className="w-2 h-2 rounded-full bg-mylken-accent mr-2 animate-pulse"></span>
-                Dairy Processing Innovation
+                Professional Dairy Equipment
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-mylken-primary leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight drop-shadow-lg">
               <span className="block">Transform Your</span>
               <span className="block">Dairy <span className="text-mylken-accent">Production</span></span>
               <span className="block">With Precision</span>
             </h1>
             
-            <p className="text-mylken-dark text-lg md:text-xl max-w-2xl">
+            <p className="text-white/90 text-lg md:text-xl max-w-2xl drop-shadow-md">
               We provide cutting-edge machinery that helps dairy farmers and processors 
               maximize yield, ensure quality, and increase efficiency in every step of production.
             </p>
             
             <div className="flex flex-wrap gap-4 pt-4">
-              <Link to="/products" className="bg-mylken-accent text-mylken-dark hover:bg-mylken-light transition-all duration-300 px-6 py-3 rounded-md font-medium flex items-center gap-2 group">
+              <Link to="/products" className="bg-mylken-accent text-mylken-dark hover:bg-mylken-light transition-all duration-300 px-6 py-3 rounded-md font-medium flex items-center gap-2 group shadow-lg">
                 Browse Equipment
                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </Link>
               <Link to="/contact">
-                <Button variant="outline" className="border-mylken-primary text-mylken-primary hover:bg-mylken-primary hover:text-white px-6 py-6 h-auto">
+                <Button variant="outline" className="border-white/80 text-white hover:bg-white/10 backdrop-blur-sm px-6 py-6 h-auto">
                   Request Consultation
                 </Button>
               </Link>
@@ -115,7 +115,7 @@ const Hero = () => {
             {/* Equipment features */}
             <div className="grid grid-cols-3 gap-4 mt-10">
               {["Precision Testing", "Rapid Analysis", "Quality Control"].map((feature, index) => (
-                <div key={index} className="bg-white/80 backdrop-blur-sm rounded-lg p-3 text-center">
+                <div key={index} className="bg-white/90 backdrop-blur-sm rounded-lg p-3 text-center shadow-lg">
                   <div className="bg-mylken-accent/20 w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-2">
                     <Beaker className="text-mylken-primary h-5 w-5" />
                   </div>

@@ -21,16 +21,11 @@ const Logo: React.FC<LogoProps> = ({ className, variant = 'default' }) => {
       </div>
       <div className="flex flex-col items-start">
         <span className={cn(
-          "font-heading font-bold text-xl leading-none",
-          variant === 'default' ? "text-mylken-primary" : "text-white"
-        )}>
+          "font-bold text-2xl leading-none tracking-wide",
+          "bg-gradient-to-r from-mylken-primary to-mylken-secondary bg-clip-text text-transparent",
+          variant === 'light' && "from-white to-mylken-light"
+        )} style={{ fontFamily: 'Georgia, serif' }}>
           Mylken
-        </span>
-        <span className={cn(
-          "text-xs leading-none",
-          variant === 'default' ? "text-mylken-secondary" : "text-mylken-light"
-        )}>
-          Dairy Innovation
         </span>
       </div>
     </Link>
