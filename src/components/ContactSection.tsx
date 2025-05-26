@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { MapPin, Phone, Mail, Clock, Send, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -17,8 +16,8 @@ const ContactSection = () => {
     message: ''
   });
 
-  // You'll need to provide your Google Sheets webhook URL or API endpoint
-  const GOOGLE_SHEETS_URL = ""; // Add your Google Sheets webhook URL here
+  // Google Sheets webhook URL
+  const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzTzPTbt6HzPB4gA21T6EQhwEaopz2uSv8NiMnZqrDTzRIzyn8kkW1-Y0UJNzQW3jN5/exec";
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -33,42 +32,22 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Save to Google Sheets if URL is provided
-      if (GOOGLE_SHEETS_URL) {
-        const response = await fetch(GOOGLE_SHEETS_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...formData,
-            timestamp: new Date().toISOString(),
-            source: 'Contact Form'
-          }),
-        });
+      const response = await fetch(GOOGLE_SHEETS_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          timestamp: new Date().toISOString(),
+          source: 'Contact Form'
+        }),
+      });
 
-        if (response.ok) {
-          toast({
-            title: "Message Sent Successfully!",
-            description: "Thank you for contacting us. We'll get back to you within 2 hours.",
-          });
-          
-          // Reset form
-          setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            subject: '',
-            message: ''
-          });
-        } else {
-          throw new Error('Failed to save to Google Sheets');
-        }
-      } else {
-        // Fallback if no Google Sheets URL provided
+      if (response.ok) {
         toast({
-          title: "Message Received!",
-          description: "We've received your message and will contact you soon. (Note: Google Sheets URL not configured)",
+          title: "Message Sent Successfully!",
+          description: "Thank you for contacting us. We'll get back to you within 2 hours.",
         });
         
         // Reset form
@@ -79,6 +58,8 @@ const ContactSection = () => {
           subject: '',
           message: ''
         });
+      } else {
+        throw new Error('Failed to save to Google Sheets');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
