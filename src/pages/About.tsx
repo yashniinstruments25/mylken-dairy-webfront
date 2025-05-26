@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Heart, Lightbulb, Target, Users, Zap, Shield, Award, Handshake } from 'lucide-react';
+import { ArrowRight, Heart, Lightbulb, Target, Users, Zap, Shield, Award, Handshake, Sparkles, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const About = () => {
@@ -17,7 +17,7 @@ const About = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2
+        staggerChildren: 0.1
       }
     }
   };
@@ -201,92 +201,100 @@ const About = () => {
           </div>
         </section>
         
-        {/* Our Values */}
-        <section className="py-16 bg-white">
-          <div className="container-custom">
-            <div className="text-center mb-12">
-              <span className="text-mylken-accent font-bold text-base">What Drives Us</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-mylken-primary mt-2 mb-4">
-                Our Core Values
-              </h2>
-              <div className="w-20 h-1 bg-mylken-accent mx-auto mb-4"></div>
-              <p className="max-w-3xl mx-auto text-gray-700 text-base">
-                These values shape every decision we make and every relationship we build as we work towards our mission.
-              </p>
+        {/* Our Values - Completely Redesigned */}
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-mylken-light/20 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute inset-0">
+            <div className="absolute top-0 right-1/4 w-64 h-64 bg-mylken-accent/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-mylken-primary/5 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="container-custom relative z-10">
+            <div className="text-center mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-mylken-accent/10 text-mylken-accent text-sm font-medium mb-6">
+                  <Sparkles className="w-4 h-4" />
+                  What Drives Us
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-mylken-primary mb-4">
+                  Our Core Values
+                </h2>
+                <div className="w-20 h-1 bg-mylken-accent mx-auto mb-6"></div>
+                <p className="max-w-2xl mx-auto text-gray-600 text-lg">
+                  These principles guide every decision we make and shape our relationships with customers and partners.
+                </p>
+              </motion.div>
             </div>
             
+            {/* Values Grid - New Hexagonal Design */}
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="relative max-w-4xl mx-auto"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
+              {/* Central Value */}
               <motion.div 
-                className="group bg-white p-5 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                className="relative z-10 mx-auto w-64 h-64"
                 variants={itemVariants}
               >
-                <div className="bg-mylken-accent/10 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-mylken-accent/20 transition-colors">
-                  <Heart className="text-mylken-accent w-6 h-6" />
+                <div className="w-full h-full bg-gradient-to-br from-mylken-primary to-mylken-secondary rounded-2xl p-8 flex flex-col items-center justify-center text-center text-white shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                  <Heart className="w-12 h-12 text-mylken-accent mb-4" />
+                  <h3 className="text-xl font-bold mb-3">Passion</h3>
+                  <p className="text-mylken-light text-sm">At the heart of everything we do - genuine passion for improving dairy operations</p>
                 </div>
-                <h3 className="text-lg font-bold text-mylken-primary mb-3">Passion</h3>
-                <p className="text-gray-700 text-sm">We're genuinely passionate about improving dairy operations and helping farmers succeed.</p>
               </motion.div>
               
-              <motion.div 
-                className="group bg-white p-5 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                variants={itemVariants}
-              >
-                <div className="bg-mylken-primary/10 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-mylken-primary/20 transition-colors">
-                  <Shield className="text-mylken-primary w-6 h-6" />
+              {/* Surrounding Values */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="relative w-full h-full">
+                  {[
+                    { icon: Shield, title: "Quality", desc: "Never compromising on reliability", position: "top-0 left-1/2 -translate-x-1/2", color: "bg-white", delay: 0.1 },
+                    { icon: Lightbulb, title: "Innovation", desc: "Constantly seeking better solutions", position: "top-1/4 right-0", color: "bg-mylken-accent/10", delay: 0.2 },
+                    { icon: Handshake, title: "Partnership", desc: "Building lasting relationships", position: "bottom-1/4 right-0", color: "bg-white", delay: 0.3 },
+                    { icon: Award, title: "Excellence", desc: "Striving for the highest standards", position: "bottom-0 left-1/2 -translate-x-1/2", color: "bg-mylken-primary/10", delay: 0.4 },
+                    { icon: Users, title: "Community", desc: "Supporting the dairy ecosystem", position: "bottom-1/4 left-0", color: "bg-white", delay: 0.5 },
+                    { icon: Star, title: "Trust", desc: "Earning confidence through transparency", position: "top-1/4 left-0", color: "bg-mylken-accent/10", delay: 0.6 }
+                  ].map((value, index) => (
+                    <motion.div
+                      key={index}
+                      className={`absolute ${value.position} w-48 h-48`}
+                      variants={itemVariants}
+                      custom={value.delay}
+                    >
+                      <div className={`w-full h-full ${value.color} rounded-xl p-6 flex flex-col items-center justify-center text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-mylken-light/20`}>
+                        <div className="bg-mylken-primary/10 rounded-full p-4 mb-4">
+                          <value.icon className="w-8 h-8 text-mylken-primary" />
+                        </div>
+                        <h4 className="text-lg font-bold text-mylken-primary mb-2">{value.title}</h4>
+                        <p className="text-gray-600 text-sm leading-relaxed">{value.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
-                <h3 className="text-lg font-bold text-mylken-primary mb-3">Quality</h3>
-                <p className="text-gray-700 text-sm">We never compromise on quality because we understand that reliable equipment is crucial for success.</p>
-              </motion.div>
-              
-              <motion.div 
-                className="group bg-white p-5 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                variants={itemVariants}
-              >
-                <div className="bg-mylken-secondary/10 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-mylken-secondary/20 transition-colors">
-                  <Lightbulb className="text-mylken-secondary w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold text-mylken-primary mb-3">Innovation</h3>
-                <p className="text-gray-700 text-sm">We constantly seek new ways to solve problems and improve the dairy industry.</p>
-              </motion.div>
-              
-              <motion.div 
-                className="group bg-white p-5 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                variants={itemVariants}
-              >
-                <div className="bg-mylken-accent/10 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-mylken-accent/20 transition-colors">
-                  <Handshake className="text-mylken-accent w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold text-mylken-primary mb-3">Partnership</h3>
-                <p className="text-gray-700 text-sm">We build lasting relationships with our customers, treating their success as our own.</p>
-              </motion.div>
-              
-              <motion.div 
-                className="group bg-white p-5 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                variants={itemVariants}
-              >
-                <div className="bg-mylken-primary/10 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-mylken-primary/20 transition-colors">
-                  <Award className="text-mylken-primary w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold text-mylken-primary mb-3">Excellence</h3>
-                <p className="text-gray-700 text-sm">We strive for excellence in everything we do, from product design to customer service.</p>
-              </motion.div>
-              
-              <motion.div 
-                className="group bg-white p-5 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                variants={itemVariants}
-              >
-                <div className="bg-mylken-secondary/10 rounded-full w-12 h-12 flex items-center justify-center mb-4 group-hover:bg-mylken-secondary/20 transition-colors">
-                  <Users className="text-mylken-secondary w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold text-mylken-primary mb-3">Community</h3>
-                <p className="text-gray-700 text-sm">We believe in supporting and growing the dairy community as a whole.</p>
-              </motion.div>
+              </div>
+            </motion.div>
+            
+            {/* Values Summary */}
+            <motion.div 
+              className="mt-20 bg-white rounded-2xl p-8 shadow-lg border border-mylken-light/20 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              <div className="text-center">
+                <h3 className="text-2xl font-bold text-mylken-primary mb-4">Values in Action</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  These values aren't just words on a wall - they're the foundation of how we design products, serve customers, and build relationships in the dairy industry. Every interaction reflects our commitment to these principles.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>
