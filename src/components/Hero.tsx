@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, ChevronLeft, ChevronRight, Beaker, Droplets, Gauge } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Beaker, Droplets, Gauge, Milk } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -21,6 +21,17 @@ const Hero = () => {
     },
     {
       id: 2,
+      name: "Premium Milk Cans Collection",
+      description: "Professional-grade milk cans with traditional design and modern functionality",
+      image: "/lovable-uploads/3e01ee23-b0ae-4376-a971-7730a9ee7f31.png",
+      fallbackImage: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?q=80&w=800&auto=format&fit=crop",
+      icon: <Milk className="w-8 h-8" />,
+      gradient: "from-green-600 via-green-500 to-emerald-600",
+      accentColor: "bg-green-600",
+      features: ["Premium Quality", "Traditional Design", "Modern Function"]
+    },
+    {
+      id: 3,
       name: "Stainless Steel Milk Cans",
       description: "Premium quality stainless steel milk storage and transport solutions",
       image: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?q=80&w=800&auto=format&fit=crop",
@@ -31,7 +42,7 @@ const Hero = () => {
       features: ["Food Grade Steel", "Easy Transport", "Durable Design"]
     },
     {
-      id: 3,
+      id: 4,
       name: "Aluminum Milk Cans",
       description: "Lightweight aluminum cans for efficient milk collection and storage",
       image: "https://images.unsplash.com/photo-1598233847491-f16487adee2f?q=80&w=800&auto=format&fit=crop",
@@ -60,6 +71,9 @@ const Hero = () => {
 
   const currentProduct = heroProducts[currentSlide];
 
+  // Special styling for the milk cans collection slide
+  const isMilkCanSlide = currentProduct.id === 2;
+
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
       {/* Animated milk splash effects from top */}
@@ -86,16 +100,53 @@ const Hero = () => {
           </svg>
         </div>
 
+        {/* Enhanced milk splash for special slide */}
+        {isMilkCanSlide && (
+          <>
+            {/* Top dripping effect to match the uploaded image */}
+            <div className="absolute top-0 left-0 right-0 h-32 z-5">
+              <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-full">
+                <path 
+                  d="M0,0 L0,20 Q100,60 200,40 Q300,20 400,50 Q500,80 600,30 Q700,10 800,45 Q900,70 1000,25 Q1100,5 1200,35 L1200,0 Z" 
+                  className="fill-white opacity-30"
+                />
+                <path 
+                  d="M0,0 L0,40 Q150,80 300,60 Q450,40 600,70 Q750,100 900,50 Q1050,20 1200,60 L1200,0 Z" 
+                  className="fill-green-100 opacity-40"
+                />
+              </svg>
+            </div>
+            
+            {/* Additional milk droplets for the special slide */}
+            <div className="absolute top-20 left-1/3 w-12 h-12 bg-white/40 rounded-full animate-[float_3s_ease-in-out_infinite] animation-delay-200"></div>
+            <div className="absolute top-32 right-1/4 w-8 h-8 bg-green-100/50 rounded-full animate-[float_4s_ease-in-out_infinite] animation-delay-600"></div>
+            <div className="absolute top-16 left-2/3 w-6 h-6 bg-white/35 rounded-full animate-[float_5s_ease-in-out_infinite] animation-delay-400"></div>
+          </>
+        )}
+
         {/* Small milk droplets */}
         <div className="absolute top-10 left-1/4 w-6 h-6 bg-white/30 rounded-full animate-[float_4s_ease-in-out_infinite] animation-delay-500"></div>
         <div className="absolute top-20 right-1/3 w-4 h-4 bg-white/25 rounded-full animate-[float_5s_ease-in-out_infinite] animation-delay-700"></div>
         <div className="absolute top-32 left-1/2 w-8 h-8 bg-white/20 rounded-full animate-[float_6s_ease-in-out_infinite] animation-delay-300"></div>
       </div>
 
-      {/* Dynamic gradient background */}
+      {/* Dynamic gradient background with special styling for milk can slide */}
       <div className="absolute inset-0 z-5">
         <div className={`absolute inset-0 bg-gradient-to-br ${currentProduct.gradient} opacity-15 transition-all duration-1000`}></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-mylken-primary via-mylken-primary/95 to-mylken-secondary/90"></div>
+        <div className={`absolute inset-0 transition-all duration-1000 ${
+          isMilkCanSlide 
+            ? 'bg-gradient-to-br from-green-700 via-green-600/95 to-emerald-700/90' 
+            : 'bg-gradient-to-br from-mylken-primary via-mylken-primary/95 to-mylken-secondary/90'
+        }`}></div>
+        
+        {/* Special background pattern for milk can slide */}
+        {isMilkCanSlide && (
+          <div className="absolute inset-0 opacity-5" 
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.3'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3Ccircle cx='10' cy='10' r='2'/%3E%3Ccircle cx='50' cy='50' r='3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          ></div>
+        )}
       </div>
 
       {/* Product image integrated across the background */}
@@ -104,7 +155,9 @@ const Hero = () => {
           <img 
             src={currentProduct.image}
             alt={currentProduct.name}
-            className="w-auto h-[70vh] max-h-[600px] object-contain opacity-80 transition-all duration-1000 transform hover:scale-105"
+            className={`w-auto h-[70vh] max-h-[600px] object-contain opacity-80 transition-all duration-1000 transform hover:scale-105 ${
+              isMilkCanSlide ? 'filter brightness-105 contrast-110' : ''
+            }`}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.src = currentProduct.fallbackImage;
@@ -113,13 +166,19 @@ const Hero = () => {
           
           {/* Additional decorative milk splash effects around product */}
           <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-mylken-accent/20 rounded-full blur-2xl animate-pulse animation-delay-500"></div>
+          <div className={`absolute bottom-20 left-1/4 w-24 h-24 rounded-full blur-2xl animate-pulse animation-delay-500 ${
+            isMilkCanSlide ? 'bg-green-200/30' : 'bg-mylken-accent/20'
+          }`}></div>
           <div className="absolute top-1/3 left-1/2 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse animation-delay-700"></div>
         </div>
       </div>
 
       {/* Overlay for text readability */}
-      <div className="absolute inset-0 z-15 bg-gradient-to-r from-mylken-primary via-mylken-primary/90 to-transparent"></div>
+      <div className={`absolute inset-0 z-15 transition-all duration-1000 ${
+        isMilkCanSlide 
+          ? 'bg-gradient-to-r from-green-700 via-green-600/90 to-transparent' 
+          : 'bg-gradient-to-r from-mylken-primary via-mylken-primary/90 to-transparent'
+      }`}></div>
 
       {/* Content overlay */}
       <div className="container-custom relative z-20 pt-32 pb-20">
@@ -138,7 +197,9 @@ const Hero = () => {
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[0.9] tracking-tight">
                 <span className="block text-mylken-light/90">Premium</span>
-                <span className="block text-mylken-accent text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black">
+                <span className={`block text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black transition-colors duration-1000 ${
+                  isMilkCanSlide ? 'text-green-300' : 'text-mylken-accent'
+                }`}>
                   {currentProduct.name.split(' ')[0]}
                 </span>
                 <span className="block text-white">
@@ -165,7 +226,9 @@ const Hero = () => {
             
             {/* Enhanced CTA buttons */}
             <div className="flex flex-wrap gap-4 pt-6">
-              <Link to="/products" className="bg-mylken-accent text-mylken-dark hover:bg-mylken-light transition-all duration-300 px-10 py-4 rounded-xl font-semibold flex items-center gap-3 group shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+              <Link to="/products" className={`text-mylken-dark hover:bg-mylken-light transition-all duration-300 px-10 py-4 rounded-xl font-semibold flex items-center gap-3 group shadow-xl hover:shadow-2xl transform hover:-translate-y-1 ${
+                isMilkCanSlide ? 'bg-green-300 hover:bg-green-200' : 'bg-mylken-accent'
+              }`}>
                 Explore Equipment
                 <ArrowRight size={22} className="transition-transform group-hover:translate-x-1" />
               </Link>
@@ -195,7 +258,9 @@ const Hero = () => {
                   {/* Learn more link */}
                   <Link 
                     to="/products" 
-                    className="inline-flex items-center gap-2 text-mylken-accent hover:text-mylken-light transition-colors font-medium group mt-4"
+                    className={`inline-flex items-center gap-2 hover:text-mylken-light transition-colors font-medium group mt-4 ${
+                      isMilkCanSlide ? 'text-green-300' : 'text-mylken-accent'
+                    }`}
                   >
                     Learn More
                     <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -223,7 +288,7 @@ const Hero = () => {
                 onClick={() => setCurrentSlide(index)}
                 className={`w-4 h-4 rounded-full transition-all duration-300 ${
                   index === currentSlide 
-                    ? 'bg-mylken-accent scale-125 shadow-lg' 
+                    ? `scale-125 shadow-lg ${isMilkCanSlide && index === 1 ? 'bg-green-300' : 'bg-mylken-accent'}` 
                     : 'bg-white/30 hover:bg-white/50'
                 }`}
               />
