@@ -12,8 +12,8 @@ const Hero = () => {
       id: 1,
       name: "Advanced Milk Analyzer",
       description: "Precision testing for comprehensive milk analysis with real-time results",
-      image: "https://images.unsplash.com/photo-1563694983011-6f4d90358083?q=80&w=800&auto=format&fit=crop",
-      fallbackImage: "https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?q=80&w=800&auto=format&fit=crop",
+      fallbackImage: "https://images.unsplash.com/photo-1581092921461-eab98af79b0b?q=80&w=800&auto=format&fit=crop",
       icon: <Beaker className="w-8 h-8" />,
       gradient: "from-blue-500 via-cyan-400 to-blue-600",
       accentColor: "bg-blue-500",
@@ -23,8 +23,8 @@ const Hero = () => {
       id: 2,
       name: "Stainless Steel Milk Cans",
       description: "Premium quality stainless steel milk storage and transport solutions",
-      image: "/lovable-uploads/d94866ea-8883-4a2a-ab94-225e53b5827a.png",
-      fallbackImage: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?q=80&w=800&auto=format&fit=crop",
+      fallbackImage: "https://images.unsplash.com/photo-1563694983011-6f4d90358083?q=80&w=800&auto=format&fit=crop",
       icon: <Droplets className="w-8 h-8" />,
       gradient: "from-gray-400 via-gray-300 to-gray-500",
       accentColor: "bg-gray-500",
@@ -34,8 +34,8 @@ const Hero = () => {
       id: 3,
       name: "Aluminum Milk Cans",
       description: "Lightweight aluminum cans for efficient milk collection and storage",
-      image: "/lovable-uploads/7982580a-c690-44c3-8467-75753a40dbd9.png",
-      fallbackImage: "https://images.unsplash.com/photo-1598233847491-f16487adee2f?q=80&w=800&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1598233847491-f16487adee2f?q=80&w=800&auto=format&fit=crop",
+      fallbackImage: "https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1?q=80&w=800&auto=format&fit=crop",
       icon: <Gauge className="w-8 h-8" />,
       gradient: "from-slate-400 via-slate-300 to-slate-500",
       accentColor: "bg-slate-500",
@@ -62,42 +62,71 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Full-width background with integrated product image */}
-      <div className="absolute inset-0 z-0">
-        {/* Dynamic gradient background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${currentProduct.gradient} opacity-15 transition-all duration-1000`}></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-mylken-primary via-mylken-primary/95 to-mylken-secondary/90"></div>
-        
-        {/* Product image integrated across the background */}
-        <div className="absolute inset-0 flex items-center justify-end pr-8 lg:pr-16">
-          <div className="relative w-full max-w-4xl h-full flex items-center justify-end">
-            <img 
-              src={currentProduct.image}
-              alt={currentProduct.name}
-              className="w-auto h-[70vh] max-h-[600px] object-contain opacity-80 transition-all duration-1000 transform hover:scale-105"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = currentProduct.fallbackImage;
-              }}
+      {/* Animated milk splash effects from top */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Primary milk splash from top-left */}
+        <div className="absolute -top-20 -left-20 w-96 h-96 opacity-20">
+          <svg viewBox="0 0 400 400" className="w-full h-full animate-pulse">
+            <path
+              d="M200,50 Q150,100 100,150 Q120,180 150,200 Q180,220 200,250 Q220,220 250,200 Q280,180 300,150 Q250,100 200,50 Z"
+              fill="white"
+              className="animate-[float_6s_ease-in-out_infinite]"
             />
-            
-            {/* Decorative milk splash effects */}
-            <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-mylken-accent/20 rounded-full blur-2xl animate-pulse animation-delay-500"></div>
-            <div className="absolute top-1/3 left-1/2 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse animation-delay-700"></div>
-          </div>
+          </svg>
+        </div>
+        
+        {/* Secondary milk splash from top-right */}
+        <div className="absolute -top-32 -right-16 w-80 h-80 opacity-15 animation-delay-300">
+          <svg viewBox="0 0 320 320" className="w-full h-full animate-pulse">
+            <path
+              d="M160,40 Q120,80 80,120 Q100,140 120,160 Q140,180 160,200 Q180,180 200,160 Q220,140 240,120 Q200,80 160,40 Z"
+              fill="white"
+              className="animate-[float_8s_ease-in-out_infinite_reverse]"
+            />
+          </svg>
         </div>
 
-        {/* Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-mylken-primary via-mylken-primary/90 to-transparent"></div>
+        {/* Small milk droplets */}
+        <div className="absolute top-10 left-1/4 w-6 h-6 bg-white/30 rounded-full animate-[float_4s_ease-in-out_infinite] animation-delay-500"></div>
+        <div className="absolute top-20 right-1/3 w-4 h-4 bg-white/25 rounded-full animate-[float_5s_ease-in-out_infinite] animation-delay-700"></div>
+        <div className="absolute top-32 left-1/2 w-8 h-8 bg-white/20 rounded-full animate-[float_6s_ease-in-out_infinite] animation-delay-300"></div>
       </div>
 
+      {/* Dynamic gradient background */}
+      <div className="absolute inset-0 z-5">
+        <div className={`absolute inset-0 bg-gradient-to-br ${currentProduct.gradient} opacity-15 transition-all duration-1000`}></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-mylken-primary via-mylken-primary/95 to-mylken-secondary/90"></div>
+      </div>
+
+      {/* Product image integrated across the background */}
+      <div className="absolute inset-0 z-10 flex items-center justify-end pr-8 lg:pr-16">
+        <div className="relative w-full max-w-4xl h-full flex items-center justify-end">
+          <img 
+            src={currentProduct.image}
+            alt={currentProduct.name}
+            className="w-auto h-[70vh] max-h-[600px] object-contain opacity-80 transition-all duration-1000 transform hover:scale-105"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = currentProduct.fallbackImage;
+            }}
+          />
+          
+          {/* Additional decorative milk splash effects around product */}
+          <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-mylken-accent/20 rounded-full blur-2xl animate-pulse animation-delay-500"></div>
+          <div className="absolute top-1/3 left-1/2 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse animation-delay-700"></div>
+        </div>
+      </div>
+
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 z-15 bg-gradient-to-r from-mylken-primary via-mylken-primary/90 to-transparent"></div>
+
       {/* Content overlay */}
-      <div className="container-custom relative z-10 pt-32 pb-20">
+      <div className="container-custom relative z-20 pt-32 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left content - Enhanced typography and layout */}
           <div className="space-y-8 lg:pr-8">
-            {/* Featured badge */}
+            {/* Featured badge with milk drop animation */}
             <div className="flex items-center gap-2">
               <span className={`px-6 py-3 rounded-full ${currentProduct.accentColor}/20 text-white border border-white/20 inline-flex items-center text-sm font-semibold backdrop-blur-sm transition-all duration-1000`}>
                 <span className={`w-3 h-3 rounded-full ${currentProduct.accentColor} mr-3 animate-pulse`}></span>
@@ -211,7 +240,7 @@ const Hero = () => {
       </div>
 
       {/* Enhanced decorative wave */}
-      <div className="absolute bottom-0 left-0 right-0 z-5">
+      <div className="absolute bottom-0 left-0 right-0 z-25">
         <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-[120px]">
           <path 
             d="M0,0 C150,100 350,0 500,80 C650,160 750,40 900,80 C1050,120 1200,30 1200,30 V120 H0 Z" 
