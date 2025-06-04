@@ -116,24 +116,25 @@ const About = () => {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-mylken-primary to-mylken-secondary p-6">
-                  <div className="h-full bg-white/10 backdrop-blur-sm rounded-xl p-6 flex flex-col justify-center items-center text-center">
-                    <Lightbulb className="text-mylken-accent h-12 w-12 mb-4" />
-                    <h3 className="text-white text-xl font-bold mb-3">Innovation Mindset</h3>
+                {/* Reduced size from aspect-square to aspect-[4/3] and smaller dimensions */}
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-mylken-primary to-mylken-secondary p-4 max-w-md mx-auto">
+                  <div className="h-full bg-white/10 backdrop-blur-sm rounded-xl p-4 flex flex-col justify-center items-center text-center">
+                    <Lightbulb className="text-mylken-accent h-8 w-8 mb-3" />
+                    <h3 className="text-white text-lg font-bold mb-2">Innovation Mindset</h3>
                     <p className="text-mylken-light text-sm">
                       We don't just manufacture equipment - we innovate solutions that understand the real challenges faced by dairy businesses today.
                     </p>
                   </div>
                 </div>
                 
-                {/* Floating stats */}
-                <div className="absolute -bottom-4 -left-4 bg-white rounded-xl shadow-lg p-4 border-l-4 border-mylken-accent">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-mylken-primary rounded-full h-10 w-10 flex items-center justify-center">
-                      <Target className="text-white h-5 w-5" />
+                {/* Floating stats - adjusted positioning */}
+                <div className="absolute -bottom-3 -left-3 bg-white rounded-xl shadow-lg p-3 border-l-4 border-mylken-accent">
+                  <div className="flex items-center gap-2">
+                    <div className="bg-mylken-primary rounded-full h-8 w-8 flex items-center justify-center">
+                      <Target className="text-white h-4 w-4" />
                     </div>
                     <div>
-                      <div className="text-xl font-bold text-mylken-primary">100%</div>
+                      <div className="text-lg font-bold text-mylken-primary">100%</div>
                       <div className="text-xs text-gray-600">Commitment</div>
                     </div>
                   </div>

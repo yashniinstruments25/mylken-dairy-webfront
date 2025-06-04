@@ -156,29 +156,29 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Right Content - Product Showcase */}
+          {/* Right Content - Product Showcase - Reduced Size */}
           <div className="relative flex items-center justify-center">
             <div className="relative">
-              {/* Product Image */}
+              {/* Product Image - Reduced max width */}
               <div className="relative group">
                 <img 
                   src={currentProduct.image}
                   alt={currentProduct.name}
-                  className="w-full max-w-lg h-auto object-contain transition-all duration-1000 transform group-hover:scale-105 filter drop-shadow-2xl"
+                  className="w-full max-w-sm h-auto object-contain transition-all duration-1000 transform group-hover:scale-105 filter drop-shadow-2xl"
                 />
                 
                 {/* Glowing Effect */}
-                <div className={`absolute inset-0 bg-gradient-to-r ${currentProduct.gradient} opacity-20 blur-3xl rounded-full scale-125 animate-pulse`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-r ${currentProduct.gradient} opacity-20 blur-3xl rounded-full scale-110 animate-pulse`}></div>
               </div>
 
-              {/* Floating Elements */}
-              <div className="absolute -top-8 -right-8 bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 animate-float">
-                <Shield className="w-8 h-8 text-white" />
+              {/* Floating Elements - Adjusted positioning */}
+              <div className="absolute -top-6 -right-6 bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/20 animate-float">
+                <Shield className="w-6 h-6 text-white" />
               </div>
               
-              <div className="absolute -bottom-4 -left-8 bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 animate-float animation-delay-500">
+              <div className="absolute -bottom-3 -left-6 bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 animate-float animation-delay-500">
                 <div className="text-center">
-                  <div className="text-2xl font-bold text-white">24/7</div>
+                  <div className="text-xl font-bold text-white">24/7</div>
                   <div className="text-white/70 text-xs">Support</div>
                 </div>
               </div>
