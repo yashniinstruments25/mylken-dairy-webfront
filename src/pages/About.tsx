@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Heart, Lightbulb, Target, Users, Zap, Shield, Award, Handshake, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, Heart, Lightbulb, Target, Users, Zap, Shield, Award, Handshake, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const About = () => {
@@ -116,7 +116,6 @@ const About = () => {
                 transition={{ duration: 0.7, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                {/* Reduced size from aspect-square to aspect-[4/3] and smaller dimensions */}
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-mylken-primary to-mylken-secondary p-4 max-w-md mx-auto">
                   <div className="h-full bg-white/10 backdrop-blur-sm rounded-xl p-4 flex flex-col justify-center items-center text-center">
                     <Lightbulb className="text-mylken-accent h-8 w-8 mb-3" />
@@ -127,7 +126,6 @@ const About = () => {
                   </div>
                 </div>
                 
-                {/* Floating stats - adjusted positioning */}
                 <div className="absolute -bottom-3 -left-3 bg-white rounded-xl shadow-lg p-3 border-l-4 border-mylken-accent">
                   <div className="flex items-center gap-2">
                     <div className="bg-mylken-primary rounded-full h-8 w-8 flex items-center justify-center">
@@ -202,14 +200,8 @@ const About = () => {
           </div>
         </section>
         
-        {/* Our Values - Completely Redesigned */}
-        <section className="py-20 bg-gradient-to-br from-gray-50 to-mylken-light/20 relative overflow-hidden">
-          {/* Background Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 right-1/4 w-64 h-64 bg-mylken-accent/5 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-mylken-primary/5 rounded-full blur-3xl"></div>
-          </div>
-          
+        {/* Our Values - Redesigned */}
+        <section className="py-20 bg-white relative overflow-hidden">
           <div className="container-custom relative z-10">
             <div className="text-center mb-16">
               <motion.div
@@ -232,67 +224,85 @@ const About = () => {
               </motion.div>
             </div>
             
-            {/* Values Grid - New Hexagonal Design */}
+            {/* Values Grid - Clean Card Layout */}
             <motion.div 
-              className="relative max-w-4xl mx-auto"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {/* Central Value */}
-              <motion.div 
-                className="relative z-10 mx-auto w-64 h-64"
-                variants={itemVariants}
-              >
-                <div className="w-full h-full bg-gradient-to-br from-mylken-primary to-mylken-secondary rounded-2xl p-8 flex flex-col items-center justify-center text-center text-white shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
-                  <Heart className="w-12 h-12 text-mylken-accent mb-4" />
-                  <h3 className="text-xl font-bold mb-3">Passion</h3>
-                  <p className="text-mylken-light text-sm">At the heart of everything we do - genuine passion for improving dairy operations</p>
-                </div>
-              </motion.div>
-              
-              {/* Surrounding Values */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative w-full h-full">
-                  {[
-                    { icon: Shield, title: "Quality", desc: "Never compromising on reliability", position: "top-0 left-1/2 -translate-x-1/2", color: "bg-white", delay: 0.1 },
-                    { icon: Lightbulb, title: "Innovation", desc: "Constantly seeking better solutions", position: "top-1/4 right-0", color: "bg-mylken-accent/10", delay: 0.2 },
-                    { icon: Handshake, title: "Partnership", desc: "Building lasting relationships", position: "bottom-1/4 right-0", color: "bg-white", delay: 0.3 },
-                    { icon: Award, title: "Excellence", desc: "Striving for the highest standards", position: "bottom-0 left-1/2 -translate-x-1/2", color: "bg-mylken-primary/10", delay: 0.4 },
-                    { icon: Users, title: "Community", desc: "Supporting the dairy ecosystem", position: "bottom-1/4 left-0", color: "bg-white", delay: 0.5 },
-                    { icon: Star, title: "Trust", desc: "Earning confidence through transparency", position: "top-1/4 left-0", color: "bg-mylken-accent/10", delay: 0.6 }
-                  ].map((value, index) => (
-                    <motion.div
-                      key={index}
-                      className={`absolute ${value.position} w-48 h-48`}
-                      variants={itemVariants}
-                      custom={value.delay}
-                    >
-                      <div className={`w-full h-full ${value.color} rounded-xl p-6 flex flex-col items-center justify-center text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 border border-mylken-light/20`}>
-                        <div className="bg-mylken-primary/10 rounded-full p-4 mb-4">
-                          <value.icon className="w-8 h-8 text-mylken-primary" />
-                        </div>
-                        <h4 className="text-lg font-bold text-mylken-primary mb-2">{value.title}</h4>
-                        <p className="text-gray-600 text-sm leading-relaxed">{value.desc}</p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+              {[
+                { 
+                  icon: Heart, 
+                  title: "Passion", 
+                  desc: "At the heart of everything we do - genuine passion for improving dairy operations worldwide.",
+                  color: "bg-red-50 border-red-200",
+                  iconColor: "text-red-600"
+                },
+                { 
+                  icon: Shield, 
+                  title: "Quality", 
+                  desc: "Never compromising on reliability and excellence in every product we manufacture.",
+                  color: "bg-blue-50 border-blue-200",
+                  iconColor: "text-blue-600"
+                },
+                { 
+                  icon: Lightbulb, 
+                  title: "Innovation", 
+                  desc: "Constantly seeking better solutions and pushing the boundaries of dairy technology.",
+                  color: "bg-yellow-50 border-yellow-200",
+                  iconColor: "text-yellow-600"
+                },
+                { 
+                  icon: Handshake, 
+                  title: "Partnership", 
+                  desc: "Building lasting relationships based on trust, transparency, and mutual success.",
+                  color: "bg-green-50 border-green-200",
+                  iconColor: "text-green-600"
+                },
+                { 
+                  icon: Award, 
+                  title: "Excellence", 
+                  desc: "Striving for the highest standards in product quality and customer service.",
+                  color: "bg-purple-50 border-purple-200",
+                  iconColor: "text-purple-600"
+                },
+                { 
+                  icon: Users, 
+                  title: "Community", 
+                  desc: "Supporting the dairy ecosystem and fostering growth within our industry community.",
+                  color: "bg-orange-50 border-orange-200",
+                  iconColor: "text-orange-600"
+                }
+              ].map((value, index) => (
+                <motion.div
+                  key={index}
+                  className={`${value.color} rounded-2xl p-8 border-2 hover:shadow-lg transition-all duration-300 hover:scale-105 group`}
+                  variants={itemVariants}
+                >
+                  <div className="text-center">
+                    <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full bg-white shadow-md mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                      <value.icon className={`w-8 h-8 ${value.iconColor}`} />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-4">{value.title}</h3>
+                    <p className="text-gray-700 leading-relaxed">{value.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
             
             {/* Values Summary */}
             <motion.div 
-              className="mt-20 bg-white rounded-2xl p-8 shadow-lg border border-mylken-light/20 max-w-3xl mx-auto"
+              className="mt-16 bg-gradient-to-r from-mylken-primary to-mylken-secondary rounded-2xl p-8 shadow-xl max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <div className="text-center">
-                <h3 className="text-2xl font-bold text-mylken-primary mb-4">Values in Action</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">
+              <div className="text-center text-white">
+                <h3 className="text-2xl font-bold mb-4">Values in Action</h3>
+                <p className="text-mylken-light text-lg leading-relaxed">
                   These values aren't just words on a wall - they're the foundation of how we design products, serve customers, and build relationships in the dairy industry. Every interaction reflects our commitment to these principles.
                 </p>
               </div>
