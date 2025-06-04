@@ -11,35 +11,38 @@ const Hero = () => {
     {
       id: 1,
       name: "Advanced Milk Analyzer",
-      description: "Precision testing for comprehensive milk analysis with real-time results",
+      description: "Precision testing for comprehensive milk analysis with real-time results and laboratory-grade accuracy",
       image: "https://images.unsplash.com/photo-1563694983011-6f4d90358083?q=80&w=800&auto=format&fit=crop",
       fallbackImage: "https://images.unsplash.com/photo-1604881988758-f76ad2f7aac1?q=80&w=800&auto=format&fit=crop",
       icon: <Beaker className="w-8 h-8" />,
       gradient: "from-blue-500 via-cyan-400 to-blue-600",
       accentColor: "bg-blue-500",
-      features: ["Real-time Analysis", "99.9% Accuracy", "Smart Interface"]
+      bgOverlay: "from-blue-900/80 via-mylken-primary/90 to-mylken-primary",
+      features: ["Real-time Analysis", "99.9% Accuracy", "Smart Interface", "Laboratory Grade"]
     },
     {
       id: 2,
       name: "Stainless Steel Milk Cans",
-      description: "Premium quality stainless steel milk storage and transport solutions",
+      description: "Premium quality stainless steel milk storage and transport solutions for modern dairy operations",
       image: "/lovable-uploads/d94866ea-8883-4a2a-ab94-225e53b5827a.png",
       fallbackImage: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757?q=80&w=800&auto=format&fit=crop",
       icon: <Droplets className="w-8 h-8" />,
       gradient: "from-gray-400 via-gray-300 to-gray-500",
       accentColor: "bg-gray-500",
-      features: ["Food Grade Steel", "Easy Transport", "Durable Design"]
+      bgOverlay: "from-gray-700/80 via-mylken-primary/90 to-mylken-primary",
+      features: ["Food Grade Steel", "Easy Transport", "Durable Design", "Hygienic"]
     },
     {
       id: 3,
       name: "Aluminum Milk Cans",
-      description: "Lightweight aluminum cans for efficient milk collection and storage",
+      description: "Lightweight aluminum cans for efficient milk collection and storage with superior durability",
       image: "/lovable-uploads/7982580a-c690-44c3-8467-75753a40dbd9.png",
       fallbackImage: "https://images.unsplash.com/photo-1598233847491-f16487adee2f?q=80&w=800&auto=format&fit=crop",
       icon: <Gauge className="w-8 h-8" />,
       gradient: "from-slate-400 via-slate-300 to-slate-500",
       accentColor: "bg-slate-500",
-      features: ["Lightweight", "Corrosion Resistant", "Cost Effective"]
+      bgOverlay: "from-slate-700/80 via-mylken-primary/90 to-mylken-primary",
+      features: ["Lightweight", "Corrosion Resistant", "Cost Effective", "Eco-Friendly"]
     }
   ];
 
@@ -62,54 +65,64 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Full-width background with integrated product image */}
+      {/* Enhanced background with better product integration */}
       <div className="absolute inset-0 z-0">
-        {/* Dynamic gradient background */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${currentProduct.gradient} opacity-15 transition-all duration-1000`}></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-mylken-primary via-mylken-primary/95 to-mylken-secondary/90"></div>
+        {/* Dynamic gradient overlay that changes with each product */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${currentProduct.bgOverlay} transition-all duration-1000`}></div>
         
-        {/* Product image integrated across the background */}
-        <div className="absolute inset-0 flex items-center justify-end pr-8 lg:pr-16">
-          <div className="relative w-full max-w-4xl h-full flex items-center justify-end">
-            <img 
-              src={currentProduct.image}
-              alt={currentProduct.name}
-              className="w-auto h-[70vh] max-h-[600px] object-contain opacity-80 transition-all duration-1000 transform hover:scale-105"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src = currentProduct.fallbackImage;
-              }}
-            />
-            
-            {/* Decorative milk splash effects */}
-            <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-20 left-1/4 w-24 h-24 bg-mylken-accent/20 rounded-full blur-2xl animate-pulse animation-delay-500"></div>
-            <div className="absolute top-1/3 left-1/2 w-40 h-40 bg-white/5 rounded-full blur-3xl animate-pulse animation-delay-700"></div>
+        {/* Enhanced product image positioning */}
+        <div className="absolute inset-0 flex items-center justify-center lg:justify-end lg:pr-20">
+          <div className="relative w-full max-w-5xl h-full flex items-center justify-center lg:justify-end">
+            <div className="relative">
+              <img 
+                src={currentProduct.image}
+                alt={currentProduct.name}
+                className="w-auto h-[60vh] lg:h-[75vh] max-h-[700px] object-contain opacity-90 transition-all duration-1000 transform hover:scale-105 filter drop-shadow-2xl"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = currentProduct.fallbackImage;
+                }}
+              />
+              
+              {/* Enhanced product glow effect */}
+              <div className={`absolute inset-0 bg-gradient-to-r ${currentProduct.gradient} opacity-20 blur-3xl rounded-full scale-150 animate-pulse`}></div>
+            </div>
           </div>
         </div>
 
-        {/* Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-mylken-primary via-mylken-primary/90 to-transparent"></div>
+        {/* Animated milk splash effects */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          <div className="absolute top-20 left-16 w-40 h-40 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-32 left-1/4 w-32 h-32 bg-mylken-accent/15 rounded-full blur-2xl animate-pulse animation-delay-500"></div>
+          <div className="absolute top-1/3 left-1/2 w-48 h-48 bg-white/8 rounded-full blur-3xl animate-pulse animation-delay-700"></div>
+          <div className="absolute bottom-20 right-1/4 w-36 h-36 bg-mylken-accent/12 rounded-full blur-2xl animate-pulse animation-delay-1000"></div>
+        </div>
       </div>
 
-      {/* Content overlay */}
+      {/* Main content */}
       <div className="container-custom relative z-10 pt-32 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left content - Enhanced typography and layout */}
-          <div className="space-y-8 lg:pr-8">
-            {/* Featured badge */}
-            <div className="flex items-center gap-2">
-              <span className={`px-6 py-3 rounded-full ${currentProduct.accentColor}/20 text-white border border-white/20 inline-flex items-center text-sm font-semibold backdrop-blur-sm transition-all duration-1000`}>
-                <span className={`w-3 h-3 rounded-full ${currentProduct.accentColor} mr-3 animate-pulse`}></span>
-                Featured Equipment
-              </span>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[70vh]">
+          {/* Left content - Enhanced and expanded */}
+          <div className="lg:col-span-7 space-y-8">
+            {/* Enhanced product badge */}
+            <div className="flex items-center gap-3">
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${currentProduct.gradient} flex items-center justify-center text-white shadow-xl transition-all duration-1000`}>
+                {currentProduct.icon}
+              </div>
+              <div className="space-y-1">
+                <span className={`px-4 py-2 rounded-full ${currentProduct.accentColor}/20 text-white border border-white/20 text-sm font-semibold backdrop-blur-sm transition-all duration-1000 inline-block`}>
+                  Featured Equipment
+                </span>
+              </div>
             </div>
             
-            {/* Main heading with enhanced typography */}
+            {/* Enhanced main heading */}
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-[0.9] tracking-tight">
-                <span className="block text-mylken-light/90">Premium</span>
-                <span className="block text-mylken-accent text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black">
+                <span className="block text-mylken-light/90 text-2xl md:text-3xl lg:text-4xl font-medium mb-2">
+                  Premium Dairy Equipment
+                </span>
+                <span className={`block bg-gradient-to-r ${currentProduct.gradient} bg-clip-text text-transparent transition-all duration-1000`}>
                   {currentProduct.name.split(' ')[0]}
                 </span>
                 <span className="block text-white">
@@ -117,19 +130,22 @@ const Hero = () => {
                 </span>
               </h1>
               
-              <p className="text-mylken-light/90 text-lg md:text-xl max-w-xl leading-relaxed">
+              <p className="text-mylken-light/90 text-lg md:text-xl max-w-2xl leading-relaxed">
                 {currentProduct.description}
               </p>
             </div>
 
-            {/* Product features with enhanced design */}
-            <div className="flex flex-wrap gap-3">
+            {/* Enhanced product features grid */}
+            <div className="grid grid-cols-2 gap-3">
               {currentProduct.features.map((feature, index) => (
                 <div 
                   key={index}
-                  className="px-5 py-2.5 bg-white/10 backdrop-blur-md rounded-full text-white text-sm font-medium border border-white/20 hover:bg-white/20 transition-all duration-300"
+                  className="px-4 py-3 bg-white/10 backdrop-blur-md rounded-xl text-white text-sm font-medium border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
                 >
-                  {feature}
+                  <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full ${currentProduct.accentColor} transition-all duration-1000`}></div>
+                    {feature}
+                  </div>
                 </div>
               ))}
             </div>
@@ -148,29 +164,23 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Right content - Product info card */}
-          <div className="relative lg:flex lg:justify-end">
-            <div className="relative max-w-md">
-              {/* Floating product info card */}
-              <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-2">
-                {/* Product icon */}
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${currentProduct.gradient} flex items-center justify-center text-white mb-6 mx-auto shadow-lg`}>
-                  {currentProduct.icon}
+          {/* Right side - Product showcase area */}
+          <div className="lg:col-span-5 relative">
+            {/* Product metrics or additional info can go here */}
+            <div className="hidden lg:block space-y-6">
+              {/* Optional: Add some product stats or highlights */}
+              <div className="grid grid-cols-1 gap-4">
+                <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-mylken-accent mb-2">99.9%</div>
+                    <div className="text-white/80 text-sm">Accuracy Rate</div>
+                  </div>
                 </div>
-                
-                {/* Product details */}
-                <div className="text-center space-y-4">
-                  <h3 className="text-2xl font-bold text-white leading-tight">{currentProduct.name}</h3>
-                  <p className="text-mylken-light/80 leading-relaxed">{currentProduct.description}</p>
-                  
-                  {/* Learn more link */}
-                  <Link 
-                    to="/products" 
-                    className="inline-flex items-center gap-2 text-mylken-accent hover:text-mylken-light transition-colors font-medium group mt-4"
-                  >
-                    Learn More
-                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                  </Link>
+                <div className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-mylken-accent mb-2">24/7</div>
+                    <div className="text-white/80 text-sm">Support Available</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -178,34 +188,43 @@ const Hero = () => {
         </div>
 
         {/* Enhanced carousel controls */}
-        <div className="flex justify-center items-center gap-6 mt-16">
+        <div className="flex justify-center items-center gap-8 mt-16">
           <button 
             onClick={prevSlide}
-            className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg"
+            className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg group"
           >
-            <ChevronLeft size={24} />
+            <ChevronLeft size={28} className="transition-transform group-hover:-translate-x-1" />
           </button>
           
-          {/* Enhanced slide indicators */}
-          <div className="flex gap-3">
-            {heroProducts.map((_, index) => (
+          {/* Enhanced slide indicators with product previews */}
+          <div className="flex gap-4">
+            {heroProducts.map((product, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                className={`relative overflow-hidden rounded-xl transition-all duration-300 border-2 ${
                   index === currentSlide 
-                    ? 'bg-mylken-accent scale-125 shadow-lg' 
-                    : 'bg-white/30 hover:bg-white/50'
+                    ? 'border-mylken-accent scale-110 shadow-xl' 
+                    : 'border-white/20 hover:border-white/40 hover:scale-105'
                 }`}
-              />
+              >
+                <div className="w-16 h-16 bg-white/10 backdrop-blur-md flex items-center justify-center">
+                  <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${product.gradient} flex items-center justify-center text-white transition-all duration-300`}>
+                    {React.cloneElement(product.icon, { size: 16 })}
+                  </div>
+                </div>
+                {index === currentSlide && (
+                  <div className="absolute inset-0 bg-mylken-accent/20 animate-pulse"></div>
+                )}
+              </button>
             ))}
           </div>
           
           <button 
             onClick={nextSlide}
-            className="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg"
+            className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 hover:scale-110 transition-all duration-300 shadow-lg group"
           >
-            <ChevronRight size={24} />
+            <ChevronRight size={28} className="transition-transform group-hover:translate-x-1" />
           </button>
         </div>
       </div>
