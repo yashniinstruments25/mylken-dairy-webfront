@@ -83,7 +83,7 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* Products dropdown */}
+          {/* Products dropdown with unique design */}
           <div className="z-50">
             <NavigationMenu>
               <NavigationMenuList>
@@ -98,66 +98,95 @@ const Navbar = () => {
                   >
                     Products
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="min-w-[280px]">
-                    <div className="absolute -top-2 right-5 h-2 w-2 bg-white rotate-45 border-t border-l border-border"></div>
-                    <div className="p-4 space-y-4">
-                      {/* Dairy Products Category */}
-                      <div>
-                        <div className="flex items-center mb-3 pb-2 border-b border-mylken-accent/20">
-                          <Milk className="mr-2 h-4 w-4 text-mylken-primary" />
-                          <h3 className="text-sm font-semibold text-mylken-primary">Dairy Products</h3>
-                        </div>
-                        <ul className="grid gap-1">
-                          {dairyProductCategories.map((category) => (
-                            <li key={category.name} className="relative">
-                              <NavigationMenuLink asChild>
+                  <NavigationMenuContent className="min-w-[400px] p-0 overflow-hidden">
+                    {/* Unique dropdown design with visual separation */}
+                    <div className="relative bg-gradient-to-br from-white via-mylken-light/5 to-mylken-accent/5">
+                      {/* Decorative top border with milk wave pattern */}
+                      <div className="h-2 bg-gradient-to-r from-mylken-accent via-mylken-secondary to-mylken-primary relative">
+                        <div className="absolute bottom-0 left-0 w-full h-3 bg-white" style={{
+                          clipPath: "polygon(0% 70%, 15% 100%, 30% 70%, 45% 100%, 60% 70%, 75% 100%, 90% 70%, 100% 100%, 100% 0%, 0% 0%)"
+                        }}></div>
+                      </div>
+                      
+                      <div className="flex">
+                        {/* Dairy Products Section */}
+                        <div className="flex-1 p-5 bg-gradient-to-br from-blue-50/80 to-mylken-light/20 relative">
+                          {/* Category Header */}
+                          <div className="flex items-center mb-4 pb-3 border-b-2 border-mylken-primary/20">
+                            <div className="p-2 bg-white rounded-full shadow-sm mr-3">
+                              <Milk className="h-5 w-5 text-mylken-primary" />
+                            </div>
+                            <h3 className="text-base font-bold text-mylken-primary">Dairy Products</h3>
+                          </div>
+                          
+                          {/* Products Grid */}
+                          <div className="space-y-2">
+                            {dairyProductCategories.map((category, index) => (
+                              <NavigationMenuLink asChild key={category.name}>
                                 <Link
                                   to={category.href}
-                                  className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/10 hover:text-mylken-primary group"
+                                  className="group flex items-center p-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 hover:shadow-sm hover:translate-x-1"
                                 >
-                                  <div className="text-sm font-medium leading-none flex items-center">
-                                    <Droplets className="mr-2 h-3 w-3 text-mylken-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    {category.name}
+                                  <div className="flex items-center space-x-3">
+                                    <div className="w-2 h-2 rounded-full bg-mylken-primary/40 group-hover:bg-mylken-primary transition-colors"></div>
+                                    <span className="text-sm font-medium text-mylken-primary group-hover:text-mylken-secondary transition-colors">
+                                      {category.name}
+                                    </span>
                                   </div>
+                                  <Droplets className="ml-auto h-3 w-3 text-mylken-primary/0 group-hover:text-mylken-primary/60 transition-all duration-200" />
                                 </Link>
                               </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                            ))}
+                          </div>
+                        </div>
 
-                      {/* Scientific Products Category */}
-                      <div>
-                        <div className="flex items-center mb-3 pb-2 border-b border-mylken-accent/20">
-                          <Beaker className="mr-2 h-4 w-4 text-mylken-primary" />
-                          <h3 className="text-sm font-semibold text-mylken-primary">Scientific Products</h3>
+                        {/* Vertical Separator with Decorative Elements */}
+                        <div className="w-px bg-gradient-to-b from-mylken-primary/20 via-mylken-secondary/40 to-mylken-primary/20 relative">
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white border-2 border-mylken-accent rounded-full shadow-sm"></div>
+                          <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-mylken-primary/30 rounded-full"></div>
+                          <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-mylken-secondary/30 rounded-full"></div>
                         </div>
-                        <ul className="grid gap-1">
-                          {scientificCategories.map((category) => (
-                            <li key={category.name} className="relative">
-                              <NavigationMenuLink asChild>
+
+                        {/* Scientific Products Section */}
+                        <div className="flex-1 p-5 bg-gradient-to-br from-green-50/80 to-mylken-secondary/10 relative">
+                          {/* Category Header */}
+                          <div className="flex items-center mb-4 pb-3 border-b-2 border-mylken-secondary/20">
+                            <div className="p-2 bg-white rounded-full shadow-sm mr-3">
+                              <Beaker className="h-5 w-5 text-mylken-secondary" />
+                            </div>
+                            <h3 className="text-base font-bold text-mylken-secondary">Scientific Products</h3>
+                          </div>
+                          
+                          {/* Products Grid */}
+                          <div className="space-y-2">
+                            {scientificCategories.map((category, index) => (
+                              <NavigationMenuLink asChild key={category.name}>
                                 <Link
                                   to={category.href}
-                                  className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/10 hover:text-mylken-primary group"
+                                  className="group flex items-center p-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 hover:shadow-sm hover:translate-x-1"
                                 >
-                                  <div className="text-sm font-medium leading-none flex items-center">
-                                    <Beaker className="mr-2 h-3 w-3 text-mylken-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                                    {category.name}
+                                  <div className="flex items-center space-x-3">
+                                    <div className="w-2 h-2 rounded-full bg-mylken-secondary/40 group-hover:bg-mylken-secondary transition-colors"></div>
+                                    <span className="text-sm font-medium text-mylken-secondary group-hover:text-mylken-primary transition-colors">
+                                      {category.name}
+                                    </span>
                                   </div>
+                                  <Beaker className="ml-auto h-3 w-3 text-mylken-secondary/0 group-hover:text-mylken-secondary/60 transition-all duration-200" />
                                 </Link>
                               </NavigationMenuLink>
-                            </li>
-                          ))}
-                        </ul>
+                            ))}
+                          </div>
+                        </div>
                       </div>
+                      
+                      {/* Decorative bottom pattern */}
+                      <div className="h-1 bg-gradient-to-r from-mylken-primary/20 via-mylken-accent/30 to-mylken-secondary/20"></div>
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
-          
-          {/* Scientific Products dropdown - removed as it's now part of Products */}
           
           <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-secondary hover:text-white transition-colors text-sm px-3 py-1 h-auto relative overflow-hidden group">
             <span className="relative z-10">Get Quote</span>
