@@ -58,7 +58,9 @@ const MilkAnalyzers = () => {
       }
     `;
     document.head.appendChild(style);
-    return () => document.head.removeChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
   }, []);
 
   const productCategories = {
