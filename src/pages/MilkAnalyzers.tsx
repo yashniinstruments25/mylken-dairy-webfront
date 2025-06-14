@@ -1,7 +1,7 @@
-
 import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ProductDetailModal from '@/components/ProductDetailModal';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -12,16 +12,60 @@ import { ArrowRight, Beaker, Milk, Factory, Filter, Search, IndianRupee, Zap, Wi
 const MilkAnalyzers = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+  }, []);
+
+  // Dairy-themed animation styles
+  const milkDropAnimation = {
+    animation: 'milkDrop 2s ease-in-out infinite',
+  };
+
+  const floatingAnimation = {
+    animation: 'float 3s ease-in-out infinite',
+  };
+
+  // Add custom CSS animations
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes milkDrop {
+        0%, 100% { transform: translateY(0px) scale(1); opacity: 0.8; }
+        50% { transform: translateY(-10px) scale(1.1); opacity: 1; }
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        33% { transform: translateY(-5px) rotate(1deg); }
+        66% { transform: translateY(-2px) rotate(-1deg); }
+      }
+      @keyframes milkWave {
+        0%, 100% { transform: translateX(0%); }
+        50% { transform: translateX(100%); }
+      }
+      .milk-wave {
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        animation: milkWave 3s ease-in-out infinite;
+      }
+      .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      }
+      .product-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    `;
+    document.head.appendChild(style);
+    return () => document.head.removeChild(style);
   }, []);
 
   const productCategories = {
     'ultra-scan-basic': {
       name: 'Ultra Scan Basic Series',
       description: 'Essential milk analysis with fast results',
-      icon: <Zap size={20} />,
+      icon: <Zap size={20} style={floatingAnimation} />,
       products: [
         { 
           name: 'Ultra Scan Kurien Milk Analyzer (30 second)', 
@@ -48,7 +92,7 @@ const MilkAnalyzers = () => {
     'ultra-scan-thermal': {
       name: 'Ultra Scan with Thermal Printer',
       description: 'Advanced analyzers with built-in printing capability',
-      icon: <Printer size={20} />,
+      icon: <Printer size={20} style={floatingAnimation} />,
       products: [
         { 
           name: 'Ultra Scan Kurien With Thermal Printer', 
@@ -75,7 +119,7 @@ const MilkAnalyzers = () => {
     'ultra-scan-iot': {
       name: 'Ultra Scan IoT Series',
       description: 'Smart analyzers with IoT connectivity and cloud integration',
-      icon: <Wifi size={20} />,
+      icon: <Wifi size={20} style={floatingAnimation} />,
       products: [
         { 
           name: 'Ultra Scan Kurien Milk Analyzer With IoT', 
@@ -102,7 +146,7 @@ const MilkAnalyzers = () => {
     'ultra-scan-premium': {
       name: 'Ultra Scan Premium Series',
       description: 'Top-tier analyzers with thermal printer and IoT capabilities',
-      icon: <Factory size={20} />,
+      icon: <Factory size={20} style={floatingAnimation} />,
       products: [
         { 
           name: 'Ultra Scan Kurien With Thermal Printer & IoT', 
@@ -129,7 +173,7 @@ const MilkAnalyzers = () => {
     'specialized': {
       name: 'Specialized Analyzers',
       description: 'Specialized milk analyzers for specific applications',
-      icon: <Beaker size={20} />,
+      icon: <Beaker size={20} style={floatingAnimation} />,
       products: [
         { 
           name: 'Ultra Scan Kurien Milk Analyzer with Ph', 
@@ -146,7 +190,7 @@ const MilkAnalyzers = () => {
     'mobile-units': {
       name: 'Mobile Collection Units',
       description: 'Portable solutions for field collection and analysis',
-      icon: <Milk size={20} />,
+      icon: <Milk size={20} style={floatingAnimation} />,
       products: [
         { 
           name: 'Ultra Scan Swift IOT Bond POS', 
@@ -193,7 +237,7 @@ const MilkAnalyzers = () => {
     'accessories': {
       name: 'Testing Equipment & Accessories',
       description: 'Essential tools and accessories for milk testing',
-      icon: <Search size={20} />,
+      icon: <Search size={20} style={floatingAnimation} />,
       products: [
         { 
           name: 'Data Processor Milk Collection Unit', 
@@ -225,7 +269,7 @@ const MilkAnalyzers = () => {
     'testing-kits': {
       name: 'Testing Kits & Solutions',
       description: 'Comprehensive testing solutions and maintenance products',
-      icon: <Beaker size={20} />,
+      icon: <Beaker size={20} style={floatingAnimation} />,
       products: [
         { 
           name: 'Milk Butyrometer 0-8%', 
@@ -266,13 +310,34 @@ const MilkAnalyzers = () => {
     ? Object.values(productCategories).flatMap(cat => cat.products.map(p => ({...p, category: cat.name})))
     : productCategories[selectedCategory]?.products || [];
 
+  const handleViewDetails = (product: any) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
       <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-mylken-primary to-mylken-primary/80 pt-32 pb-16">
-          <div className="container-custom">
+        {/* Hero Section with enhanced animations */}
+        <section className="bg-gradient-to-br from-mylken-primary to-mylken-primary/80 pt-32 pb-16 relative overflow-hidden">
+          {/* Animated milk drops */}
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-4 h-6 bg-white/10 rounded-full"
+                style={{
+                  left: `${10 + i * 20}%`,
+                  top: `${20 + i * 10}%`,
+                  ...milkDropAnimation,
+                  animationDelay: `${i * 0.5}s`,
+                }}
+              />
+            ))}
+          </div>
+          
+          <div className="container-custom relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <span className="inline-block px-4 py-2 rounded-full bg-mylken-accent/20 text-mylken-accent text-sm font-medium animate-fade-in">
                 Professional Milk Analysis Equipment
@@ -287,14 +352,18 @@ const MilkAnalyzers = () => {
                 <Button 
                   variant={viewMode === 'cards' ? "primary" : "outline"}
                   onClick={() => setViewMode('cards')}
+                  className="relative overflow-hidden"
                 >
-                  Card View
+                  <span className="relative z-10">Card View</span>
+                  <div className="absolute inset-0 milk-wave"></div>
                 </Button>
                 <Button 
                   variant={viewMode === 'table' ? "primary" : "outline"}
                   onClick={() => setViewMode('table')}
+                  className="relative overflow-hidden"
                 >
-                  Table View
+                  <span className="relative z-10">Table View</span>
+                  <div className="absolute inset-0 milk-wave"></div>
                 </Button>
               </div>
             </div>
@@ -308,9 +377,9 @@ const MilkAnalyzers = () => {
               <Button 
                 variant={selectedCategory === 'all' ? "primary" : "outline"}
                 onClick={() => setSelectedCategory('all')}
-                className="rounded-full"
+                className="rounded-full hover-scale"
               >
-                <Filter size={16} className="mr-2" />
+                <Filter size={16} className="mr-2" style={milkDropAnimation} />
                 All Products ({Object.values(productCategories).reduce((acc, cat) => acc + cat.products.length, 0)})
               </Button>
               {categories.map((cat) => (
@@ -318,7 +387,7 @@ const MilkAnalyzers = () => {
                   key={cat}
                   variant={selectedCategory === cat ? "primary" : "outline"}
                   onClick={() => setSelectedCategory(cat)}
-                  className="rounded-full text-sm"
+                  className="rounded-full text-sm hover-scale"
                 >
                   {productCategories[cat].icon}
                   <span className="ml-2">{productCategories[cat].name} ({productCategories[cat].products.length})</span>
@@ -328,17 +397,18 @@ const MilkAnalyzers = () => {
           </div>
         </section>
 
-        {/* Products Section */}
+        {/* Products Section with enhanced cards */}
         <section className="py-16 bg-gray-50">
           <div className="container-custom">
             {selectedCategory === 'all' ? (
               // Show all categories
               <div className="space-y-16">
                 {Object.entries(productCategories).map(([key, category]) => (
-                  <div key={key} className="bg-white rounded-lg shadow-sm p-8">
-                    <div className="text-center mb-8">
+                  <div key={key} className="bg-white rounded-lg shadow-sm p-8 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-mylken-accent/5 rounded-full -translate-y-16 translate-x-16"></div>
+                    <div className="text-center mb-8 relative z-10">
                       <div className="flex items-center justify-center gap-3 mb-4">
-                        <div className="bg-mylken-primary/10 p-3 rounded-full">
+                        <div className="bg-mylken-primary/10 p-3 rounded-full" style={floatingAnimation}>
                           {category.icon}
                         </div>
                         <h2 className="text-2xl font-bold text-mylken-dark">{category.name}</h2>
@@ -349,30 +419,36 @@ const MilkAnalyzers = () => {
                     {viewMode === 'cards' ? (
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {category.products.slice(0, 6).map((product, index) => (
-                          <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105 border border-gray-200">
-                            <CardHeader className="pb-3">
+                          <Card key={index} className="product-card border border-gray-200 relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-gradient-to-br from-mylken-accent/0 to-mylken-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <CardHeader className="pb-3 relative z-10">
                               <div className="flex justify-between items-start gap-3">
                                 <CardTitle className="text-lg text-mylken-dark leading-tight">{product.name}</CardTitle>
-                                <Badge className="bg-mylken-primary text-white whitespace-nowrap shrink-0">
+                                <Badge className="bg-mylken-primary text-white whitespace-nowrap shrink-0" style={milkDropAnimation}>
                                   <IndianRupee size={12} />
                                   {product.price.toLocaleString()}
                                 </Badge>
                               </div>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="relative z-10">
                               <ul className="space-y-2 mb-4">
                                 {product.features.map((feature, i) => (
                                   <li key={i} className="flex items-start text-sm text-gray-600">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-mylken-accent mr-2 mt-2 shrink-0"></span>
+                                    <span className="w-1.5 h-1.5 rounded-full bg-mylken-accent mr-2 mt-2 shrink-0" style={milkDropAnimation}></span>
                                     {feature}
                                   </li>
                                 ))}
                               </ul>
                               <div className="pt-4 border-t flex justify-between items-center gap-2">
-                                <Button variant="outline" size="sm" className="flex-1">
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="flex-1 hover-scale"
+                                  onClick={() => handleViewDetails(product)}
+                                >
                                   View Details
                                 </Button>
-                                <Button size="sm" className="bg-mylken-primary text-white flex-1">
+                                <Button size="sm" className="bg-mylken-primary text-white flex-1 hover-scale">
                                   Get Quote
                                 </Button>
                               </div>
@@ -393,7 +469,7 @@ const MilkAnalyzers = () => {
                           </TableHeader>
                           <TableBody>
                             {category.products.slice(0, 6).map((product, index) => (
-                              <TableRow key={index}>
+                              <TableRow key={index} className="hover:bg-mylken-light/20">
                                 <TableCell className="font-medium">{product.name}</TableCell>
                                 <TableCell>
                                   <Badge className="bg-mylken-primary text-white">
@@ -415,7 +491,13 @@ const MilkAnalyzers = () => {
                                 </TableCell>
                                 <TableCell>
                                   <div className="flex gap-2">
-                                    <Button variant="outline" size="sm">Details</Button>
+                                    <Button 
+                                      variant="outline" 
+                                      size="sm"
+                                      onClick={() => handleViewDetails(product)}
+                                    >
+                                      Details
+                                    </Button>
                                     <Button size="sm" className="bg-mylken-primary text-white">Quote</Button>
                                   </div>
                                 </TableCell>
@@ -431,7 +513,7 @@ const MilkAnalyzers = () => {
                         <Button 
                           variant="outline" 
                           onClick={() => setSelectedCategory(key)}
-                          className="bg-white hover:bg-mylken-light"
+                          className="bg-white hover:bg-mylken-light hover-scale"
                         >
                           View All {category.products.length} Products <ArrowRight size={16} className="ml-2" />
                         </Button>
@@ -442,10 +524,11 @@ const MilkAnalyzers = () => {
               </div>
             ) : (
               // Show selected category
-              <div className="bg-white rounded-lg shadow-sm p-8">
-                <div className="text-center mb-8">
+              <div className="bg-white rounded-lg shadow-sm p-8 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-mylken-accent/5 rounded-full -translate-y-16 translate-x-16"></div>
+                <div className="text-center mb-8 relative z-10">
                   <div className="flex items-center justify-center gap-3 mb-4">
-                    <div className="bg-mylken-primary/10 p-3 rounded-full">
+                    <div className="bg-mylken-primary/10 p-3 rounded-full" style={floatingAnimation}>
                       {productCategories[selectedCategory]?.icon}
                     </div>
                     <h2 className="text-3xl font-bold text-mylken-dark">
@@ -460,30 +543,36 @@ const MilkAnalyzers = () => {
                 {viewMode === 'cards' ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredProducts.map((product, index) => (
-                      <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105 border border-gray-200">
-                        <CardHeader className="pb-3">
+                      <Card key={index} className="product-card border border-gray-200 relative overflow-hidden group">
+                        <div className="absolute inset-0 bg-gradient-to-br from-mylken-accent/0 to-mylken-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <CardHeader className="pb-3 relative z-10">
                           <div className="flex justify-between items-start gap-3">
                             <CardTitle className="text-lg text-mylken-dark leading-tight">{product.name}</CardTitle>
-                            <Badge className="bg-mylken-primary text-white whitespace-nowrap shrink-0">
+                            <Badge className="bg-mylken-primary text-white whitespace-nowrap shrink-0" style={milkDropAnimation}>
                               <IndianRupee size={12} />
                               {product.price.toLocaleString()}
                             </Badge>
                           </div>
                         </CardHeader>
-                        <CardContent>
+                        <CardContent className="relative z-10">
                           <ul className="space-y-2 mb-4">
                             {product.features.map((feature, i) => (
                               <li key={i} className="flex items-start text-sm text-gray-600">
-                                <span className="w-1.5 h-1.5 rounded-full bg-mylken-accent mr-2 mt-2 shrink-0"></span>
+                                <span className="w-1.5 h-1.5 rounded-full bg-mylken-accent mr-2 mt-2 shrink-0" style={milkDropAnimation}></span>
                                 {feature}
                               </li>
                             ))}
                           </ul>
                           <div className="pt-4 border-t flex justify-between items-center gap-2">
-                            <Button variant="outline" size="sm" className="flex-1">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="flex-1 hover-scale"
+                              onClick={() => handleViewDetails(product)}
+                            >
                               View Details
                             </Button>
-                            <Button size="sm" className="bg-mylken-primary text-white flex-1">
+                            <Button size="sm" className="bg-mylken-primary text-white flex-1 hover-scale">
                               Get Quote
                             </Button>
                           </div>
@@ -504,7 +593,7 @@ const MilkAnalyzers = () => {
                       </TableHeader>
                       <TableBody>
                         {filteredProducts.map((product, index) => (
-                          <TableRow key={index}>
+                          <TableRow key={index} className="hover:bg-mylken-light/20">
                             <TableCell className="font-medium">{product.name}</TableCell>
                             <TableCell>
                               <Badge className="bg-mylken-primary text-white">
@@ -526,7 +615,13 @@ const MilkAnalyzers = () => {
                             </TableCell>
                             <TableCell>
                               <div className="flex gap-2">
-                                <Button variant="outline" size="sm">Details</Button>
+                                <Button 
+                                  variant="outline" 
+                                  size="sm"
+                                  onClick={() => handleViewDetails(product)}
+                                >
+                                  Details
+                                </Button>
                                 <Button size="sm" className="bg-mylken-primary text-white">Quote</Button>
                               </div>
                             </TableCell>
@@ -550,24 +645,24 @@ const MilkAnalyzers = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-mylken-light/50 p-6 rounded-lg shadow-md">
-                <div className="bg-mylken-accent/20 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+              <div className="bg-mylken-light/50 p-6 rounded-lg shadow-md hover-scale">
+                <div className="bg-mylken-accent/20 w-12 h-12 rounded-full flex items-center justify-center mb-4" style={floatingAnimation}>
                   <Beaker className="text-mylken-primary" size={24} />
                 </div>
                 <h3 className="font-bold text-lg mb-2">High Precision</h3>
                 <p className="text-gray-600">Our analyzers deliver accuracy up to 99.8% with consistent and reliable results every time.</p>
               </div>
               
-              <div className="bg-mylken-light/50 p-6 rounded-lg shadow-md">
-                <div className="bg-mylken-accent/20 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+              <div className="bg-mylken-light/50 p-6 rounded-lg shadow-md hover-scale">
+                <div className="bg-mylken-accent/20 w-12 h-12 rounded-full flex items-center justify-center mb-4" style={floatingAnimation}>
                   <Factory className="text-mylken-primary" size={24} />
                 </div>
                 <h3 className="font-bold text-lg mb-2">Easy Integration</h3>
                 <p className="text-gray-600">Seamlessly connect with your existing processes and software systems.</p>
               </div>
               
-              <div className="bg-mylken-light/50 p-6 rounded-lg shadow-md">
-                <div className="bg-mylken-accent/20 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+              <div className="bg-mylken-light/50 p-6 rounded-lg shadow-md hover-scale">
+                <div className="bg-mylken-accent/20 w-12 h-12 rounded-full flex items-center justify-center mb-4" style={floatingAnimation}>
                   <Milk className="text-mylken-primary" size={24} />
                 </div>
                 <h3 className="font-bold text-lg mb-2">Rapid Analysis</h3>
@@ -578,8 +673,22 @@ const MilkAnalyzers = () => {
         </section>
         
         {/* Call to Action */}
-        <section className="py-16 bg-mylken-primary">
-          <div className="container-custom">
+        <section className="py-16 bg-mylken-primary relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            {[...Array(3)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-6 h-8 bg-white/5 rounded-full"
+                style={{
+                  left: `${20 + i * 30}%`,
+                  top: `${30 + i * 15}%`,
+                  ...milkDropAnimation,
+                  animationDelay: `${i * 1}s`,
+                }}
+              />
+            ))}
+          </div>
+          <div className="container-custom relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl font-bold text-white mb-6">Ready to Upgrade Your Milk Testing?</h2>
               <p className="text-mylken-light text-lg mb-8">
@@ -587,12 +696,12 @@ const MilkAnalyzers = () => {
               </p>
               <div className="flex justify-center gap-4">
                 <Link to="/contact">
-                  <Button variant="accent" size="lg">
+                  <Button variant="accent" size="lg" className="hover-scale">
                     Request Consultation
                   </Button>
                 </Link>
                 <Link to="/products">
-                  <Button variant="milk" size="lg">
+                  <Button variant="milk" size="lg" className="hover-scale">
                     View All Products
                   </Button>
                 </Link>
@@ -602,6 +711,15 @@ const MilkAnalyzers = () => {
         </section>
       </main>
       <Footer />
+      
+      {/* Product Detail Modal */}
+      {selectedProduct && (
+        <ProductDetailModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          product={selectedProduct}
+        />
+      )}
     </div>
   );
 };

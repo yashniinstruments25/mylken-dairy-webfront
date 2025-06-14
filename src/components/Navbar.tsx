@@ -21,7 +21,7 @@ const Navbar = () => {
   const navbarStyles = "fixed w-full z-40 bg-mylken-primary py-3 shadow-md";
 
   const productCategories = [
-    { name: 'Milk Analyzers', href: '/products/milk-analyzers' },
+    { name: 'Milk Analyzers', href: '/milk-analyzers' },
     { name: 'Khoya Making Machines', href: '/products/khoya-machines' },
     { name: 'Milk Cans', href: '/products/milk-cans' },
     { name: 'Dairy Processing Equipment', href: '/products/dairy-processing' },
@@ -88,7 +88,7 @@ const Navbar = () => {
                   <NavigationMenuTrigger 
                     className={cn(
                       "font-medium transition-colors bg-transparent text-sm lg:text-base",
-                      isActive('/products') 
+                      isActive('/products') || isActive('/milk-analyzers')
                         ? "text-mylken-accent font-bold" 
                         : "text-mylken-accent hover:text-mylken-light"
                     )}
@@ -239,8 +239,8 @@ const Navbar = () => {
                   }
                 }}
               >
-                <span className={isActive('/products') ? "text-mylken-accent font-medium flex items-center" : "text-mylken-primary flex items-center"}>
-                  {isActive('/products') && <Droplets className="mr-2 h-4 w-4" />}
+                <span className={isActive('/products') || isActive('/milk-analyzers') ? "text-mylken-accent font-medium flex items-center" : "text-mylken-primary flex items-center"}>
+                  {(isActive('/products') || isActive('/milk-analyzers')) && <Droplets className="mr-2 h-4 w-4" />}
                   Dairy Products
                 </span>
                 <ChevronDown size={16} />
