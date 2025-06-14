@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown, Droplets } from 'lucide-react';
+import { Menu, X, ChevronDown, Droplets, Milk, Beaker } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Link, useLocation } from 'react-router-dom';
@@ -20,11 +21,13 @@ const Navbar = () => {
   // Always visible navbar, no transparency change
   const navbarStyles = "fixed w-full z-40 bg-mylken-primary py-3 shadow-md";
 
-  const productCategories = [
+  const dairyProductCategories = [
     { name: 'Milk Analyzers', href: '/milk-analyzers' },
-    { name: 'Khoya Making Machines', href: '/products/khoya-machines' },
-    { name: 'Milk Cans', href: '/products/milk-cans' },
-    { name: 'Dairy Processing Equipment', href: '/products/dairy-processing' },
+    { name: 'Milk Can', href: '/products/milk-cans' },
+    { name: 'BMC', href: '/products/bmc' },
+    { name: 'Khoya Machine', href: '/products/khoya-machines' },
+    { name: 'Cream Separator', href: '/products/cream-separator' },
+    { name: 'Paneer Press', href: '/products/paneer-press' },
   ];
   
   const scientificCategories = [
@@ -80,7 +83,7 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* Dairy Products dropdown */}
+          {/* Products dropdown */}
           <div className="z-50">
             <NavigationMenu>
               <NavigationMenuList>
@@ -93,92 +96,68 @@ const Navbar = () => {
                         : "text-mylken-accent hover:text-mylken-light"
                     )}
                   >
-                    Dairy Products
+                    Products
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="min-w-[220px]">
+                  <NavigationMenuContent className="min-w-[280px]">
                     <div className="absolute -top-2 right-5 h-2 w-2 bg-white rotate-45 border-t border-l border-border"></div>
-                    <ul className="grid gap-1 p-3">
-                      {productCategories.map((category) => (
-                        <li key={category.name} className="relative">
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={category.href}
-                              className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary group"
-                            >
-                              <div className="text-sm font-medium leading-none flex items-center">
-                                <Droplets className="mr-2 h-3 w-3 text-mylken-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                                {category.name}
-                              </div>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                      <li className="relative mt-1 border-t pt-1">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to="/products"
-                            className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
-                          >
-                            View All
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    </ul>
+                    <div className="p-4 space-y-4">
+                      {/* Dairy Products Category */}
+                      <div>
+                        <div className="flex items-center mb-3 pb-2 border-b border-mylken-accent/20">
+                          <Milk className="mr-2 h-4 w-4 text-mylken-primary" />
+                          <h3 className="text-sm font-semibold text-mylken-primary">Dairy Products</h3>
+                        </div>
+                        <ul className="grid gap-1">
+                          {dairyProductCategories.map((category) => (
+                            <li key={category.name} className="relative">
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={category.href}
+                                  className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/10 hover:text-mylken-primary group"
+                                >
+                                  <div className="text-sm font-medium leading-none flex items-center">
+                                    <Droplets className="mr-2 h-3 w-3 text-mylken-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    {category.name}
+                                  </div>
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Scientific Products Category */}
+                      <div>
+                        <div className="flex items-center mb-3 pb-2 border-b border-mylken-accent/20">
+                          <Beaker className="mr-2 h-4 w-4 text-mylken-primary" />
+                          <h3 className="text-sm font-semibold text-mylken-primary">Scientific Products</h3>
+                        </div>
+                        <ul className="grid gap-1">
+                          {scientificCategories.map((category) => (
+                            <li key={category.name} className="relative">
+                              <NavigationMenuLink asChild>
+                                <Link
+                                  to={category.href}
+                                  className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/10 hover:text-mylken-primary group"
+                                >
+                                  <div className="text-sm font-medium leading-none flex items-center">
+                                    <Beaker className="mr-2 h-3 w-3 text-mylken-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                    {category.name}
+                                  </div>
+                                </Link>
+                              </NavigationMenuLink>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
           </div>
           
-          {/* Scientific Products dropdown */}
-          <div className="z-50">
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger 
-                    className={cn(
-                      "font-medium transition-colors bg-transparent text-sm lg:text-base",
-                      isActive('/scientific-products') 
-                        ? "text-mylken-accent font-bold" 
-                        : "text-mylken-accent hover:text-mylken-light"
-                    )}
-                  >
-                    Scientific
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent className="min-w-[220px]">
-                    <div className="absolute -top-2 right-5 h-2 w-2 bg-white rotate-45 border-t border-l border-border"></div>
-                    <ul className="grid gap-1 p-3">
-                      {scientificCategories.map((category) => (
-                        <li key={category.name} className="relative">
-                          <NavigationMenuLink asChild>
-                            <Link
-                              to={category.href}
-                              className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary group"
-                            >
-                              <div className="text-sm font-medium leading-none flex items-center">
-                                <Droplets className="mr-2 h-3 w-3 text-mylken-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                                {category.name}
-                              </div>
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                      ))}
-                      <li className="relative mt-1 border-t pt-1">
-                        <NavigationMenuLink asChild>
-                          <Link
-                            to="/scientific-products"
-                            className="block select-none space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-mylken-accent/20 hover:text-mylken-primary font-medium"
-                          >
-                            View All
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
+          {/* Scientific Products dropdown - removed as it's now part of Products */}
           
           <Button className="bg-mylken-accent text-mylken-dark hover:bg-mylken-secondary hover:text-white transition-colors text-sm px-3 py-1 h-auto relative overflow-hidden group">
             <span className="relative z-10">Get Quote</span>
@@ -227,7 +206,7 @@ const Navbar = () => {
               </Link>
             ))}
             
-            {/* Mobile Dairy Products Dropdown */}
+            {/* Mobile Products Dropdown */}
             <div className="py-2 relative">
               <button 
                 className="flex items-center justify-between w-full text-left"
@@ -241,67 +220,50 @@ const Navbar = () => {
               >
                 <span className={isActive('/products') || isActive('/milk-analyzers') ? "text-mylken-accent font-medium flex items-center" : "text-mylken-primary flex items-center"}>
                   {(isActive('/products') || isActive('/milk-analyzers')) && <Droplets className="mr-2 h-4 w-4" />}
-                  Dairy Products
+                  Products
                 </span>
                 <ChevronDown size={16} />
               </button>
-              <div className="pl-4 space-y-2 mt-2 hidden">
-                {productCategories.map((category) => (
-                  <Link
-                    key={category.name}
-                    to={category.href}
-                    className="block py-1 text-mylken-primary hover:text-mylken-secondary"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {category.name}
-                  </Link>
-                ))}
-                <Link
-                  to="/products"
-                  className="block py-1 font-medium text-mylken-accent"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  View All
-                </Link>
-              </div>
-            </div>
-            
-            {/* Mobile Scientific Products Dropdown */}
-            <div className="py-2 relative">
-              <button 
-                className="flex items-center justify-between w-full text-left"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const submenu = e.currentTarget.nextElementSibling;
-                  if (submenu) {
-                    submenu.classList.toggle('hidden');
-                  }
-                }}
-              >
-                <span className={isActive('/scientific-products') ? "text-mylken-accent font-medium flex items-center" : "text-mylken-primary flex items-center"}>
-                  {isActive('/scientific-products') && <Droplets className="mr-2 h-4 w-4" />}
-                  Scientific Products
-                </span>
-                <ChevronDown size={16} />
-              </button>
-              <div className="pl-4 space-y-2 mt-2 hidden">
-                {scientificCategories.map((category) => (
-                  <Link
-                    key={category.name}
-                    to={category.href}
-                    className="block py-1 text-mylken-primary hover:text-mylken-secondary"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {category.name}
-                  </Link>
-                ))}
-                <Link
-                  to="/scientific-products"
-                  className="block py-1 font-medium text-mylken-accent"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  View All
-                </Link>
+              <div className="pl-4 space-y-3 mt-2 hidden">
+                {/* Dairy Products Category */}
+                <div>
+                  <div className="flex items-center mb-2 text-mylken-primary font-medium">
+                    <Milk className="mr-2 h-4 w-4" />
+                    <span className="text-sm">Dairy Products</span>
+                  </div>
+                  <div className="pl-6 space-y-1">
+                    {dairyProductCategories.map((category) => (
+                      <Link
+                        key={category.name}
+                        to={category.href}
+                        className="block py-1 text-mylken-primary hover:text-mylken-secondary text-sm"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {category.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+                
+                {/* Scientific Products Category */}
+                <div>
+                  <div className="flex items-center mb-2 text-mylken-primary font-medium">
+                    <Beaker className="mr-2 h-4 w-4" />
+                    <span className="text-sm">Scientific Products</span>
+                  </div>
+                  <div className="pl-6 space-y-1">
+                    {scientificCategories.map((category) => (
+                      <Link
+                        key={category.name}
+                        to={category.href}
+                        className="block py-1 text-mylken-primary hover:text-mylken-secondary text-sm"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {category.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
             
