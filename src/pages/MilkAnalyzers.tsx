@@ -6,10 +6,12 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Beaker, Milk, Factory, Filter, Search, IndianRupee } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { ArrowRight, Beaker, Milk, Factory, Filter, Search, IndianRupee, Zap, Wifi, Printer } from 'lucide-react';
 
 const MilkAnalyzers = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -19,86 +21,94 @@ const MilkAnalyzers = () => {
     'ultra-scan-basic': {
       name: 'Ultra Scan Basic Series',
       description: 'Essential milk analysis with fast results',
+      icon: <Zap size={20} />,
       products: [
-        { name: 'Ultra Scan Kurien Milk Analyzer(30 second)', price: 32000, features: ['30-second analysis', 'Basic parameters', 'User-friendly'] },
-        { name: 'Ultra Scan Kurien Twinsonic Milk Analyzer', price: 38000, features: ['Twin sensor technology', 'Enhanced accuracy', 'Compact design'] },
-        { name: 'Ultra Scan Swift Milk Analyzer Fast Sensor', price: 40000, features: ['Fast sensor technology', 'Quick results', 'Reliable performance'] },
-        { name: 'Ultra Scan Swift Twinsonic Milk Analyzer', price: 45000, features: ['Twin sensor system', 'Swift processing', 'Professional grade'] }
+        { name: 'Ultra Scan Kurien Milk Analyzer (30 second)', price: 32000, features: ['30-second analysis', 'Basic parameters', 'User-friendly interface', 'Fat, SNF, Protein analysis'] },
+        { name: 'Ultra Scan Kurien Twinsonic Milk Analyzer', price: 38000, features: ['Twin sensor technology', 'Enhanced accuracy', 'Compact design', 'Multiple parameter testing'] },
+        { name: 'Ultra Scan Swift Milk Analyzer Fast Sensor', price: 40000, features: ['Fast sensor technology', 'Quick results', 'Reliable performance', 'Advanced calibration'] },
+        { name: 'Ultra Scan Swift Twinsonic Milk Analyzer', price: 45000, features: ['Twin sensor system', 'Swift processing', 'Professional grade', 'High precision results'] }
       ]
     },
     'ultra-scan-thermal': {
       name: 'Ultra Scan with Thermal Printer',
       description: 'Advanced analyzers with built-in printing capability',
+      icon: <Printer size={20} />,
       products: [
-        { name: 'Ultra Scan Kurien With Thermal Printer', price: 36000, features: ['Built-in printer', 'Instant reports', 'Data logging'] },
-        { name: 'Ultra Scan Kurien Twinsonic With Thermal Printer', price: 41500, features: ['Thermal printing', 'Twin sensor tech', 'Report generation'] },
-        { name: 'Ultra Scan Swift With Thermal Printer', price: 43500, features: ['Swift analysis', 'Thermal printer', 'Professional reports'] },
-        { name: 'Ultra Scan Swift Twinsonic With Thermal Printer', price: 49000, features: ['Advanced printing', 'Dual sensors', 'Complete solution'] }
+        { name: 'Ultra Scan Kurien With Thermal Printer', price: 36000, features: ['Built-in thermal printer', 'Instant report generation', 'Data logging capability', 'Professional reports'] },
+        { name: 'Ultra Scan Kurien Twinsonic With Thermal Printer', price: 41500, features: ['Thermal printing technology', 'Twin sensor precision', 'Automated reporting', 'Multi-format output'] },
+        { name: 'Ultra Scan Swift With Thermal Printer', price: 43500, features: ['Swift analysis with printing', 'High-speed thermal printer', 'Custom report formats', 'Data backup'] },
+        { name: 'Ultra Scan Swift Twinsonic With Thermal Printer', price: 49000, features: ['Advanced dual printing', 'Twin sensor accuracy', 'Complete documentation', 'Professional grade output'] }
       ]
     },
     'ultra-scan-iot': {
       name: 'Ultra Scan IoT Series',
       description: 'Smart analyzers with IoT connectivity and cloud integration',
+      icon: <Wifi size={20} />,
       products: [
-        { name: 'Ultra Scan Kurien Milk Analyzer With IoT', price: 42500, features: ['IoT connectivity', 'Cloud data sync', 'Remote monitoring'] },
-        { name: 'Ultra Scan Kurien Twinsonic With IoT', price: 48000, features: ['IoT enabled', 'Real-time data', 'Smart analytics'] },
-        { name: 'Ultra Scan Swift Milk Analyzer With IoT', price: 50000, features: ['IoT integration', 'Data analytics', 'Mobile app'] },
-        { name: 'Ultra Scan Swift Twinsonic Milk Analyzer With IoT', price: 53500, features: ['Complete IoT solution', 'Advanced analytics', 'Cloud storage'] }
+        { name: 'Ultra Scan Kurien Milk Analyzer With IoT', price: 42500, features: ['IoT connectivity', 'Cloud data synchronization', 'Remote monitoring', 'Mobile app integration'] },
+        { name: 'Ultra Scan Kurien Twinsonic With IoT', price: 48000, features: ['IoT-enabled twin sensors', 'Real-time data transmission', 'Smart analytics dashboard', 'Remote diagnostics'] },
+        { name: 'Ultra Scan Swift Milk Analyzer With IoT', price: 50000, features: ['IoT integration', 'Advanced data analytics', 'Mobile app control', 'Cloud storage'] },
+        { name: 'Ultra Scan Swift Twinsonic Milk Analyzer With IoT', price: 53500, features: ['Complete IoT solution', 'Advanced cloud analytics', 'Real-time monitoring', 'Predictive maintenance'] }
       ]
     },
     'ultra-scan-premium': {
       name: 'Ultra Scan Premium Series',
       description: 'Top-tier analyzers with thermal printer and IoT capabilities',
+      icon: <Factory size={20} />,
       products: [
-        { name: 'Ultra Scan Kurien With Thermal Printer & IoT', price: 46500, features: ['Thermal printer', 'IoT connectivity', 'Complete package'] },
-        { name: 'Ultra Scan Kurien Twinsonic With Thermal Printer & IoT', price: 52000, features: ['Premium features', 'All-in-one solution', 'Professional grade'] },
-        { name: 'Ultra Scan Swift With Thermal Printer & IoT', price: 54000, features: ['Swift processing', 'IoT + Printing', 'Advanced reporting'] },
-        { name: 'Ultra Scan Swift Twinsonic with Thermal Printer & IoT', price: 60000, features: ['Ultimate solution', 'Complete package', 'Enterprise grade'] }
+        { name: 'Ultra Scan Kurien With Thermal Printer & IoT', price: 46500, features: ['Thermal printer + IoT', 'Complete documentation', 'Cloud connectivity', 'Professional reporting'] },
+        { name: 'Ultra Scan Kurien Twinsonic With Thermal Printer & IoT', price: 52000, features: ['Premium twin sensor tech', 'All-in-one solution', 'Professional grade output', 'Enterprise features'] },
+        { name: 'Ultra Scan Swift With Thermal Printer & IoT', price: 54000, features: ['Swift processing + IoT', 'Integrated printing', 'Advanced cloud features', 'Professional reporting'] },
+        { name: 'Ultra Scan Swift Twinsonic with Thermal Printer & IoT', price: 60000, features: ['Ultimate analyzer solution', 'Complete feature package', 'Enterprise-grade performance', 'Maximum connectivity'] }
       ]
     },
     'specialized': {
       name: 'Specialized Analyzers',
       description: 'Specialized milk analyzers for specific applications',
+      icon: <Beaker size={20} />,
       products: [
-        { name: 'Ultra Scan Kurien Milk Analyzer with Ph', price: 39000, features: ['pH measurement', 'Acidity testing', 'Quality control'] },
-        { name: 'Ultra Scan Kurien with Ph & Conductivity', price: 41000, features: ['pH & conductivity', 'Comprehensive testing', 'Quality assurance'] }
+        { name: 'Ultra Scan Kurien Milk Analyzer with Ph', price: 39000, features: ['pH measurement capability', 'Acidity level testing', 'Quality control features', 'Multi-parameter analysis'] },
+        { name: 'Ultra Scan Kurien with Ph & Conductivity', price: 41000, features: ['pH & conductivity testing', 'Comprehensive quality analysis', 'Advanced quality assurance', 'Professional validation'] }
       ]
     },
     'mobile-units': {
       name: 'Mobile Collection Units',
       description: 'Portable solutions for field collection and analysis',
+      icon: <Milk size={20} />,
       products: [
-        { name: 'Ultra Scan Swift IOT Bond POS', price: 82500, features: ['POS integration', 'IoT connectivity', 'Field ready'] },
-        { name: 'Mobile Automatic Milk Collection Unit (Swift mAMCU POS)', price: 81000, features: ['Automatic collection', 'POS system', 'Mobile solution'] },
-        { name: 'Ultra Scan Swift IOT Bond', price: 67000, features: ['IoT enabled', 'Portable design', 'Bond connectivity'] },
-        { name: 'Mobile Automatic Milk Collection Unit (Swift mAMCU)', price: 64500, features: ['Automatic collection', 'Mobile unit', 'Efficient processing'] },
-        { name: 'Ultra Scan Kurien IOT Bond POS', price: 75000, features: ['Kurien series', 'IoT + POS', 'Complete solution'] },
-        { name: 'Mobile Automatic Milk Collection Unit (mAMCU POS Kurien)', price: 73500, features: ['Kurien technology', 'POS integration', 'Mobile collection'] },
-        { name: 'Ultra Scan Kurien IOT Bond', price: 60000, features: ['IoT connectivity', 'Bond system', 'Portable'] },
-        { name: 'Mobile Automatic Milk Collection Unit (mAMCU Kurien)', price: 58500, features: ['Kurien series', 'Automatic collection', 'Mobile'] }
+        { name: 'Ultra Scan Swift IOT Bond POS', price: 82500, features: ['POS system integration', 'IoT connectivity', 'Field-ready design', 'Complete payment solution'] },
+        { name: 'Mobile Automatic Milk Collection Unit (Swift mAMCU POS)', price: 81000, features: ['Automatic milk collection', 'Integrated POS system', 'Mobile operation', 'Farmer payment system'] },
+        { name: 'Ultra Scan Swift IOT Bond', price: 67000, features: ['IoT-enabled bonding', 'Portable analyzer', 'Bond system connectivity', 'Field deployment ready'] },
+        { name: 'Mobile Automatic Milk Collection Unit (Swift mAMCU)', price: 64500, features: ['Automatic collection system', 'Mobile unit design', 'Efficient milk processing', 'Field operation capable'] },
+        { name: 'Ultra Scan Kurien IOT Bond POS', price: 75000, features: ['Kurien series technology', 'IoT + POS integration', 'Complete field solution', 'Farmer management system'] },
+        { name: 'Mobile Automatic Milk Collection Unit (mAMCU POS Kurien)', price: 73500, features: ['Kurien technology base', 'POS integration', 'Mobile collection unit', 'Payment processing'] },
+        { name: 'Ultra Scan Kurien IOT Bond', price: 60000, features: ['IoT connectivity', 'Bond system integration', 'Portable design', 'Field-tested reliability'] },
+        { name: 'Mobile Automatic Milk Collection Unit (mAMCU Kurien)', price: 58500, features: ['Kurien series base', 'Automatic collection', 'Mobile operation', 'Dairy cooperative ready'] }
       ]
     },
     'accessories': {
       name: 'Testing Equipment & Accessories',
       description: 'Essential tools and accessories for milk testing',
+      icon: <Search size={20} />,
       products: [
-        { name: 'Data Processor Milk Collection Unit', price: 6000, features: ['Data processing', 'Collection interface', 'System integration'] },
-        { name: 'Electronic Weighing Scale 100Kg', price: 8500, features: ['100kg capacity', 'Digital display', 'Precision weighing'] },
-        { name: 'Electronic Weighing Scale 200Kg', price: 15000, features: ['200kg capacity', 'Heavy duty', 'Professional grade'] },
-        { name: 'Digital Ultrasonic Stirrer', price: 4000, features: ['Ultrasonic mixing', 'Digital control', 'Sample preparation'] },
-        { name: 'Ultra Scan Kurien Android Bond', price: 76500, features: ['Android interface', 'Touch screen', 'Modern UI'] }
+        { name: 'Data Processor Milk Collection Unit', price: 6000, features: ['Data processing capability', 'Collection interface', 'System integration', 'Data management'] },
+        { name: 'Electronic Weighing Scale 100Kg', price: 8500, features: ['100kg capacity', 'Digital display', 'Precision weighing', 'Milk collection support'] },
+        { name: 'Electronic Weighing Scale 200Kg', price: 15000, features: ['200kg heavy-duty capacity', 'Professional grade', 'High precision', 'Industrial use'] },
+        { name: 'Digital Ultrasonic Stirrer', price: 4000, features: ['Ultrasonic mixing technology', 'Digital control panel', 'Sample preparation', 'Laboratory grade'] },
+        { name: 'Ultra Scan Kurien Android Bond', price: 76500, features: ['Android interface', 'Touch screen operation', 'Modern UI design', 'User-friendly controls'] }
       ]
     },
     'testing-kits': {
       name: 'Testing Kits & Solutions',
       description: 'Comprehensive testing solutions and maintenance products',
+      icon: <Beaker size={20} />,
       products: [
-        { name: 'Milk Butyrometer 0-8%', price: 100, features: ['Fat measurement', '0-8% range', 'Standard testing'] },
-        { name: 'Milk Butyrometer 0-10% ISI Mark', price: 100, features: ['ISI certified', '0-10% range', 'Quality assured'] },
-        { name: 'Milk Butyrometer 0-10% Double Tested', price: 100, features: ['Double tested', 'Enhanced accuracy', 'Reliable results'] },
-        { name: 'Milk Butyrometer 0-10% for Milk analyzer calibration and Lab purpose', price: 2500, features: ['Calibration tool', 'Lab grade', 'Precision instrument'] },
-        { name: 'Lactodaily Milk Analyzer Cleaning Solution', price: 150, features: ['Daily cleaning', 'Maintenance solution', 'Equipment care'] },
-        { name: 'Lactoweekly Milk Analyzer Cleaning Solution', price: 150, features: ['Weekly cleaning', 'Deep maintenance', 'System care'] }
+        { name: 'Milk Butyrometer 0-8%', price: 100, features: ['Fat content measurement', '0-8% measurement range', 'Standard testing tool', 'Laboratory essential'] },
+        { name: 'Milk Butyrometer 0-10% ISI Mark', price: 100, features: ['ISI certified quality', '0-10% measurement range', 'Quality assured product', 'Standard compliance'] },
+        { name: 'Milk Butyrometer 0-10% Double Tested', price: 100, features: ['Double-tested accuracy', 'Enhanced precision', 'Reliable measurements', 'Quality control'] },
+        { name: 'Milk Butyrometer 0-10% for Milk analyzer calibration and Lab purpose', price: 2500, features: ['Calibration tool', 'Laboratory grade precision', 'Professional instrument', 'Analyzer calibration'] },
+        { name: 'Lactodaily Milk Analyzer Cleaning Solution', price: 150, features: ['Daily maintenance solution', 'Analyzer cleaning', 'Equipment care', 'Performance maintenance'] },
+        { name: 'Lactoweekly Milk Analyzer Cleaning Solution', price: 150, features: ['Weekly deep cleaning', 'Advanced maintenance', 'System care solution', 'Extended equipment life'] }
       ]
     }
   };
@@ -125,6 +135,20 @@ const MilkAnalyzers = () => {
               <p className="text-mylken-light text-lg mt-4 animate-fade-in animation-delay-500">
                 From basic analyzers to IoT-enabled systems with thermal printing and mobile collection units
               </p>
+              <div className="mt-8 flex justify-center gap-4">
+                <Button 
+                  variant={viewMode === 'cards' ? "default" : "outline"}
+                  onClick={() => setViewMode('cards')}
+                >
+                  Card View
+                </Button>
+                <Button 
+                  variant={viewMode === 'table' ? "default" : "outline"}
+                  onClick={() => setViewMode('table')}
+                >
+                  Table View
+                </Button>
+              </div>
             </div>
           </div>
         </section>
@@ -148,7 +172,8 @@ const MilkAnalyzers = () => {
                   onClick={() => setSelectedCategory(cat)}
                   className="rounded-full text-sm"
                 >
-                  {productCategories[cat].name}
+                  {productCategories[cat].icon}
+                  <span className="ml-2">{productCategories[cat].name}</span>
                 </Button>
               ))}
             </div>
@@ -164,50 +189,103 @@ const MilkAnalyzers = () => {
                 {Object.entries(productCategories).map(([key, category]) => (
                   <div key={key}>
                     <div className="text-center mb-8">
-                      <h2 className="text-2xl font-bold text-mylken-dark mb-2">{category.name}</h2>
-                      <p className="text-gray-600">{category.description}</p>
+                      <div className="flex items-center justify-center gap-3 mb-4">
+                        <div className="bg-mylken-primary/10 p-3 rounded-full">
+                          {category.icon}
+                        </div>
+                        <h2 className="text-2xl font-bold text-mylken-dark">{category.name}</h2>
+                      </div>
+                      <p className="text-gray-600 max-w-2xl mx-auto">{category.description}</p>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {category.products.slice(0, 6).map((product, index) => (
-                        <Card key={index} className="hover:shadow-lg transition-shadow">
-                          <CardHeader>
-                            <div className="flex justify-between items-start">
-                              <CardTitle className="text-lg text-mylken-dark leading-tight">{product.name}</CardTitle>
-                              <Badge className="bg-mylken-primary text-white whitespace-nowrap ml-2">
-                                <IndianRupee size={12} />
-                                {product.price.toLocaleString()}
-                              </Badge>
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            <ul className="space-y-1">
-                              {product.features.map((feature, i) => (
-                                <li key={i} className="flex items-center text-sm text-gray-600">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-mylken-accent mr-2"></span>
-                                  {feature}
-                                </li>
-                              ))}
-                            </ul>
-                            <div className="mt-4 pt-4 border-t flex justify-between items-center">
-                              <Button variant="outline" size="sm">
-                                View Details
-                              </Button>
-                              <Button size="sm" className="bg-mylken-primary text-white">
-                                Get Quote
-                              </Button>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </div>
+                    
+                    {viewMode === 'cards' ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {category.products.slice(0, 6).map((product, index) => (
+                          <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
+                            <CardHeader className="pb-3">
+                              <div className="flex justify-between items-start gap-3">
+                                <CardTitle className="text-lg text-mylken-dark leading-tight">{product.name}</CardTitle>
+                                <Badge className="bg-mylken-primary text-white whitespace-nowrap shrink-0">
+                                  <IndianRupee size={12} />
+                                  {product.price.toLocaleString()}
+                                </Badge>
+                              </div>
+                            </CardHeader>
+                            <CardContent>
+                              <ul className="space-y-2">
+                                {product.features.map((feature, i) => (
+                                  <li key={i} className="flex items-start text-sm text-gray-600">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-mylken-accent mr-2 mt-2 shrink-0"></span>
+                                    {feature}
+                                  </li>
+                                ))}
+                              </ul>
+                              <div className="mt-4 pt-4 border-t flex justify-between items-center gap-2">
+                                <Button variant="outline" size="sm" className="flex-1">
+                                  View Details
+                                </Button>
+                                <Button size="sm" className="bg-mylken-primary text-white flex-1">
+                                  Get Quote
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead>Product Name</TableHead>
+                              <TableHead>Price</TableHead>
+                              <TableHead>Key Features</TableHead>
+                              <TableHead>Actions</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {category.products.slice(0, 6).map((product, index) => (
+                              <TableRow key={index}>
+                                <TableCell className="font-medium">{product.name}</TableCell>
+                                <TableCell>
+                                  <Badge className="bg-mylken-primary text-white">
+                                    <IndianRupee size={12} />
+                                    {product.price.toLocaleString()}
+                                  </Badge>
+                                </TableCell>
+                                <TableCell className="max-w-md">
+                                  <div className="flex flex-wrap gap-1">
+                                    {product.features.slice(0, 2).map((feature, i) => (
+                                      <span key={i} className="text-xs bg-gray-100 px-2 py-1 rounded">
+                                        {feature}
+                                      </span>
+                                    ))}
+                                    {product.features.length > 2 && (
+                                      <span className="text-xs text-gray-500">+{product.features.length - 2} more</span>
+                                    )}
+                                  </div>
+                                </TableCell>
+                                <TableCell>
+                                  <div className="flex gap-2">
+                                    <Button variant="outline" size="sm">Details</Button>
+                                    <Button size="sm" className="bg-mylken-primary text-white">Quote</Button>
+                                  </div>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </div>
+                    )}
+                    
                     {category.products.length > 6 && (
                       <div className="text-center mt-6">
                         <Button 
                           variant="outline" 
                           onClick={() => setSelectedCategory(key)}
-                          className="bg-white"
+                          className="bg-white hover:bg-mylken-light"
                         >
-                          View All {category.name} <ArrowRight size={16} className="ml-2" />
+                          View All {category.products.length} Products <ArrowRight size={16} className="ml-2" />
                         </Button>
                       </div>
                     )}
@@ -218,46 +296,98 @@ const MilkAnalyzers = () => {
               // Show selected category
               <div>
                 <div className="text-center mb-8">
-                  <h2 className="text-3xl font-bold text-mylken-dark mb-2">
-                    {productCategories[selectedCategory]?.name}
-                  </h2>
-                  <p className="text-gray-600">
+                  <div className="flex items-center justify-center gap-3 mb-4">
+                    <div className="bg-mylken-primary/10 p-3 rounded-full">
+                      {productCategories[selectedCategory]?.icon}
+                    </div>
+                    <h2 className="text-3xl font-bold text-mylken-dark">
+                      {productCategories[selectedCategory]?.name}
+                    </h2>
+                  </div>
+                  <p className="text-gray-600 max-w-2xl mx-auto">
                     {productCategories[selectedCategory]?.description}
                   </p>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredProducts.map((product, index) => (
-                    <Card key={index} className="hover:shadow-lg transition-shadow">
-                      <CardHeader>
-                        <div className="flex justify-between items-start">
-                          <CardTitle className="text-lg text-mylken-dark leading-tight">{product.name}</CardTitle>
-                          <Badge className="bg-mylken-primary text-white whitespace-nowrap ml-2">
-                            <IndianRupee size={12} />
-                            {product.price.toLocaleString()}
-                          </Badge>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-1">
-                          {product.features.map((feature, i) => (
-                            <li key={i} className="flex items-center text-sm text-gray-600">
-                              <span className="w-1.5 h-1.5 rounded-full bg-mylken-accent mr-2"></span>
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                        <div className="mt-4 pt-4 border-t flex justify-between items-center">
-                          <Button variant="outline" size="sm">
-                            View Details
-                          </Button>
-                          <Button size="sm" className="bg-mylken-primary text-white">
-                            Get Quote
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
+                
+                {viewMode === 'cards' ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredProducts.map((product, index) => (
+                      <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:scale-105">
+                        <CardHeader className="pb-3">
+                          <div className="flex justify-between items-start gap-3">
+                            <CardTitle className="text-lg text-mylken-dark leading-tight">{product.name}</CardTitle>
+                            <Badge className="bg-mylken-primary text-white whitespace-nowrap shrink-0">
+                              <IndianRupee size={12} />
+                              {product.price.toLocaleString()}
+                            </Badge>
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <ul className="space-y-2">
+                            {product.features.map((feature, i) => (
+                              <li key={i} className="flex items-start text-sm text-gray-600">
+                                <span className="w-1.5 h-1.5 rounded-full bg-mylken-accent mr-2 mt-2 shrink-0"></span>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                          <div className="mt-4 pt-4 border-t flex justify-between items-center gap-2">
+                            <Button variant="outline" size="sm" className="flex-1">
+                              View Details
+                            </Button>
+                            <Button size="sm" className="bg-mylken-primary text-white flex-1">
+                              Get Quote
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Product Name</TableHead>
+                          <TableHead>Price</TableHead>
+                          <TableHead>Key Features</TableHead>
+                          <TableHead>Actions</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {filteredProducts.map((product, index) => (
+                          <TableRow key={index}>
+                            <TableCell className="font-medium">{product.name}</TableCell>
+                            <TableCell>
+                              <Badge className="bg-mylken-primary text-white">
+                                <IndianRupee size={12} />
+                                {product.price.toLocaleString()}
+                              </Badge>
+                            </TableCell>
+                            <TableCell className="max-w-md">
+                              <div className="flex flex-wrap gap-1">
+                                {product.features.slice(0, 2).map((feature, i) => (
+                                  <span key={i} className="text-xs bg-gray-100 px-2 py-1 rounded">
+                                    {feature}
+                                  </span>
+                                ))}
+                                {product.features.length > 2 && (
+                                  <span className="text-xs text-gray-500">+{product.features.length - 2} more</span>
+                                )}
+                              </div>
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex gap-2">
+                                <Button variant="outline" size="sm">Details</Button>
+                                <Button size="sm" className="bg-mylken-primary text-white">Quote</Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                )}
               </div>
             )}
           </div>
