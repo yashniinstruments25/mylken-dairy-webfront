@@ -2,18 +2,25 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductDetailModal from '@/components/ProductDetailModal';
+import QuoteModal from '@/components/QuoteModal';
+import ConsultationModal from '@/components/ConsultationModal';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ArrowRight, Beaker, Milk, Factory, Filter, Search, IndianRupee, Zap, Wifi, Printer } from 'lucide-react';
+import { ArrowRight, Beaker, Milk, Factory, Filter, Search, IndianRupee, Zap, Wifi, Printer, Download, Phone } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const MilkAnalyzers = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
+  const [quoteProduct, setQuoteProduct] = useState<any>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -317,6 +324,40 @@ const MilkAnalyzers = () => {
     setIsModalOpen(true);
   };
 
+  const handleGetQuote = (product: any) => {
+    setQuoteProduct(product);
+    setIsQuoteModalOpen(true);
+  };
+
+  const handleDownloadBrochure = (productName?: string) => {
+    // Simulate PDF download
+    console.log('Downloading brochure for:', productName || 'All Products');
+    
+    toast({
+      title: "Download Started",
+      description: `${productName ? productName + ' ' : ''}Product brochure is being downloaded.`,
+    });
+
+    // Simulate file download
+    const link = document.createElement('a');
+    link.href = '#'; // In real app, this would be the actual PDF URL
+    link.download = `${productName ? productName.replace(/\s+/g, '-') : 'milk-analyzers'}-brochure.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleContactSales = () => {
+    // Simulate contact sales action
+    toast({
+      title: "Redirecting to Sales",
+      description: "You'll be connected with our sales team shortly.",
+    });
+    
+    // In a real app, this could redirect to a contact form or initiate a chat
+    console.log('Contacting sales team');
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       <Navbar />
@@ -450,7 +491,11 @@ const MilkAnalyzers = () => {
                                 >
                                   View Details
                                 </Button>
-                                <Button size="sm" className="bg-mylken-primary text-white flex-1 hover-scale">
+                                <Button 
+                                  size="sm" 
+                                  className="bg-mylken-primary text-white flex-1 hover-scale"
+                                  onClick={() => handleGetQuote(product)}
+                                >
                                   Get Quote
                                 </Button>
                               </div>
@@ -574,7 +619,11 @@ const MilkAnalyzers = () => {
                             >
                               View Details
                             </Button>
-                            <Button size="sm" className="bg-mylken-primary text-white flex-1 hover-scale">
+                            <Button 
+                              size="sm" 
+                              className="bg-mylken-primary text-white flex-1 hover-scale"
+                              onClick={() => handleGetQuote(product)}
+                            >
                               Get Quote
                             </Button>
                           </div>
@@ -624,7 +673,13 @@ const MilkAnalyzers = () => {
                                 >
                                   Details
                                 </Button>
-                                <Button size="sm" className="bg-mylken-primary text-white">Quote</Button>
+                                <Button 
+                                  size="sm" 
+                                  className="bg-mylken-primary text-white"
+                                  onClick={() => handleGetQuote(product)}
+                                >
+                                  Quote
+                                </Button>
                               </div>
                             </TableCell>
                           </TableRow>
@@ -697,11 +752,14 @@ const MilkAnalyzers = () => {
                 Contact our team to find the perfect analyzer for your dairy business needs.
               </p>
               <div className="flex justify-center gap-4">
-                <Link to="/contact">
-                  <Button variant="accent" size="lg" className="hover-scale">
-                    Request Consultation
-                  </Button>
-                </Link>
+                <Button 
+                  variant="accent" 
+                  size="lg" 
+                  className="hover-scale"
+                  onClick={() => setIsConsultationModalOpen(true)}
+                >
+                  Request Consultation
+                </Button>
                 <Link to="/products">
                   <Button variant="milk" size="lg" className="hover-scale">
                     View All Products
@@ -720,8 +778,27 @@ const MilkAnalyzers = () => {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           product={selectedProduct}
+          onRequestQuote={() => {
+            setIsModalOpen(false);
+            handleGetQuote(selectedProduct);
+          }}
+          onDownloadBrochure={() => handleDownloadBrochure(selectedProduct.name)}
+          onContactSales={handleContactSales}
         />
       )}
+
+      {/* Quote Modal */}
+      <QuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+        product={quoteProduct}
+      />
+
+      {/* Consultation Modal */}
+      <ConsultationModal
+        isOpen={isConsultationModalOpen}
+        onClose={() => setIsConsultationModalOpen(false)}
+      />
     </div>
   );
 };

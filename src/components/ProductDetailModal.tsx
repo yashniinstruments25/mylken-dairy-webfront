@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { IndianRupee, CheckCircle, Star, Clock, Zap, Wifi } from 'lucide-react';
+import { IndianRupee, CheckCircle, Star, Clock, Zap, Wifi, Download, Phone } from 'lucide-react';
 
 interface ProductDetailModalProps {
   isOpen: boolean;
@@ -14,9 +13,19 @@ interface ProductDetailModalProps {
     features: string[];
     category?: string;
   };
+  onRequestQuote?: () => void;
+  onDownloadBrochure?: () => void;
+  onContactSales?: () => void;
 }
 
-const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ isOpen, onClose, product }) => {
+const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  product,
+  onRequestQuote,
+  onDownloadBrochure,
+  onContactSales
+}) => {
   // Enhanced product data with detailed specifications
   const getProductDetails = (productName: string) => {
     const baseDetails = {
@@ -197,13 +206,26 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ isOpen, onClose
 
           {/* Action Buttons */}
           <div className="flex gap-4 pt-4 border-t">
-            <Button className="flex-1 bg-mylken-primary text-white hover:bg-mylken-primary/90">
+            <Button 
+              className="flex-1 bg-mylken-primary text-white hover:bg-mylken-primary/90"
+              onClick={onRequestQuote}
+            >
               Request Quote
             </Button>
-            <Button variant="outline" className="flex-1 hover:bg-mylken-light">
+            <Button 
+              variant="outline" 
+              className="flex-1 hover:bg-mylken-light"
+              onClick={onDownloadBrochure}
+            >
+              <Download size={16} className="mr-2" />
               Download Brochure
             </Button>
-            <Button variant="outline" className="hover:bg-mylken-accent/20">
+            <Button 
+              variant="outline" 
+              className="hover:bg-mylken-accent/20"
+              onClick={onContactSales}
+            >
+              <Phone size={16} className="mr-2" />
               Contact Sales
             </Button>
           </div>
