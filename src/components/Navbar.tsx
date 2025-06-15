@@ -84,7 +84,7 @@ const Navbar = () => {
           ))}
 
           {/* Products dropdown with unique design */}
-          <div className="z-50 relative">
+          <div className="z-50">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -98,7 +98,7 @@ const Navbar = () => {
                   >
                     Products
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="w-[320px] sm:w-[400px] md:w-[480px] lg:w-[520px] p-0 overflow-hidden left-1/2 transform -translate-x-1/2">
+                  <NavigationMenuContent className="min-w-[400px] p-0 overflow-hidden">
                     {/* Unique dropdown design with visual separation */}
                     <div className="relative bg-gradient-to-br from-white via-mylken-light/5 to-mylken-accent/5">
                       {/* Decorative top border with milk wave pattern */}
@@ -108,28 +108,28 @@ const Navbar = () => {
                         }}></div>
                       </div>
                       
-                      <div className="flex flex-col md:flex-row">
+                      <div className="flex">
                         {/* Dairy Products Section */}
-                        <div className="flex-1 p-4 bg-gradient-to-br from-blue-50/80 to-mylken-light/20 relative">
+                        <div className="flex-1 p-5 bg-gradient-to-br from-blue-50/80 to-mylken-light/20 relative">
                           {/* Category Header */}
-                          <div className="flex items-center mb-3 pb-2 border-b-2 border-mylken-primary/20">
-                            <div className="p-1.5 bg-white rounded-full shadow-sm mr-2">
-                              <Milk className="h-4 w-4 text-mylken-primary" />
+                          <div className="flex items-center mb-4 pb-3 border-b-2 border-mylken-primary/20">
+                            <div className="p-2 bg-white rounded-full shadow-sm mr-3">
+                              <Milk className="h-5 w-5 text-mylken-primary" />
                             </div>
-                            <h3 className="text-sm font-bold text-mylken-primary">Dairy Products</h3>
+                            <h3 className="text-base font-bold text-mylken-primary">Dairy Products</h3>
                           </div>
                           
                           {/* Products Grid */}
-                          <div className="space-y-1">
+                          <div className="space-y-2">
                             {dairyProductCategories.map((category, index) => (
                               <NavigationMenuLink asChild key={category.name}>
                                 <Link
                                   to={category.href}
-                                  className="group flex items-center p-2 rounded-lg transition-all duration-200 hover:bg-white/70 hover:shadow-sm hover:translate-x-1"
+                                  className="group flex items-center p-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 hover:shadow-sm hover:translate-x-1"
                                 >
-                                  <div className="flex items-center space-x-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-mylken-primary/40 group-hover:bg-mylken-primary transition-colors"></div>
-                                    <span className="text-xs font-medium text-mylken-primary group-hover:text-mylken-secondary transition-colors">
+                                  <div className="flex items-center space-x-3">
+                                    <div className="w-2 h-2 rounded-full bg-mylken-primary/40 group-hover:bg-mylken-primary transition-colors"></div>
+                                    <span className="text-sm font-medium text-mylken-primary group-hover:text-mylken-secondary transition-colors">
                                       {category.name}
                                     </span>
                                   </div>
@@ -140,34 +140,34 @@ const Navbar = () => {
                           </div>
                         </div>
 
-                        {/* Vertical/Horizontal Separator with Decorative Elements */}
-                        <div className="md:w-px w-full md:h-auto h-px bg-gradient-to-r md:bg-gradient-to-b from-mylken-primary/20 via-mylken-secondary/40 to-mylken-primary/20 relative">
-                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white border-2 border-mylken-accent rounded-full shadow-sm"></div>
-                          <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-mylken-primary/30 rounded-full"></div>
-                          <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-mylken-secondary/30 rounded-full"></div>
+                        {/* Vertical Separator with Decorative Elements */}
+                        <div className="w-px bg-gradient-to-b from-mylken-primary/20 via-mylken-secondary/40 to-mylken-primary/20 relative">
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white border-2 border-mylken-accent rounded-full shadow-sm"></div>
+                          <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-mylken-primary/30 rounded-full"></div>
+                          <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-mylken-secondary/30 rounded-full"></div>
                         </div>
 
                         {/* Scientific Products Section */}
-                        <div className="flex-1 p-4 bg-gradient-to-br from-green-50/80 to-mylken-secondary/10 relative">
+                        <div className="flex-1 p-5 bg-gradient-to-br from-green-50/80 to-mylken-secondary/10 relative">
                           {/* Category Header */}
-                          <div className="flex items-center mb-3 pb-2 border-b-2 border-mylken-secondary/20">
-                            <div className="p-1.5 bg-white rounded-full shadow-sm mr-2">
-                              <Beaker className="h-4 w-4 text-mylken-secondary" />
+                          <div className="flex items-center mb-4 pb-3 border-b-2 border-mylken-secondary/20">
+                            <div className="p-2 bg-white rounded-full shadow-sm mr-3">
+                              <Beaker className="h-5 w-5 text-mylken-secondary" />
                             </div>
-                            <h3 className="text-sm font-bold text-mylken-secondary">Scientific Products</h3>
+                            <h3 className="text-base font-bold text-mylken-secondary">Scientific Products</h3>
                           </div>
                           
                           {/* Products Grid */}
-                          <div className="space-y-1">
+                          <div className="space-y-2">
                             {scientificCategories.map((category, index) => (
                               <NavigationMenuLink asChild key={category.name}>
                                 <Link
                                   to={category.href}
-                                  className="group flex items-center p-2 rounded-lg transition-all duration-200 hover:bg-white/70 hover:shadow-sm hover:translate-x-1"
+                                  className="group flex items-center p-2.5 rounded-lg transition-all duration-200 hover:bg-white/70 hover:shadow-sm hover:translate-x-1"
                                 >
-                                  <div className="flex items-center space-x-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-mylken-secondary/40 group-hover:bg-mylken-secondary transition-colors"></div>
-                                    <span className="text-xs font-medium text-mylken-secondary group-hover:text-mylken-primary transition-colors">
+                                  <div className="flex items-center space-x-3">
+                                    <div className="w-2 h-2 rounded-full bg-mylken-secondary/40 group-hover:bg-mylken-secondary transition-colors"></div>
+                                    <span className="text-sm font-medium text-mylken-secondary group-hover:text-mylken-primary transition-colors">
                                       {category.name}
                                     </span>
                                   </div>
