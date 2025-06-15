@@ -83,8 +83,8 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* Products dropdown with viewport-aware positioning */}
-          <div className="z-50 relative">
+          {/* Products dropdown with proper viewport positioning */}
+          <div className="relative">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -98,19 +98,19 @@ const Navbar = () => {
                   >
                     Products
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="w-[90vw] max-w-[600px] min-w-[320px] p-0 overflow-hidden left-1/2 transform -translate-x-1/2">
-                    {/* Unique dropdown design with visual separation */}
+                  <NavigationMenuContent className="absolute right-0 top-full mt-2 w-[480px] max-w-[90vw] p-0 overflow-hidden bg-white shadow-lg border border-gray-200 rounded-lg z-50">
+                    {/* Dropdown content with proper viewport constraints */}
                     <div className="relative bg-gradient-to-br from-white via-mylken-light/5 to-mylken-accent/5">
-                      {/* Decorative top border with milk wave pattern */}
+                      {/* Decorative top border */}
                       <div className="h-2 bg-gradient-to-r from-mylken-accent via-mylken-secondary to-mylken-primary relative">
                         <div className="absolute bottom-0 left-0 w-full h-3 bg-white" style={{
                           clipPath: "polygon(0% 70%, 15% 100%, 30% 70%, 45% 100%, 60% 70%, 75% 100%, 90% 70%, 100% 100%, 100% 0%, 0% 0%)"
                         }}></div>
                       </div>
                       
-                      <div className="flex flex-col sm:flex-row">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-0">
                         {/* Dairy Products Section */}
-                        <div className="flex-1 p-4 sm:p-5 bg-gradient-to-br from-blue-50/80 to-mylken-light/20 relative">
+                        <div className="p-4 bg-gradient-to-br from-blue-50/80 to-mylken-light/20 relative">
                           {/* Category Header */}
                           <div className="flex items-center mb-3 pb-2 border-b-2 border-mylken-primary/20">
                             <div className="p-1.5 bg-white rounded-full shadow-sm mr-2">
@@ -119,41 +119,34 @@ const Navbar = () => {
                             <h3 className="text-sm font-bold text-mylken-primary">Dairy Products</h3>
                           </div>
                           
-                          {/* Products Grid */}
-                          <div className="space-y-1.5">
-                            {dairyProductCategories.map((category, index) => (
+                          {/* Products List */}
+                          <div className="space-y-1">
+                            {dairyProductCategories.map((category) => (
                               <NavigationMenuLink asChild key={category.name}>
                                 <Link
                                   to={category.href}
                                   className="group flex items-center p-2 rounded-lg transition-all duration-200 hover:bg-white/70 hover:shadow-sm hover:translate-x-1"
                                 >
-                                  <div className="flex items-center space-x-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-mylken-primary/40 group-hover:bg-mylken-primary transition-colors"></div>
+                                  <div className="flex items-center space-x-2 flex-1">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-mylken-primary/40 group-hover:bg-mylken-primary transition-colors flex-shrink-0"></div>
                                     <span className="text-xs font-medium text-mylken-primary group-hover:text-mylken-secondary transition-colors">
                                       {category.name}
                                     </span>
                                   </div>
-                                  <Droplets className="ml-auto h-3 w-3 text-mylken-primary/0 group-hover:text-mylken-primary/60 transition-all duration-200" />
+                                  <Droplets className="ml-2 h-3 w-3 text-mylken-primary/0 group-hover:text-mylken-primary/60 transition-all duration-200 flex-shrink-0" />
                                 </Link>
                               </NavigationMenuLink>
                             ))}
                           </div>
                         </div>
 
-                        {/* Vertical Separator with Decorative Elements - Hidden on mobile */}
-                        <div className="hidden sm:block w-px bg-gradient-to-b from-mylken-primary/20 via-mylken-secondary/40 to-mylken-primary/20 relative">
-                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white border-2 border-mylken-accent rounded-full shadow-sm"></div>
-                          <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-mylken-primary/30 rounded-full"></div>
-                          <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-mylken-secondary/30 rounded-full"></div>
-                        </div>
-
-                        {/* Horizontal separator for mobile */}
-                        <div className="sm:hidden h-px bg-gradient-to-r from-mylken-primary/20 via-mylken-secondary/40 to-mylken-primary/20 relative mx-4">
-                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white border-2 border-mylken-accent rounded-full shadow-sm"></div>
+                        {/* Vertical Separator - Hidden on mobile */}
+                        <div className="hidden sm:block absolute left-1/2 top-12 bottom-4 w-px bg-gradient-to-b from-mylken-primary/20 via-mylken-secondary/40 to-mylken-primary/20 transform -translate-x-1/2">
+                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white border-2 border-mylken-accent rounded-full shadow-sm"></div>
                         </div>
 
                         {/* Scientific Products Section */}
-                        <div className="flex-1 p-4 sm:p-5 bg-gradient-to-br from-green-50/80 to-mylken-secondary/10 relative">
+                        <div className="p-4 bg-gradient-to-br from-green-50/80 to-mylken-secondary/10 relative">
                           {/* Category Header */}
                           <div className="flex items-center mb-3 pb-2 border-b-2 border-mylken-secondary/20">
                             <div className="p-1.5 bg-white rounded-full shadow-sm mr-2">
@@ -162,21 +155,21 @@ const Navbar = () => {
                             <h3 className="text-sm font-bold text-mylken-secondary">Scientific Products</h3>
                           </div>
                           
-                          {/* Products Grid */}
-                          <div className="space-y-1.5">
-                            {scientificCategories.map((category, index) => (
+                          {/* Products List */}
+                          <div className="space-y-1">
+                            {scientificCategories.map((category) => (
                               <NavigationMenuLink asChild key={category.name}>
                                 <Link
                                   to={category.href}
                                   className="group flex items-center p-2 rounded-lg transition-all duration-200 hover:bg-white/70 hover:shadow-sm hover:translate-x-1"
                                 >
-                                  <div className="flex items-center space-x-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-mylken-secondary/40 group-hover:bg-mylken-secondary transition-colors"></div>
+                                  <div className="flex items-center space-x-2 flex-1">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-mylken-secondary/40 group-hover:bg-mylken-secondary transition-colors flex-shrink-0"></div>
                                     <span className="text-xs font-medium text-mylken-secondary group-hover:text-mylken-primary transition-colors">
                                       {category.name}
                                     </span>
                                   </div>
-                                  <Beaker className="ml-auto h-3 w-3 text-mylken-secondary/0 group-hover:text-mylken-secondary/60 transition-all duration-200" />
+                                  <Beaker className="ml-2 h-3 w-3 text-mylken-secondary/0 group-hover:text-mylken-secondary/60 transition-all duration-200 flex-shrink-0" />
                                 </Link>
                               </NavigationMenuLink>
                             ))}
@@ -216,7 +209,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white absolute top-full left-0 w-full shadow-md animate-fade-in">
+        <div className="md:hidden bg-white absolute top-full left-0 w-full shadow-md animate-fade-in z-50">
           <div className="container-custom py-3 flex flex-col space-y-3">
             {/* Wave effect at top of mobile menu */}
             <div className="absolute top-0 left-0 w-full h-1 bg-mylken-accent" style={{
