@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
@@ -77,7 +76,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-x-8 gap-y-6">
+          <div className="space-y-8">
             {/* Product Description */}
             {product.productDescription && product.productDescription.length > 0 && (
               <div className="space-y-3">
@@ -86,7 +85,7 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   Product Details
                 </h3>
                 <ul className="space-y-2">
-                  {product.productDescription.map((desc, index) => (
+                  {product.productDescription.filter(desc => desc !== 'Product Details:').map((desc, index) => (
                     <li key={index} className="flex items-start gap-3">
                       <div className="w-1.5 h-1.5 rounded-full bg-mylken-accent mt-2 shrink-0"></div>
                       <span className="text-sm text-gray-700">{desc}</span>
