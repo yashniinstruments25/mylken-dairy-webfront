@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ProductDetailModal from '@/components/ProductDetailModal';
 import QuoteModal from '@/components/QuoteModal';
 import ConsultationModal from '@/components/ConsultationModal';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -13,10 +12,9 @@ import { ArrowRight, Beaker, Milk, Factory, Filter, Search, IndianRupee, Zap, Wi
 import { useToast } from '@/hooks/use-toast';
 
 const MilkAnalyzers = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
   const [quoteProduct, setQuoteProduct] = useState<any>(null);
@@ -25,6 +23,15 @@ const MilkAnalyzers = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Helper function to create product slug
+  const createProductSlug = (name: string) => {
+    return name.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim();
+  };
 
   // Dairy-themed animation styles
   const milkDropAnimation = {
@@ -405,8 +412,8 @@ const MilkAnalyzers = () => {
     : productCategories[selectedCategory]?.products || [];
 
   const handleViewDetails = (product: any) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
+    const productSlug = createProductSlug(product.name);
+    navigate(`/product/${productSlug}`);
   };
 
   const handleGetQuote = (product: any) => {
@@ -630,7 +637,13 @@ const MilkAnalyzers = () => {
                                     >
                                       Details
                                     </Button>
-                                    <Button size="sm" className="bg-mylken-primary text-white">Quote</Button>
+                                    <Button 
+                                      size="sm" 
+                                      className="bg-mylken-primary text-white"
+                                      onClick={() => handleGetQuote(product)}
+                                    >
+                                      Quote
+                                    </Button>
                                   </div>
                                 </TableCell>
                               </TableRow>
@@ -857,21 +870,6 @@ const MilkAnalyzers = () => {
       </main>
       <Footer />
       
-      {/* Product Detail Modal */}
-      {selectedProduct && (
-        <ProductDetailModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          product={selectedProduct}
-          onRequestQuote={() => {
-            setIsModalOpen(false);
-            handleGetQuote(selectedProduct);
-          }}
-          onDownloadBrochure={() => handleDownloadBrochure(selectedProduct.name)}
-          onContactSales={handleContactSales}
-        />
-      )}
-
       {/* Quote Modal */}
       <QuoteModal
         isOpen={isQuoteModalOpen}
