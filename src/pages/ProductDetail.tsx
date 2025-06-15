@@ -16,7 +16,6 @@ import {
   Star, 
   Clock, 
   Zap, 
-  Wifi, 
   Download, 
   Phone, 
   ListChecks, 
@@ -28,10 +27,23 @@ import {
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
+interface ProductData {
+  name: string;
+  price: number;
+  category: string;
+  image: string;
+  rating: number;
+  features: string[];
+  productDescription: string[];
+  detailedFeatures: string[];
+  specifications: Record<string, string>;
+  benefits: string[];
+}
+
 const ProductDetail = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<ProductData | null>(null);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
   const { toast } = useToast();
@@ -41,7 +53,7 @@ const ProductDetail = () => {
   }, []);
 
   // Product data - In a real app, this would come from an API
-  const productData = {
+  const productData: Record<string, ProductData> = {
     'ultra-scan-kurien-milk-analyzer-30-second': {
       name: 'Ultra Scan Kurien Milk Analyzer (30 second)',
       price: 35000,
@@ -89,7 +101,7 @@ const ProductDetail = () => {
 
   useEffect(() => {
     if (productId) {
-      const foundProduct = productData[productId as keyof typeof productData];
+      const foundProduct = productData[productId];
       if (foundProduct) {
         setProduct(foundProduct);
       } else {
@@ -105,7 +117,7 @@ const ProductDetail = () => {
   const handleDownloadBrochure = () => {
     toast({
       title: "Download Started",
-      description: `${product.name} brochure is being downloaded.`,
+      description: `${product?.name} brochure is being downloaded.`,
     });
   };
 
@@ -403,7 +415,7 @@ const ProductDetail = () => {
                   </CardContent>
                 </Card>
 
-                {/* Related Products */}
+                {/* Need Help */}
                 <Card>
                   <CardHeader>
                     <CardTitle className="text-lg">Need Help?</CardTitle>
