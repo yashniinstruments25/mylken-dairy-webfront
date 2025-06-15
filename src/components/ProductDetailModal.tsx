@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -23,28 +22,57 @@ interface ProductDetailModalProps {
   product: Product | null;
   isOpen: boolean;
   onClose: () => void;
+  onRequestQuote?: () => void;
+  onDownloadBrochure?: () => void;
+  onContactSales?: () => void;
 }
 
-const ProductDetailModal = ({ product, isOpen, onClose }: ProductDetailModalProps) => {
+const ProductDetailModal = ({ 
+  product, 
+  isOpen, 
+  onClose, 
+  onRequestQuote, 
+  onDownloadBrochure, 
+  onContactSales 
+}: ProductDetailModalProps) => {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState("overview");
 
   if (!product) return null;
 
   const handleQuoteRequest = () => {
-    toast({
-      title: "Quote Request Sent",
-      description: `We'll send you a detailed quote for ${product.name} shortly.`,
-    });
-    onClose();
+    if (onRequestQuote) {
+      onRequestQuote();
+    } else {
+      toast({
+        title: "Quote Request Sent",
+        description: `We'll send you a detailed quote for ${product.name} shortly.`,
+      });
+      onClose();
+    }
   };
 
   const handleContactExpert = () => {
-    toast({
-      title: "Expert Consultation",
-      description: "Our technical expert will contact you within 24 hours.",
-    });
-    onClose();
+    if (onContactSales) {
+      onContactSales();
+    } else {
+      toast({
+        title: "Expert Consultation",
+        description: "Our technical expert will contact you within 24 hours.",
+      });
+      onClose();
+    }
+  };
+
+  const handleDownloadBrochure = () => {
+    if (onDownloadBrochure) {
+      onDownloadBrochure();
+    } else {
+      toast({
+        title: "Download Started",
+        description: `${product.name} product brochure is being downloaded.`,
+      });
+    }
   };
 
   // Enhanced product data with more details
