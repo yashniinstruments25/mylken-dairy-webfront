@@ -83,8 +83,8 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* Products dropdown with corrected positioning */}
-          <div className="relative">
+          {/* Products dropdown with new design */}
+          <div className="z-50 relative">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -98,8 +98,8 @@ const Navbar = () => {
                   >
                     Products
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="absolute left-0 top-full mt-2 z-[100] bg-white shadow-2xl border border-gray-200 rounded-2xl overflow-hidden w-[600px]">
-                    <div className="p-0">
+                  <NavigationMenuContent className="left-0 top-0 w-auto data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
+                    <div className="w-[600px] p-0 bg-white/95 backdrop-blur-sm shadow-2xl border-0 rounded-2xl overflow-hidden">
                       {/* Header with dairy wave pattern */}
                       <div className="bg-gradient-to-r from-mylken-primary to-mylken-secondary p-4 relative overflow-hidden">
                         <div className="absolute inset-0 opacity-10">
