@@ -83,8 +83,8 @@ const Navbar = () => {
             </Link>
           ))}
 
-          {/* Products dropdown with viewport-aware positioning */}
-          <div className="z-50 relative">
+          {/* Products dropdown with improved positioning */}
+          <div className="relative">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -98,7 +98,7 @@ const Navbar = () => {
                   >
                     Products
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="w-[90vw] max-w-[600px] min-w-[320px] p-0 overflow-hidden left-1/2 transform -translate-x-1/2">
+                  <NavigationMenuContent className="absolute top-full right-0 w-[480px] max-w-[90vw] p-0 overflow-hidden bg-white shadow-xl border border-gray-200/50 rounded-lg z-50">
                     {/* Unique dropdown design with visual separation */}
                     <div className="relative bg-gradient-to-br from-white via-mylken-light/5 to-mylken-accent/5">
                       {/* Decorative top border with milk wave pattern */}
@@ -108,9 +108,9 @@ const Navbar = () => {
                         }}></div>
                       </div>
                       
-                      <div className="flex flex-col sm:flex-row">
+                      <div className="flex flex-col">
                         {/* Dairy Products Section */}
-                        <div className="flex-1 p-4 sm:p-5 bg-gradient-to-br from-blue-50/80 to-mylken-light/20 relative">
+                        <div className="p-4 bg-gradient-to-br from-blue-50/80 to-mylken-light/20 relative">
                           {/* Category Header */}
                           <div className="flex items-center mb-3 pb-2 border-b-2 border-mylken-primary/20">
                             <div className="p-1.5 bg-white rounded-full shadow-sm mr-2">
@@ -120,7 +120,7 @@ const Navbar = () => {
                           </div>
                           
                           {/* Products Grid */}
-                          <div className="space-y-1.5">
+                          <div className="grid grid-cols-2 gap-1">
                             {dairyProductCategories.map((category, index) => (
                               <NavigationMenuLink asChild key={category.name}>
                                 <Link
@@ -140,20 +140,13 @@ const Navbar = () => {
                           </div>
                         </div>
 
-                        {/* Vertical Separator with Decorative Elements - Hidden on mobile */}
-                        <div className="hidden sm:block w-px bg-gradient-to-b from-mylken-primary/20 via-mylken-secondary/40 to-mylken-primary/20 relative">
-                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white border-2 border-mylken-accent rounded-full shadow-sm"></div>
-                          <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-mylken-primary/30 rounded-full"></div>
-                          <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-mylken-secondary/30 rounded-full"></div>
-                        </div>
-
-                        {/* Horizontal separator for mobile */}
-                        <div className="sm:hidden h-px bg-gradient-to-r from-mylken-primary/20 via-mylken-secondary/40 to-mylken-primary/20 relative mx-4">
+                        {/* Horizontal separator */}
+                        <div className="h-px bg-gradient-to-r from-mylken-primary/20 via-mylken-secondary/40 to-mylken-primary/20 relative mx-4">
                           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 bg-white border-2 border-mylken-accent rounded-full shadow-sm"></div>
                         </div>
 
                         {/* Scientific Products Section */}
-                        <div className="flex-1 p-4 sm:p-5 bg-gradient-to-br from-green-50/80 to-mylken-secondary/10 relative">
+                        <div className="p-4 bg-gradient-to-br from-green-50/80 to-mylken-secondary/10 relative">
                           {/* Category Header */}
                           <div className="flex items-center mb-3 pb-2 border-b-2 border-mylken-secondary/20">
                             <div className="p-1.5 bg-white rounded-full shadow-sm mr-2">
@@ -163,7 +156,7 @@ const Navbar = () => {
                           </div>
                           
                           {/* Products Grid */}
-                          <div className="space-y-1.5">
+                          <div className="grid grid-cols-1 gap-1">
                             {scientificCategories.map((category, index) => (
                               <NavigationMenuLink asChild key={category.name}>
                                 <Link
