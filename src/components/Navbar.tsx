@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, Droplets, Milk, Beaker } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -97,7 +98,7 @@ const Navbar = () => {
                   >
                     Products
                   </NavigationMenuTrigger>
-                  <NavigationMenuContent className="absolute left-0 top-full mt-1 z-50 bg-white/95 backdrop-blur-sm shadow-2xl border-0 rounded-2xl overflow-hidden w-[600px]">
+                  <NavigationMenuContent className="absolute left-0 top-full mt-2 z-[100] bg-white shadow-2xl border border-gray-200 rounded-2xl overflow-hidden w-[600px]">
                     <div className="p-0">
                       {/* Header with dairy wave pattern */}
                       <div className="bg-gradient-to-r from-mylken-primary to-mylken-secondary p-4 relative overflow-hidden">
