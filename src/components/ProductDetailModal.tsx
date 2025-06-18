@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
@@ -9,7 +10,9 @@ interface ProductDetailModalProps {
   onClose: () => void;
   product: {
     name: string;
-    price: number;
+    price?: number;
+    minPrice?: number;
+    maxPrice?: number;
     features: string[];
     category?: string;
     productDescription?: string[];
@@ -28,6 +31,8 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   onDownloadBrochure,
   onContactSales
 }) => {
+  // Handle price display - use price if available, otherwise use minPrice
+  const displayPrice = product.price || product.minPrice || 0;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -47,7 +52,10 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
             <div className="flex justify-between items-center mb-3">
               <Badge className="bg-mylken-primary text-white text-lg px-4 py-2">
                 <IndianRupee size={16} />
-                {product.price.toLocaleString()}
+                {displayPrice.toLocaleString()}
+                {product.minPrice && product.maxPrice && product.minPrice !== product.maxPrice && (
+                  <span className="ml-1">- ₹{product.maxPrice.toLocaleString()}</span>
+                )}
               </Badge>
               <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
