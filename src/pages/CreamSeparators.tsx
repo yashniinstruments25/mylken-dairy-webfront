@@ -1,21 +1,12 @@
 
 import React, { useState } from 'react';
-import { ArrowLeft, Filter, Search, ShoppingCart, Phone, Mail, MapPin, Star, Check, Droplets } from 'lucide-react';
+import { ArrowLeft, Search, ShoppingCart, Phone, Mail, MapPin, Check, Droplets } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
 
 interface CreamSeparatorProduct {
   id: number;
@@ -201,7 +192,6 @@ const CreamSeparators = () => {
   const [selectedCapacity, setSelectedCapacity] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
   const [sortBy, setSortBy] = useState('name');
-  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
 
   const filteredProducts = creamSeparatorProducts.filter(product => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -229,10 +219,10 @@ const CreamSeparators = () => {
   const typeOptions = Array.from(new Set(creamSeparatorProducts.map(p => p.operationType)));
 
   return (
-    <div className="min-h-screen bg-mylken-light/30">
+    <div className="min-h-screen bg-mylken-light/30 pt-20">
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-mylken-primary to-mylken-secondary text-white py-16">
-        <div className="container-custom">
+        <div className="container mx-auto px-4">
           <Link to="/" className="inline-flex items-center text-mylken-accent hover:text-white mb-6 transition-colors">
             <ArrowLeft size={20} className="mr-2" />
             Back to Home
@@ -264,7 +254,7 @@ const CreamSeparators = () => {
 
       {/* Filters and Search */}
       <section className="py-8 bg-white shadow-sm">
-        <div className="container-custom">
+        <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
             <div className="flex flex-col sm:flex-row gap-4 flex-1">
               <div className="relative flex-1 max-w-md">
@@ -314,25 +304,6 @@ const CreamSeparators = () => {
                   <SelectItem value="capacity">Capacity</SelectItem>
                 </SelectContent>
               </Select>
-
-              <div className="flex border rounded-lg">
-                <Button
-                  variant={viewMode === 'grid' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('grid')}
-                  className="rounded-r-none"
-                >
-                  Grid
-                </Button>
-                <Button
-                  variant={viewMode === 'table' ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setViewMode('table')}
-                  className="rounded-l-none"
-                >
-                  Table
-                </Button>
-              </div>
             </div>
           </div>
 
@@ -342,109 +313,68 @@ const CreamSeparators = () => {
         </div>
       </section>
 
-      {/* Products Display */}
+      {/* Products Grid */}
       <section className="py-12">
-        <div className="container-custom">
-          {viewMode === 'grid' ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {sortedProducts.map((product) => (
-                <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="aspect-square relative">
-                    <img 
-                      src={product.image} 
-                      alt={product.name} 
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "/placeholder.svg";
-                      }}
-                    />
-                    <Badge className="absolute top-3 right-3 bg-mylken-primary text-white">
-                      {product.capacity}
-                    </Badge>
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {sortedProducts.map((product) => (
+              <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="aspect-square relative">
+                  <img 
+                    src={product.image} 
+                    alt={product.name} 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/placeholder.svg";
+                    }}
+                  />
+                  <Badge className="absolute top-3 right-3 bg-mylken-primary text-white">
+                    {product.capacity}
+                  </Badge>
+                </div>
+                
+                <CardHeader>
+                  <CardTitle className="text-mylken-dark">{product.name}</CardTitle>
+                  <CardDescription className="flex items-center">
+                    <Droplets size={16} className="mr-1 text-mylken-primary" />
+                    {product.operationType}
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent>
+                  <p className="text-gray-600 mb-4">{product.description}</p>
+                  <div className="space-y-2 mb-4">
+                    {product.features.slice(0, 3).map((feature, idx) => (
+                      <div key={idx} className="flex items-center text-sm">
+                        <Check size={14} className="mr-2 text-mylken-primary" />
+                        {feature}
+                      </div>
+                    ))}
                   </div>
-                  
-                  <CardHeader>
-                    <CardTitle className="text-mylken-dark">{product.name}</CardTitle>
-                    <CardDescription className="flex items-center">
-                      <Droplets size={16} className="mr-1 text-mylken-primary" />
-                      {product.operationType}
-                    </CardDescription>
-                  </CardHeader>
-                  
-                  <CardContent>
-                    <p className="text-gray-600 mb-4">{product.description}</p>
-                    <div className="space-y-2 mb-4">
-                      {product.features.slice(0, 3).map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm">
-                          <Check size={14} className="mr-2 text-mylken-primary" />
-                          {feature}
-                        </div>
-                      ))}
-                    </div>
-                    <div className="text-2xl font-bold text-mylken-primary">
-                      {product.priceRange}
-                    </div>
-                  </CardContent>
-                  
-                  <CardFooter className="flex gap-2">
-                    <Button className="flex-1" size="sm">
-                      <ShoppingCart size={16} className="mr-2" />
-                      Get Quote
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Phone size={16} />
-                    </Button>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white rounded-lg shadow overflow-hidden">
-              <Table>
-                <TableCaption>Complete list of cream separators with specifications and pricing</TableCaption>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Product Name</TableHead>
-                    <TableHead>Capacity</TableHead>
-                    <TableHead>Type</TableHead>
-                    <TableHead>Efficiency</TableHead>
-                    <TableHead>Price Range</TableHead>
-                    <TableHead>Action</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {sortedProducts.map((product) => (
-                    <TableRow key={product.id}>
-                      <TableCell className="font-medium">{product.name}</TableCell>
-                      <TableCell>{product.capacity}</TableCell>
-                      <TableCell>{product.operationType}</TableCell>
-                      <TableCell>{product.specifications.efficiency}</TableCell>
-                      <TableCell className="font-semibold text-mylken-primary">
-                        {product.priceRange}
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex gap-1">
-                          <Button size="sm" variant="outline">
-                            <Phone size={14} />
-                          </Button>
-                          <Button size="sm">
-                            Quote
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          )}
+                  <div className="text-2xl font-bold text-mylken-primary">
+                    {product.priceRange}
+                  </div>
+                </CardContent>
+                
+                <CardFooter className="flex gap-2">
+                  <Button className="flex-1" size="sm">
+                    <ShoppingCart size={16} className="mr-2" />
+                    Get Quote
+                  </Button>
+                  <Button variant="outline" size="sm">
+                    <Phone size={16} />
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Contact Section */}
       <section className="py-12 bg-mylken-primary text-white">
-        <div className="container-custom text-center">
+        <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">Need Help Choosing the Right Cream Separator?</h2>
           <p className="text-mylken-light mb-8 max-w-2xl mx-auto">
             Our dairy experts are here to help you select the perfect cream separator for your needs. 
