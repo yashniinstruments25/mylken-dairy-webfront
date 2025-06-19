@@ -15,8 +15,9 @@ interface QuoteModalProps {
   onClose: () => void;
   product?: {
     name: string;
-    price: number;
+    price?: number;
     category?: string;
+    capacity?: string;
   };
 }
 
@@ -72,10 +73,17 @@ const QuoteModal: React.FC<QuoteModalProps> = ({ isOpen, onClose, product }) => 
         {product && (
           <div className="bg-mylken-light/30 p-4 rounded-lg border-l-4 border-mylken-accent mb-4">
             <h3 className="font-semibold text-mylken-dark">{product.name}</h3>
-            <Badge className="bg-mylken-primary text-white mt-2">
-              <IndianRupee size={12} />
-              {product.price.toLocaleString()}
-            </Badge>
+            {product.capacity && (
+              <Badge className="bg-mylken-primary text-white mt-2">
+                {product.capacity}
+              </Badge>
+            )}
+            {product.price && (
+              <Badge className="bg-mylken-primary text-white mt-2">
+                <IndianRupee size={12} />
+                {product.price.toLocaleString()}
+              </Badge>
+            )}
           </div>
         )}
 
