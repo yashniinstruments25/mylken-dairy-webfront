@@ -10,6 +10,7 @@ import Products from "./pages/Products";
 import MilkAnalyzers from "./pages/MilkAnalyzers";
 import CreamSeparators from "./pages/CreamSeparators";
 import KhoyaMachines from "./pages/KhoyaMachines";
+import PaneerPress from "./pages/PaneerPress";
 import MilkCans from "./pages/MilkCans";
 import BMC from "./pages/BMC";
 import ProductCategory from "./pages/ProductCategory";
