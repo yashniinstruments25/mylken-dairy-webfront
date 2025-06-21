@@ -17,7 +17,7 @@ interface ProductDetailModalProps {
     category?: string;
     productDescription?: string[];
     detailedFeatures?: string[];
-  };
+  } | null;
   onRequestQuote?: () => void;
   onDownloadBrochure?: () => void;
   onContactSales?: () => void;
@@ -31,6 +31,11 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   onDownloadBrochure,
   onContactSales
 }) => {
+  // Early return if product is null
+  if (!product) {
+    return null;
+  }
+
   // Handle price display - use price if available, otherwise use minPrice
   const displayPrice = product.price || product.minPrice || 0;
 
@@ -48,41 +53,43 @@ const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         
         <div className="space-y-6">
           {/* Price and Quick Info */}
-          <div className="bg-mylken-light/30 rounded-lg p-4 border-l-4 border-mylken-accent">
-            <div className="flex justify-between items-center mb-3">
-              <Badge className="bg-mylken-primary text-white text-lg px-4 py-2">
-                <IndianRupee size={16} />
-                {displayPrice.toLocaleString()}
-                {product.minPrice && product.maxPrice && product.minPrice !== product.maxPrice && (
-                  <span className="ml-1">- ₹{product.maxPrice.toLocaleString()}</span>
-                )}
-              </Badge>
-              <div className="flex items-center gap-2">
-                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                <span className="text-sm text-gray-600">4.8/5 Rating</span>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-mylken-primary" />
-                <span>Fast Analysis</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>ISO Certified</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-mylken-accent" />
-                <span>High Accuracy</span>
-              </div>
-              {product.name.includes('IoT') && (
+          {displayPrice > 0 && (
+            <div className="bg-mylken-light/30 rounded-lg p-4 border-l-4 border-mylken-accent">
+              <div className="flex justify-between items-center mb-3">
+                <Badge className="bg-mylken-primary text-white text-lg px-4 py-2">
+                  <IndianRupee size={16} />
+                  {displayPrice.toLocaleString()}
+                  {product.minPrice && product.maxPrice && product.minPrice !== product.maxPrice && (
+                    <span className="ml-1">- ₹{product.maxPrice.toLocaleString()}</span>
+                  )}
+                </Badge>
                 <div className="flex items-center gap-2">
-                  <Wifi className="w-4 h-4 text-blue-500" />
-                  <span>IoT Enabled</span>
+                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <span className="text-sm text-gray-600">4.8/5 Rating</span>
                 </div>
-              )}
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-mylken-primary" />
+                  <span>Fast Analysis</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  <span>ISO Certified</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-mylken-accent" />
+                  <span>High Accuracy</span>
+                </div>
+                {product.name.includes('IoT') && (
+                  <div className="flex items-center gap-2">
+                    <Wifi className="w-4 h-4 text-blue-500" />
+                    <span>IoT Enabled</span>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="space-y-8">
             {/* Product Description */}
