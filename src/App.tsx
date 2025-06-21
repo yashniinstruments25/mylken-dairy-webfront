@@ -10,6 +10,8 @@ import Products from "./pages/Products";
 import MilkAnalyzers from "./pages/MilkAnalyzers";
 import CreamSeparators from "./pages/CreamSeparators";
 import KhoyaMachines from "./pages/KhoyaMachines";
+import MilkCans from "./pages/MilkCans";
+import BMC from "./pages/BMC";
 import ProductCategory from "./pages/ProductCategory";
 import ScientificProducts from "./pages/ScientificProducts";
 import NotFound from "./pages/NotFound";
@@ -34,6 +36,8 @@ const App = () => (
               <Route path="/milk-analyzers" element={<MilkAnalyzers />} />
               <Route path="/products/cream-separator" element={<CreamSeparators />} />
               <Route path="/products/khoya-machines" element={<KhoyaMachines />} />
+              <Route path="/products/milk-cans" element={<MilkCans />} />
+              <Route path="/products/bmc" element={<BMC />} />
               <Route path="/products/:category" element={<ProductCategory />} />
               <Route path="/scientific-products" element={<ScientificProducts />} />
               <Route path="/scientific-products/:category" element={<ProductCategory />} />
